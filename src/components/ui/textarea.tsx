@@ -1,0 +1,15 @@
+import type { ComponentPropsWithoutRef } from "react";
+
+import { cn } from "@/lib/utils";
+
+export function Textarea({ className, ...props }: ComponentPropsWithoutRef<"textarea">) {
+  return (
+    <textarea
+      className={cn(
+        "min-h-24 w-full rounded-sm border border-border bg-surface px-3 py-2 text-sm text-text-primary shadow-sm placeholder:text-text-secondary focus-visible:border-brand-primary disabled:cursor-not-allowed disabled:opacity-50",
+        className,
+      )}
+      {...props}
+    />
+  );
+}
