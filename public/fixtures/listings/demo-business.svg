@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800" role="img" aria-labelledby="title desc">
+  <title id="title">Demo business fixture</title>
+  <desc id="desc">Synthetic placeholder image for a demo local cafe profile.</desc>
+  <rect width="1200" height="800" fill="#f2f6ed"/>
+  <rect x="245" y="330" width="710" height="320" fill="#6f8f5f"/>
+  <rect x="300" y="420" width="150" height="230" fill="#dfe8d6"/>
+  <rect x="510" y="425" width="140" height="100" fill="#dfe8d6"/>
+  <rect x="715" y="425" width="140" height="100" fill="#dfe8d6"/>
+  <path d="M215 330h770l-88-120H303l-88 120Z" fill="#a43d36"/>
+  <rect x="530" y="552" width="140" height="98" fill="#3d4e36"/>
+  <text x="80" y="130" fill="#263822" font-family="Arial, sans-serif" font-size="42" font-weight="700">GuzoMarket Demo</text>
+  <text x="80" y="185" fill="#536b4b" font-family="Arial, sans-serif" font-size="28">Local fixture image, not a real business photo</text>
+</svg>

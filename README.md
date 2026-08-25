@@ -36,11 +36,30 @@ NEXT_PUBLIC_APP_URL="http://localhost:3000"
 
 `DATABASE_URL` is server-only and must not be exposed to browser code.
 
-## Database Setup Placeholder
+## Database Setup
 
-Prompt 0 initializes Prisma with a PostgreSQL datasource and client generator only. The full marketplace schema, migrations, and seed data are deferred to later prompts.
+Apply the Prisma migrations to a local PostgreSQL database:
 
-Validate the current Prisma foundation with:
+```bash
+npx prisma migrate dev
+```
+
+Seed deterministic development fixtures:
+
+```bash
+npm run db:seed
+npm run db:seed:verify
+```
+
+The seed data uses only synthetic `@guzomarket.test` users, non-login fixture password hashes, approximate DMV public locations, and local placeholder images from `public/fixtures/listings`. Rerunning the seed removes and recreates only known demo records, then preserves unrelated local data.
+
+To reset local development data from scratch:
+
+```bash
+npx prisma migrate reset
+```
+
+Validate the Prisma schema with:
 
 ```bash
 npm run prisma:validate
@@ -84,4 +103,4 @@ tests/
 
 ## Current Stage Status
 
-Prompt 0 foundation is the active stage. Authentication, accounts, listings, search, messaging, moderation, admin, jobs, businesses, events, community, payments, maps, email, storage, analytics, and AI features are out of scope for this stage.
+Stage 3 seed data and development fixtures are implemented. Authentication, accounts, listing posting flows, search UI, messaging UI, moderation UI, admin dashboards, payments, maps, email, storage providers, analytics providers, and AI features are out of scope for this stage.

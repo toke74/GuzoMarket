@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800" role="img" aria-labelledby="title desc">
+  <title id="title">Demo event fixture</title>
+  <desc id="desc">Synthetic placeholder image for a demo local event.</desc>
+  <rect width="1200" height="800" fill="#f5f2f7"/>
+  <rect x="255" y="190" width="690" height="470" rx="34" fill="#ffffff"/>
+  <rect x="255" y="190" width="690" height="110" rx="34" fill="#7b4f8a"/>
+  <rect x="360" y="385" width="130" height="95" rx="12" fill="#d6c1dd"/>
+  <rect x="535" y="385" width="130" height="95" rx="12" fill="#d6c1dd"/>
+  <rect x="710" y="385" width="130" height="95" rx="12" fill="#d6c1dd"/>
+  <text x="80" y="130" fill="#3e2c45" font-family="Arial, sans-serif" font-size="42" font-weight="700">GuzoMarket Demo</text>
+  <text x="360" y="265" fill="#ffffff" font-family="Arial, sans-serif" font-size="44" font-weight="700">Local Meetup</text>
+  <text x="80" y="710" fill="#654772" font-family="Arial, sans-serif" font-size="28">Local fixture image, not a real event photo</text>
+</svg>

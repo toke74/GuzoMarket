@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800" role="img" aria-labelledby="title desc">
+  <title id="title">Demo electronics fixture</title>
+  <desc id="desc">Synthetic placeholder image for a demo camera listing.</desc>
+  <rect width="1200" height="800" fill="#eff3f7"/>
+  <rect x="260" y="290" width="680" height="360" rx="42" fill="#2f3b48"/>
+  <rect x="355" y="225" width="210" height="95" rx="20" fill="#3f4e5e"/>
+  <circle cx="610" cy="470" r="142" fill="#101820"/>
+  <circle cx="610" cy="470" r="88" fill="#586b7a"/>
+  <circle cx="610" cy="470" r="42" fill="#d3e5ef"/>
+  <rect x="775" y="335" width="86" height="48" rx="14" fill="#c1d5df"/>
+  <text x="80" y="130" fill="#243241" font-family="Arial, sans-serif" font-size="42" font-weight="700">GuzoMarket Demo</text>
+  <text x="80" y="185" fill="#526677" font-family="Arial, sans-serif" font-size="28">Local fixture image, not a real camera photo</text>
+</svg>

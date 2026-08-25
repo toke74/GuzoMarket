@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800" role="img" aria-labelledby="title desc">
+  <title id="title">Demo furniture fixture</title>
+  <desc id="desc">Synthetic placeholder image for a demo dining table listing.</desc>
+  <rect width="1200" height="800" fill="#f7f4ef"/>
+  <rect x="230" y="355" width="740" height="72" rx="10" fill="#7a583a"/>
+  <rect x="285" y="425" width="52" height="230" fill="#5f422b"/>
+  <rect x="865" y="425" width="52" height="230" fill="#5f422b"/>
+  <rect x="365" y="488" width="470" height="28" fill="#6b4b31"/>
+  <circle cx="600" cy="390" r="118" fill="#d7b48a" opacity="0.34"/>
+  <text x="80" y="130" fill="#3d3025" font-family="Arial, sans-serif" font-size="42" font-weight="700">GuzoMarket Demo</text>
+  <text x="80" y="185" fill="#6a5541" font-family="Arial, sans-serif" font-size="28">Local fixture image, not a real item photo</text>
+</svg>

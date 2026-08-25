@@ -8,6 +8,7 @@ out
 # production
 build
 coverage
+.tmp
 
 # TypeScript
 *.tsbuildinfo

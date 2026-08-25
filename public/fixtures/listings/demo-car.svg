@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800" role="img" aria-labelledby="title desc">
+  <title id="title">Demo car fixture</title>
+  <desc id="desc">Synthetic placeholder image for a demo sedan listing.</desc>
+  <rect width="1200" height="800" fill="#f3f7f1"/>
+  <rect x="95" y="510" width="1010" height="70" rx="20" fill="#2f4f3a"/>
+  <path d="M260 485h650c58 0 102 38 132 95H146c24-58 62-95 114-95Z" fill="#6f9b62"/>
+  <path d="M390 365h350c75 0 136 50 178 120H250c34-76 82-120 140-120Z" fill="#8fc07f"/>
+  <path d="M430 392h122v82H335c22-47 54-82 95-82Zm160 0h132c52 0 95 31 130 82H590v-82Z" fill="#dcebd8"/>
+  <circle cx="330" cy="590" r="76" fill="#1f2b22"/>
+  <circle cx="330" cy="590" r="34" fill="#d9e6d3"/>
+  <circle cx="875" cy="590" r="76" fill="#1f2b22"/>
+  <circle cx="875" cy="590" r="34" fill="#d9e6d3"/>
+  <text x="80" y="130" fill="#203528" font-family="Arial, sans-serif" font-size="42" font-weight="700">GuzoMarket Demo</text>
+  <text x="80" y="185" fill="#45624d" font-family="Arial, sans-serif" font-size="28">Local fixture image, not a real vehicle photo</text>
+</svg>
