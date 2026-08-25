@@ -17,4 +17,163 @@ import * as Prisma from './internal/prismaNamespaceBrowser'
 export { Prisma }
 export * as $Enums from './enums'
 export * from './enums';
-
+/**
+ * Model User
+ * 
+ */
+export type User = Prisma.UserModel
+/**
+ * Model Profile
+ * 
+ */
+export type Profile = Prisma.ProfileModel
+/**
+ * Model Role
+ * 
+ */
+export type Role = Prisma.RoleModel
+/**
+ * Model UserRole
+ * 
+ */
+export type UserRole = Prisma.UserRoleModel
+/**
+ * Model Verification
+ * 
+ */
+export type Verification = Prisma.VerificationModel
+/**
+ * Model Location
+ * 
+ */
+export type Location = Prisma.LocationModel
+/**
+ * Model MarketplaceRegion
+ * 
+ */
+export type MarketplaceRegion = Prisma.MarketplaceRegionModel
+/**
+ * Model MarketplaceRegionLocation
+ * 
+ */
+export type MarketplaceRegionLocation = Prisma.MarketplaceRegionLocationModel
+/**
+ * Model Category
+ * 
+ */
+export type Category = Prisma.CategoryModel
+/**
+ * Model CategoryAttributeDefinition
+ * 
+ */
+export type CategoryAttributeDefinition = Prisma.CategoryAttributeDefinitionModel
+/**
+ * Model CategoryAttributeOption
+ * 
+ */
+export type CategoryAttributeOption = Prisma.CategoryAttributeOptionModel
+/**
+ * Model Listing
+ * 
+ */
+export type Listing = Prisma.ListingModel
+/**
+ * Model ListingImage
+ * 
+ */
+export type ListingImage = Prisma.ListingImageModel
+/**
+ * Model ListingAttributeValue
+ * 
+ */
+export type ListingAttributeValue = Prisma.ListingAttributeValueModel
+/**
+ * Model Favorite
+ * 
+ */
+export type Favorite = Prisma.FavoriteModel
+/**
+ * Model Conversation
+ * 
+ */
+export type Conversation = Prisma.ConversationModel
+/**
+ * Model ConversationParticipant
+ * 
+ */
+export type ConversationParticipant = Prisma.ConversationParticipantModel
+/**
+ * Model Message
+ * 
+ */
+export type Message = Prisma.MessageModel
+/**
+ * Model MessageAttachment
+ * 
+ */
+export type MessageAttachment = Prisma.MessageAttachmentModel
+/**
+ * Model Notification
+ * 
+ */
+export type Notification = Prisma.NotificationModel
+/**
+ * Model NotificationPreference
+ * 
+ */
+export type NotificationPreference = Prisma.NotificationPreferenceModel
+/**
+ * Model Report
+ * 
+ */
+export type Report = Prisma.ReportModel
+/**
+ * Model ModerationAction
+ * 
+ */
+export type ModerationAction = Prisma.ModerationActionModel
+/**
+ * Model Block
+ * 
+ */
+export type Block = Prisma.BlockModel
+/**
+ * Model AuditLog
+ * 
+ */
+export type AuditLog = Prisma.AuditLogModel
+/**
+ * Model Business
+ * 
+ */
+export type Business = Prisma.BusinessModel
+/**
+ * Model BusinessMember
+ * 
+ */
+export type BusinessMember = Prisma.BusinessMemberModel
+/**
+ * Model BusinessImage
+ * 
+ */
+export type BusinessImage = Prisma.BusinessImageModel
+/**
+ * Model Job
+ * 
+ */
+export type Job = Prisma.JobModel
+/**
+ * Model Event
+ * 
+ */
+export type Event = Prisma.EventModel
+/**
+ * Model EventImage
+ * 
+ */
+export type EventImage = Prisma.EventImageModel
+/**
+ * Model CommunityPost
+ * 
+ */
+export type CommunityPost = Prisma.CommunityPostModel

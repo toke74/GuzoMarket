@@ -9,7 +9,384 @@
 * 🟢 You can import this file directly.
 */
 
+export const UserStatus = {
+  ACTIVE: 'ACTIVE',
+  PENDING_VERIFICATION: 'PENDING_VERIFICATION',
+  SUSPENDED: 'SUSPENDED',
+  DEACTIVATED: 'DEACTIVATED',
+  DELETED: 'DELETED'
+} as const
+
+export type UserStatus = (typeof UserStatus)[keyof typeof UserStatus]
 
 
-// This file is empty because there are no enums in the schema.
-export {}
+export const RoleName = {
+  REGISTERED_USER: 'REGISTERED_USER',
+  BUSINESS_ACCOUNT: 'BUSINESS_ACCOUNT',
+  MODERATOR: 'MODERATOR',
+  ADMIN: 'ADMIN',
+  SUPER_ADMIN: 'SUPER_ADMIN'
+} as const
+
+export type RoleName = (typeof RoleName)[keyof typeof RoleName]
+
+
+export const VerificationType = {
+  EMAIL: 'EMAIL',
+  PHONE: 'PHONE',
+  IDENTITY: 'IDENTITY',
+  BUSINESS: 'BUSINESS'
+} as const
+
+export type VerificationType = (typeof VerificationType)[keyof typeof VerificationType]
+
+
+export const VerificationStatus = {
+  PENDING: 'PENDING',
+  VERIFIED: 'VERIFIED',
+  REJECTED: 'REJECTED',
+  EXPIRED: 'EXPIRED',
+  REVOKED: 'REVOKED'
+} as const
+
+export type VerificationStatus = (typeof VerificationStatus)[keyof typeof VerificationStatus]
+
+
+export const LocationType = {
+  COUNTRY: 'COUNTRY',
+  STATE_REGION: 'STATE_REGION',
+  COUNTY_DISTRICT: 'COUNTY_DISTRICT',
+  CITY: 'CITY',
+  NEIGHBORHOOD: 'NEIGHBORHOOD',
+  POSTAL_CODE: 'POSTAL_CODE'
+} as const
+
+export type LocationType = (typeof LocationType)[keyof typeof LocationType]
+
+
+export const CategoryDomainType = {
+  LISTING: 'LISTING',
+  JOB: 'JOB',
+  SERVICE: 'SERVICE',
+  BUSINESS: 'BUSINESS',
+  EVENT: 'EVENT',
+  COMMUNITY: 'COMMUNITY'
+} as const
+
+export type CategoryDomainType = (typeof CategoryDomainType)[keyof typeof CategoryDomainType]
+
+
+export const AttributeDataType = {
+  TEXT: 'TEXT',
+  INTEGER: 'INTEGER',
+  DECIMAL: 'DECIMAL',
+  BOOLEAN: 'BOOLEAN',
+  DATE: 'DATE',
+  ENUM: 'ENUM',
+  MULTI_ENUM: 'MULTI_ENUM'
+} as const
+
+export type AttributeDataType = (typeof AttributeDataType)[keyof typeof AttributeDataType]
+
+
+export const ListingStatus = {
+  DRAFT: 'DRAFT',
+  PENDING_REVIEW: 'PENDING_REVIEW',
+  ACTIVE: 'ACTIVE',
+  SOLD: 'SOLD',
+  RENTED: 'RENTED',
+  FILLED: 'FILLED',
+  EXPIRED: 'EXPIRED',
+  ARCHIVED: 'ARCHIVED',
+  REJECTED: 'REJECTED',
+  REMOVED: 'REMOVED',
+  SUSPENDED: 'SUSPENDED'
+} as const
+
+export type ListingStatus = (typeof ListingStatus)[keyof typeof ListingStatus]
+
+
+export const ModerationState = {
+  NOT_REVIEWED: 'NOT_REVIEWED',
+  AUTO_CLEARED: 'AUTO_CLEARED',
+  NEEDS_REVIEW: 'NEEDS_REVIEW',
+  UNDER_REVIEW: 'UNDER_REVIEW',
+  APPROVED: 'APPROVED',
+  REJECTED: 'REJECTED',
+  REMOVED: 'REMOVED'
+} as const
+
+export type ModerationState = (typeof ModerationState)[keyof typeof ModerationState]
+
+
+export const PriceType = {
+  FIXED: 'FIXED',
+  NEGOTIABLE: 'NEGOTIABLE',
+  FREE: 'FREE',
+  CONTACT: 'CONTACT',
+  PER_HOUR: 'PER_HOUR',
+  PER_DAY: 'PER_DAY',
+  PER_WEEK: 'PER_WEEK',
+  PER_MONTH: 'PER_MONTH',
+  SALARY: 'SALARY'
+} as const
+
+export type PriceType = (typeof PriceType)[keyof typeof PriceType]
+
+
+export const LocationPrecision = {
+  CITY: 'CITY',
+  NEIGHBORHOOD: 'NEIGHBORHOOD',
+  APPROXIMATE: 'APPROXIMATE',
+  EXACT_PUBLIC: 'EXACT_PUBLIC'
+} as const
+
+export type LocationPrecision = (typeof LocationPrecision)[keyof typeof LocationPrecision]
+
+
+export const ContactPreference = {
+  IN_APP_MESSAGE: 'IN_APP_MESSAGE',
+  BUSINESS_CONTACT: 'BUSINESS_CONTACT',
+  EXTERNAL_APPLICATION: 'EXTERNAL_APPLICATION'
+} as const
+
+export type ContactPreference = (typeof ContactPreference)[keyof typeof ContactPreference]
+
+
+export const ConversationContextType = {
+  LISTING: 'LISTING',
+  BUSINESS: 'BUSINESS',
+  JOB: 'JOB',
+  EVENT: 'EVENT',
+  SUPPORT: 'SUPPORT'
+} as const
+
+export type ConversationContextType = (typeof ConversationContextType)[keyof typeof ConversationContextType]
+
+
+export const MessageType = {
+  TEXT: 'TEXT',
+  IMAGE: 'IMAGE',
+  SYSTEM: 'SYSTEM'
+} as const
+
+export type MessageType = (typeof MessageType)[keyof typeof MessageType]
+
+
+export const NotificationType = {
+  NEW_MESSAGE: 'NEW_MESSAGE',
+  LISTING_APPROVED: 'LISTING_APPROVED',
+  LISTING_REJECTED: 'LISTING_REJECTED',
+  LISTING_EXPIRING: 'LISTING_EXPIRING',
+  SAVED_SEARCH_MATCH: 'SAVED_SEARCH_MATCH',
+  FAVORITE_UPDATE: 'FAVORITE_UPDATE',
+  PRICE_CHANGE: 'PRICE_CHANGE',
+  REVIEW_RECEIVED: 'REVIEW_RECEIVED',
+  BUSINESS_INQUIRY: 'BUSINESS_INQUIRY',
+  MODERATION_ACTION: 'MODERATION_ACTION',
+  SECURITY_ALERT: 'SECURITY_ALERT'
+} as const
+
+export type NotificationType = (typeof NotificationType)[keyof typeof NotificationType]
+
+
+export const ReportSubjectType = {
+  LISTING: 'LISTING',
+  USER: 'USER',
+  BUSINESS: 'BUSINESS',
+  MESSAGE: 'MESSAGE',
+  COMMUNITY_POST: 'COMMUNITY_POST',
+  EVENT: 'EVENT'
+} as const
+
+export type ReportSubjectType = (typeof ReportSubjectType)[keyof typeof ReportSubjectType]
+
+
+export const ReportReason = {
+  SCAM: 'SCAM',
+  SPAM: 'SPAM',
+  PROHIBITED_ITEM: 'PROHIBITED_ITEM',
+  HARASSMENT: 'HARASSMENT',
+  FRAUD: 'FRAUD',
+  DUPLICATE: 'DUPLICATE',
+  MISLEADING: 'MISLEADING',
+  COPYRIGHT_IP: 'COPYRIGHT_IP',
+  OTHER: 'OTHER'
+} as const
+
+export type ReportReason = (typeof ReportReason)[keyof typeof ReportReason]
+
+
+export const ReportStatus = {
+  OPEN: 'OPEN',
+  TRIAGED: 'TRIAGED',
+  UNDER_REVIEW: 'UNDER_REVIEW',
+  RESOLVED: 'RESOLVED',
+  DISMISSED: 'DISMISSED'
+} as const
+
+export type ReportStatus = (typeof ReportStatus)[keyof typeof ReportStatus]
+
+
+export const ReportPriority = {
+  LOW: 'LOW',
+  NORMAL: 'NORMAL',
+  HIGH: 'HIGH',
+  URGENT: 'URGENT'
+} as const
+
+export type ReportPriority = (typeof ReportPriority)[keyof typeof ReportPriority]
+
+
+export const ModerationTargetType = {
+  USER: 'USER',
+  LISTING: 'LISTING',
+  BUSINESS: 'BUSINESS',
+  MESSAGE: 'MESSAGE',
+  EVENT: 'EVENT',
+  COMMUNITY_POST: 'COMMUNITY_POST',
+  REVIEW: 'REVIEW'
+} as const
+
+export type ModerationTargetType = (typeof ModerationTargetType)[keyof typeof ModerationTargetType]
+
+
+export const ModerationActionType = {
+  APPROVE: 'APPROVE',
+  REJECT: 'REJECT',
+  REMOVE: 'REMOVE',
+  RESTORE: 'RESTORE',
+  SUSPEND: 'SUSPEND',
+  UNSUSPEND: 'UNSUSPEND',
+  WARN: 'WARN',
+  FLAG: 'FLAG',
+  UNFLAG: 'UNFLAG',
+  VERIFY: 'VERIFY',
+  REVOKE_VERIFICATION: 'REVOKE_VERIFICATION'
+} as const
+
+export type ModerationActionType = (typeof ModerationActionType)[keyof typeof ModerationActionType]
+
+
+export const AuditActorType = {
+  USER: 'USER',
+  MODERATOR: 'MODERATOR',
+  ADMIN: 'ADMIN',
+  SYSTEM: 'SYSTEM'
+} as const
+
+export type AuditActorType = (typeof AuditActorType)[keyof typeof AuditActorType]
+
+
+export const BusinessStatus = {
+  DRAFT: 'DRAFT',
+  PENDING_REVIEW: 'PENDING_REVIEW',
+  ACTIVE: 'ACTIVE',
+  SUSPENDED: 'SUSPENDED',
+  ARCHIVED: 'ARCHIVED',
+  REMOVED: 'REMOVED'
+} as const
+
+export type BusinessStatus = (typeof BusinessStatus)[keyof typeof BusinessStatus]
+
+
+export const BusinessMemberRole = {
+  OWNER: 'OWNER',
+  ADMIN: 'ADMIN',
+  MANAGER: 'MANAGER',
+  STAFF: 'STAFF'
+} as const
+
+export type BusinessMemberRole = (typeof BusinessMemberRole)[keyof typeof BusinessMemberRole]
+
+
+export const JobWorkMode = {
+  ON_SITE: 'ON_SITE',
+  HYBRID: 'HYBRID',
+  REMOTE: 'REMOTE'
+} as const
+
+export type JobWorkMode = (typeof JobWorkMode)[keyof typeof JobWorkMode]
+
+
+export const EmploymentType = {
+  FULL_TIME: 'FULL_TIME',
+  PART_TIME: 'PART_TIME',
+  TEMPORARY: 'TEMPORARY',
+  CONTRACT: 'CONTRACT',
+  INTERNSHIP: 'INTERNSHIP',
+  GIG: 'GIG',
+  OTHER: 'OTHER'
+} as const
+
+export type EmploymentType = (typeof EmploymentType)[keyof typeof EmploymentType]
+
+
+export const SalaryPeriod = {
+  HOUR: 'HOUR',
+  DAY: 'DAY',
+  WEEK: 'WEEK',
+  MONTH: 'MONTH',
+  YEAR: 'YEAR'
+} as const
+
+export type SalaryPeriod = (typeof SalaryPeriod)[keyof typeof SalaryPeriod]
+
+
+export const JobApplicationMethod = {
+  IN_APP_CONTACT: 'IN_APP_CONTACT',
+  EXTERNAL_URL: 'EXTERNAL_URL',
+  EMAIL: 'EMAIL'
+} as const
+
+export type JobApplicationMethod = (typeof JobApplicationMethod)[keyof typeof JobApplicationMethod]
+
+
+export const JobStatus = {
+  DRAFT: 'DRAFT',
+  PENDING_REVIEW: 'PENDING_REVIEW',
+  ACTIVE: 'ACTIVE',
+  FILLED: 'FILLED',
+  EXPIRED: 'EXPIRED',
+  ARCHIVED: 'ARCHIVED',
+  REJECTED: 'REJECTED',
+  REMOVED: 'REMOVED',
+  SUSPENDED: 'SUSPENDED'
+} as const
+
+export type JobStatus = (typeof JobStatus)[keyof typeof JobStatus]
+
+
+export const EventStatus = {
+  DRAFT: 'DRAFT',
+  PENDING_REVIEW: 'PENDING_REVIEW',
+  ACTIVE: 'ACTIVE',
+  CANCELLED: 'CANCELLED',
+  COMPLETED: 'COMPLETED',
+  ARCHIVED: 'ARCHIVED',
+  REJECTED: 'REJECTED',
+  REMOVED: 'REMOVED'
+} as const
+
+export type EventStatus = (typeof EventStatus)[keyof typeof EventStatus]
+
+
+export const CommunityPostType = {
+  ANNOUNCEMENT: 'ANNOUNCEMENT',
+  RECOMMENDATION: 'RECOMMENDATION',
+  QUESTION: 'QUESTION',
+  HELP_REQUEST: 'HELP_REQUEST',
+  LOCAL_INFORMATION: 'LOCAL_INFORMATION'
+} as const
+
+export type CommunityPostType = (typeof CommunityPostType)[keyof typeof CommunityPostType]
+
+
+export const CommunityPostStatus = {
+  ACTIVE: 'ACTIVE',
+  FLAGGED: 'FLAGGED',
+  REMOVED: 'REMOVED',
+  ARCHIVED: 'ARCHIVED'
+} as const
+
+export type CommunityPostStatus = (typeof CommunityPostStatus)[keyof typeof CommunityPostStatus]

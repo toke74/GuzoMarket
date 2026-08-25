@@ -6,3 +6,982 @@ generator client {
 datasource db {
   provider = "postgresql"
 }
+
+enum UserStatus {
+  ACTIVE
+  PENDING_VERIFICATION
+  SUSPENDED
+  DEACTIVATED
+  DELETED
+}
+
+enum RoleName {
+  REGISTERED_USER
+  BUSINESS_ACCOUNT
+  MODERATOR
+  ADMIN
+  SUPER_ADMIN
+}
+
+enum VerificationType {
+  EMAIL
+  PHONE
+  IDENTITY
+  BUSINESS
+}
+
+enum VerificationStatus {
+  PENDING
+  VERIFIED
+  REJECTED
+  EXPIRED
+  REVOKED
+}
+
+enum LocationType {
+  COUNTRY
+  STATE_REGION
+  COUNTY_DISTRICT
+  CITY
+  NEIGHBORHOOD
+  POSTAL_CODE
+}
+
+enum CategoryDomainType {
+  LISTING
+  JOB
+  SERVICE
+  BUSINESS
+  EVENT
+  COMMUNITY
+}
+
+enum AttributeDataType {
+  TEXT
+  INTEGER
+  DECIMAL
+  BOOLEAN
+  DATE
+  ENUM
+  MULTI_ENUM
+}
+
+enum ListingStatus {
+  DRAFT
+  PENDING_REVIEW
+  ACTIVE
+  SOLD
+  RENTED
+  FILLED
+  EXPIRED
+  ARCHIVED
+  REJECTED
+  REMOVED
+  SUSPENDED
+}
+
+enum ModerationState {
+  NOT_REVIEWED
+  AUTO_CLEARED
+  NEEDS_REVIEW
+  UNDER_REVIEW
+  APPROVED
+  REJECTED
+  REMOVED
+}
+
+enum PriceType {
+  FIXED
+  NEGOTIABLE
+  FREE
+  CONTACT
+  PER_HOUR
+  PER_DAY
+  PER_WEEK
+  PER_MONTH
+  SALARY
+}
+
+enum LocationPrecision {
+  CITY
+  NEIGHBORHOOD
+  APPROXIMATE
+  EXACT_PUBLIC
+}
+
+enum ContactPreference {
+  IN_APP_MESSAGE
+  BUSINESS_CONTACT
+  EXTERNAL_APPLICATION
+}
+
+enum ConversationContextType {
+  LISTING
+  BUSINESS
+  JOB
+  EVENT
+  SUPPORT
+}
+
+enum MessageType {
+  TEXT
+  IMAGE
+  SYSTEM
+}
+
+enum NotificationType {
+  NEW_MESSAGE
+  LISTING_APPROVED
+  LISTING_REJECTED
+  LISTING_EXPIRING
+  SAVED_SEARCH_MATCH
+  FAVORITE_UPDATE
+  PRICE_CHANGE
+  REVIEW_RECEIVED
+  BUSINESS_INQUIRY
+  MODERATION_ACTION
+  SECURITY_ALERT
+}
+
+enum ReportSubjectType {
+  LISTING
+  USER
+  BUSINESS
+  MESSAGE
+  COMMUNITY_POST
+  EVENT
+}
+
+enum ReportReason {
+  SCAM
+  SPAM
+  PROHIBITED_ITEM
+  HARASSMENT
+  FRAUD
+  DUPLICATE
+  MISLEADING
+  COPYRIGHT_IP
+  OTHER
+}
+
+enum ReportStatus {
+  OPEN
+  TRIAGED
+  UNDER_REVIEW
+  RESOLVED
+  DISMISSED
+}
+
+enum ReportPriority {
+  LOW
+  NORMAL
+  HIGH
+  URGENT
+}
+
+enum ModerationTargetType {
+  USER
+  LISTING
+  BUSINESS
+  MESSAGE
+  EVENT
+  COMMUNITY_POST
+  REVIEW
+}
+
+enum ModerationActionType {
+  APPROVE
+  REJECT
+  REMOVE
+  RESTORE
+  SUSPEND
+  UNSUSPEND
+  WARN
+  FLAG
+  UNFLAG
+  VERIFY
+  REVOKE_VERIFICATION
+}
+
+enum AuditActorType {
+  USER
+  MODERATOR
+  ADMIN
+  SYSTEM
+}
+
+enum BusinessStatus {
+  DRAFT
+  PENDING_REVIEW
+  ACTIVE
+  SUSPENDED
+  ARCHIVED
+  REMOVED
+}
+
+enum BusinessMemberRole {
+  OWNER
+  ADMIN
+  MANAGER
+  STAFF
+}
+
+enum JobWorkMode {
+  ON_SITE
+  HYBRID
+  REMOTE
+}
+
+enum EmploymentType {
+  FULL_TIME
+  PART_TIME
+  TEMPORARY
+  CONTRACT
+  INTERNSHIP
+  GIG
+  OTHER
+}
+
+enum SalaryPeriod {
+  HOUR
+  DAY
+  WEEK
+  MONTH
+  YEAR
+}
+
+enum JobApplicationMethod {
+  IN_APP_CONTACT
+  EXTERNAL_URL
+  EMAIL
+}
+
+enum JobStatus {
+  DRAFT
+  PENDING_REVIEW
+  ACTIVE
+  FILLED
+  EXPIRED
+  ARCHIVED
+  REJECTED
+  REMOVED
+  SUSPENDED
+}
+
+enum EventStatus {
+  DRAFT
+  PENDING_REVIEW
+  ACTIVE
+  CANCELLED
+  COMPLETED
+  ARCHIVED
+  REJECTED
+  REMOVED
+}
+
+enum CommunityPostType {
+  ANNOUNCEMENT
+  RECOMMENDATION
+  QUESTION
+  HELP_REQUEST
+  LOCAL_INFORMATION
+}
+
+enum CommunityPostStatus {
+  ACTIVE
+  FLAGGED
+  REMOVED
+  ARCHIVED
+}
+
+model User {
+  id                String               @id @default(uuid()) @db.Uuid
+  email             String
+  emailNormalized   String               @unique
+  emailVerifiedAt   DateTime?            @db.Timestamptz(6)
+  passwordHash      String?
+  status            UserStatus           @default(PENDING_VERIFICATION)
+  defaultRole       RoleName             @default(REGISTERED_USER)
+  lastLoginAt       DateTime?            @db.Timestamptz(6)
+  lastActiveAt      DateTime?            @db.Timestamptz(6)
+  createdAt         DateTime             @default(now()) @db.Timestamptz(6)
+  updatedAt         DateTime             @updatedAt @db.Timestamptz(6)
+  deletedAt         DateTime?            @db.Timestamptz(6)
+  profile           Profile?
+  grantedRoles      UserRole[]           @relation("GrantedRoles")
+  roles             UserRole[]           @relation("UserRoles")
+  verifications     Verification[]       @relation("UserVerifications")
+  reviewedVerifications Verification[]   @relation("ReviewedVerifications")
+  listings          Listing[]
+  favorites         Favorite[]
+  conversationParticipants ConversationParticipant[]
+  sentMessages      Message[]
+  notifications     Notification[]
+  notificationPreferences NotificationPreference[]
+  reportsMade       Report[]             @relation("ReportsMade")
+  reportsAboutUser  Report[]             @relation("ReportsAboutUser")
+  assignedReports   Report[]             @relation("AssignedReports")
+  moderationActions ModerationAction[]
+  blockedUsers      Block[]              @relation("Blocker")
+  blockedByUsers    Block[]              @relation("Blocked")
+  auditLogs         AuditLog[]
+  businesses        Business[]
+  businessMemberships BusinessMember[]
+  jobs              Job[]
+  events            Event[]
+  communityPosts    CommunityPost[]
+
+  @@index([status])
+  @@index([createdAt])
+  @@index([lastActiveAt])
+}
+
+model Profile {
+  id                    String    @id @default(uuid()) @db.Uuid
+  userId                String    @unique @db.Uuid
+  displayName           String
+  username              String?   @unique
+  bio                   String?
+  avatarUrl             String?
+  cityLocationId        String?   @db.Uuid
+  publicLocationText    String?
+  joinedDisplayPreference String?
+  responseRatePercent   Int?
+  medianResponseMinutes Int?
+  sellerRatingAverage   Decimal?  @db.Decimal(3, 2)
+  sellerRatingCount     Int       @default(0)
+  isPublic              Boolean   @default(true)
+  createdAt             DateTime  @default(now()) @db.Timestamptz(6)
+  updatedAt             DateTime  @updatedAt @db.Timestamptz(6)
+  user                  User      @relation(fields: [userId], references: [id], onDelete: Restrict)
+  cityLocation          Location? @relation(fields: [cityLocationId], references: [id], onDelete: SetNull)
+}
+
+model Role {
+  id        String     @id @default(uuid()) @db.Uuid
+  name      RoleName   @unique
+  createdAt DateTime   @default(now()) @db.Timestamptz(6)
+  userRoles UserRole[]
+}
+
+model UserRole {
+  id              String    @id @default(uuid()) @db.Uuid
+  userId          String    @db.Uuid
+  roleId          String    @db.Uuid
+  grantedByUserId String?   @db.Uuid
+  createdAt       DateTime  @default(now()) @db.Timestamptz(6)
+  revokedAt       DateTime? @db.Timestamptz(6)
+  user            User      @relation("UserRoles", fields: [userId], references: [id], onDelete: Restrict)
+  role            Role      @relation(fields: [roleId], references: [id], onDelete: Restrict)
+  grantedBy       User?     @relation("GrantedRoles", fields: [grantedByUserId], references: [id], onDelete: SetNull)
+
+  @@index([userId, roleId])
+}
+
+model Verification {
+  id                String             @id @default(uuid()) @db.Uuid
+  userId            String?            @db.Uuid
+  businessId        String?            @db.Uuid
+  type              VerificationType
+  status            VerificationStatus @default(PENDING)
+  providerReference String?
+  verifiedAt        DateTime?          @db.Timestamptz(6)
+  expiresAt         DateTime?          @db.Timestamptz(6)
+  reviewedByUserId  String?            @db.Uuid
+  metadataJson      Json?
+  createdAt         DateTime           @default(now()) @db.Timestamptz(6)
+  updatedAt         DateTime           @updatedAt @db.Timestamptz(6)
+  user              User?              @relation("UserVerifications", fields: [userId], references: [id], onDelete: Restrict)
+  business          Business?          @relation(fields: [businessId], references: [id], onDelete: Restrict)
+  reviewedBy        User?              @relation("ReviewedVerifications", fields: [reviewedByUserId], references: [id], onDelete: SetNull)
+
+  @@index([userId, type, status])
+  @@index([businessId, type, status])
+}
+
+model Location {
+  id                       String                      @id @default(uuid()) @db.Uuid
+  type                     LocationType
+  name                     String
+  slug                     String
+  parentId                 String?                     @db.Uuid
+  countryCode              String?
+  regionCode               String?
+  postalCode               String?
+  latitude                 Decimal?                    @db.Decimal(9, 6)
+  longitude                Decimal?                    @db.Decimal(9, 6)
+  timezone                 String?
+  isActive                 Boolean                     @default(true)
+  createdAt                DateTime                    @default(now()) @db.Timestamptz(6)
+  updatedAt                DateTime                    @updatedAt @db.Timestamptz(6)
+  parent                   Location?                   @relation("LocationHierarchy", fields: [parentId], references: [id], onDelete: Restrict)
+  children                 Location[]                  @relation("LocationHierarchy")
+  marketplaceRegions       MarketplaceRegionLocation[]
+  profiles                 Profile[]
+  listings                 Listing[]
+  businesses               Business[]
+  jobs                     Job[]
+  events                   Event[]
+  communityPosts           CommunityPost[]
+
+  @@index([parentId])
+  @@index([type, name])
+  @@index([countryCode, regionCode])
+  @@index([latitude, longitude])
+}
+
+model MarketplaceRegion {
+  id                 String                      @id @default(uuid()) @db.Uuid
+  name               String
+  slug               String                      @unique
+  countryCode        String
+  defaultLatitude    Decimal                     @db.Decimal(9, 6)
+  defaultLongitude   Decimal                     @db.Decimal(9, 6)
+  defaultRadiusMiles Int
+  isLaunchMarket     Boolean                     @default(false)
+  isActive           Boolean                     @default(true)
+  createdAt          DateTime                    @default(now()) @db.Timestamptz(6)
+  updatedAt          DateTime                    @updatedAt @db.Timestamptz(6)
+  locations          MarketplaceRegionLocation[]
+}
+
+model MarketplaceRegionLocation {
+  id                  String            @id @default(uuid()) @db.Uuid
+  marketplaceRegionId String            @db.Uuid
+  locationId          String            @db.Uuid
+  priority            Int               @default(0)
+  marketplaceRegion   MarketplaceRegion @relation(fields: [marketplaceRegionId], references: [id], onDelete: Restrict)
+  location            Location          @relation(fields: [locationId], references: [id], onDelete: Restrict)
+
+  @@unique([marketplaceRegionId, locationId])
+  @@index([locationId])
+}
+
+model Category {
+  id                  String                        @id @default(uuid()) @db.Uuid
+  parentId            String?                       @db.Uuid
+  domainType          CategoryDomainType
+  name                String
+  slug                String
+  description         String?
+  iconKey             String?
+  sortOrder           Int                           @default(0)
+  isActive            Boolean                       @default(true)
+  isFeatured          Boolean                       @default(false)
+  createdAt           DateTime                      @default(now()) @db.Timestamptz(6)
+  updatedAt           DateTime                      @updatedAt @db.Timestamptz(6)
+  parent              Category?                     @relation("CategoryHierarchy", fields: [parentId], references: [id], onDelete: Restrict)
+  children            Category[]                    @relation("CategoryHierarchy")
+  attributeDefinitions CategoryAttributeDefinition[]
+  listings            Listing[]
+  businesses          Business[]
+  jobs                Job[]
+  events              Event[]
+
+  @@index([parentId])
+  @@index([domainType, isActive, sortOrder])
+}
+
+model CategoryAttributeDefinition {
+  id           String                    @id @default(uuid()) @db.Uuid
+  categoryId   String                    @db.Uuid
+  key          String
+  label        String
+  dataType     AttributeDataType
+  isRequired   Boolean                   @default(false)
+  isFilterable Boolean                   @default(false)
+  isSearchable Boolean                   @default(false)
+  unit         String?
+  sortOrder    Int                       @default(0)
+  validationJson Json?
+  createdAt    DateTime                  @default(now()) @db.Timestamptz(6)
+  updatedAt    DateTime                  @updatedAt @db.Timestamptz(6)
+  category     Category                  @relation(fields: [categoryId], references: [id], onDelete: Restrict)
+  options      CategoryAttributeOption[]
+  values       ListingAttributeValue[]
+
+  @@unique([categoryId, key])
+  @@index([categoryId, sortOrder])
+}
+
+model CategoryAttributeOption {
+  id                    String                      @id @default(uuid()) @db.Uuid
+  attributeDefinitionId String                      @db.Uuid
+  value                 String
+  label                 String
+  sortOrder             Int                         @default(0)
+  isActive              Boolean                     @default(true)
+  attributeDefinition   CategoryAttributeDefinition @relation(fields: [attributeDefinitionId], references: [id], onDelete: Restrict)
+
+  @@unique([attributeDefinitionId, value])
+  @@index([attributeDefinitionId, sortOrder])
+}
+
+model Listing {
+  id                String                  @id @default(uuid()) @db.Uuid
+  ownerUserId       String                  @db.Uuid
+  categoryId        String                  @db.Uuid
+  title             String
+  slug              String
+  description       String
+  priceAmount       Decimal?                @db.Decimal(12, 2)
+  priceCurrency     String                  @default("USD")
+  priceType         PriceType
+  condition         String?
+  status            ListingStatus           @default(DRAFT)
+  moderationState   ModerationState         @default(NOT_REVIEWED)
+  publicLocationId  String?                 @db.Uuid
+  postalCode        String?
+  latitude          Decimal?                @db.Decimal(9, 6)
+  longitude         Decimal?                @db.Decimal(9, 6)
+  locationPrecision LocationPrecision       @default(APPROXIMATE)
+  contactPreference ContactPreference       @default(IN_APP_MESSAGE)
+  availabilityText  String?
+  isFeatured        Boolean                 @default(false)
+  featuredSource    String?
+  publishedAt       DateTime?               @db.Timestamptz(6)
+  expiresAt         DateTime?               @db.Timestamptz(6)
+  soldAt            DateTime?               @db.Timestamptz(6)
+  archivedAt        DateTime?               @db.Timestamptz(6)
+  deletedAt         DateTime?               @db.Timestamptz(6)
+  createdAt         DateTime                @default(now()) @db.Timestamptz(6)
+  updatedAt         DateTime                @updatedAt @db.Timestamptz(6)
+  owner             User                    @relation(fields: [ownerUserId], references: [id], onDelete: Restrict)
+  category          Category                @relation(fields: [categoryId], references: [id], onDelete: Restrict)
+  publicLocation    Location?               @relation(fields: [publicLocationId], references: [id], onDelete: SetNull)
+  images            ListingImage[]
+  attributeValues   ListingAttributeValue[]
+  favorites         Favorite[]
+  conversations     Conversation[]
+  reports           Report[]
+
+  @@index([ownerUserId, status])
+  @@index([categoryId, status, publishedAt(sort: Desc)])
+  @@index([publicLocationId, status, publishedAt(sort: Desc)])
+  @@index([priceAmount])
+  @@index([status, expiresAt])
+  @@index([isFeatured, status])
+  @@index([slug])
+}
+
+model ListingImage {
+  id              String          @id @default(uuid()) @db.Uuid
+  listingId       String          @db.Uuid
+  storageKey      String
+  publicUrl       String
+  width           Int
+  height          Int
+  mimeType        String
+  fileSizeBytes   Int
+  sortOrder       Int
+  altText         String?
+  moderationState ModerationState @default(NOT_REVIEWED)
+  createdAt       DateTime        @default(now()) @db.Timestamptz(6)
+  listing         Listing         @relation(fields: [listingId], references: [id], onDelete: Cascade)
+
+  @@unique([listingId, sortOrder])
+}
+
+model ListingAttributeValue {
+  id                    String                      @id @default(uuid()) @db.Uuid
+  listingId             String                      @db.Uuid
+  attributeDefinitionId String                      @db.Uuid
+  textValue             String?
+  integerValue          Int?
+  decimalValue          Decimal?                    @db.Decimal(14, 4)
+  booleanValue          Boolean?
+  dateValue             DateTime?                   @db.Date
+  optionValue           String?
+  multiOptionJson       Json?
+  createdAt             DateTime                    @default(now()) @db.Timestamptz(6)
+  updatedAt             DateTime                    @updatedAt @db.Timestamptz(6)
+  listing               Listing                     @relation(fields: [listingId], references: [id], onDelete: Cascade)
+  attributeDefinition   CategoryAttributeDefinition @relation(fields: [attributeDefinitionId], references: [id], onDelete: Restrict)
+
+  @@unique([listingId, attributeDefinitionId])
+  @@index([attributeDefinitionId])
+}
+
+model Favorite {
+  id        String   @id @default(uuid()) @db.Uuid
+  userId    String   @db.Uuid
+  listingId String   @db.Uuid
+  createdAt DateTime @default(now()) @db.Timestamptz(6)
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  listing   Listing  @relation(fields: [listingId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, listingId])
+  @@index([userId, createdAt(sort: Desc)])
+  @@index([listingId])
+}
+
+model Conversation {
+  id             String                    @id @default(uuid()) @db.Uuid
+  contextType    ConversationContextType
+  listingId      String?                   @db.Uuid
+  businessId     String?                   @db.Uuid
+  jobId          String?                   @db.Uuid
+  eventId        String?                   @db.Uuid
+  createdAt      DateTime                  @default(now()) @db.Timestamptz(6)
+  updatedAt      DateTime                  @updatedAt @db.Timestamptz(6)
+  lastMessageAt  DateTime?                 @db.Timestamptz(6)
+  listing        Listing?                  @relation(fields: [listingId], references: [id], onDelete: Restrict)
+  business       Business?                 @relation(fields: [businessId], references: [id], onDelete: Restrict)
+  job            Job?                      @relation(fields: [jobId], references: [id], onDelete: Restrict)
+  event          Event?                    @relation(fields: [eventId], references: [id], onDelete: Restrict)
+  participants   ConversationParticipant[]
+  messages       Message[]
+
+  @@index([listingId])
+  @@index([businessId])
+  @@index([jobId])
+  @@index([eventId])
+  @@index([lastMessageAt])
+}
+
+model ConversationParticipant {
+  id             String       @id @default(uuid()) @db.Uuid
+  conversationId String       @db.Uuid
+  userId         String       @db.Uuid
+  joinedAt       DateTime     @default(now()) @db.Timestamptz(6)
+  lastReadAt     DateTime?    @db.Timestamptz(6)
+  isMuted        Boolean      @default(false)
+  leftAt         DateTime?    @db.Timestamptz(6)
+  conversation   Conversation @relation(fields: [conversationId], references: [id], onDelete: Cascade)
+  user           User         @relation(fields: [userId], references: [id], onDelete: Restrict)
+
+  @@unique([conversationId, userId])
+  @@index([userId])
+}
+
+model Message {
+  id              String              @id @default(uuid()) @db.Uuid
+  conversationId  String              @db.Uuid
+  senderUserId    String              @db.Uuid
+  body            String
+  messageType     MessageType         @default(TEXT)
+  sentAt          DateTime            @default(now()) @db.Timestamptz(6)
+  editedAt        DateTime?           @db.Timestamptz(6)
+  deletedAt       DateTime?           @db.Timestamptz(6)
+  moderationState ModerationState     @default(NOT_REVIEWED)
+  conversation    Conversation        @relation(fields: [conversationId], references: [id], onDelete: Cascade)
+  sender          User                @relation(fields: [senderUserId], references: [id], onDelete: Restrict)
+  attachments     MessageAttachment[]
+  reports         Report[]
+
+  @@index([conversationId, sentAt])
+  @@index([senderUserId, sentAt])
+}
+
+model MessageAttachment {
+  id              String          @id @default(uuid()) @db.Uuid
+  messageId       String          @db.Uuid
+  storageKey      String
+  publicUrl       String
+  mimeType        String
+  fileSizeBytes   Int
+  width           Int?
+  height          Int?
+  moderationState ModerationState @default(NOT_REVIEWED)
+  createdAt       DateTime        @default(now()) @db.Timestamptz(6)
+  message         Message         @relation(fields: [messageId], references: [id], onDelete: Cascade)
+}
+
+model Notification {
+  id         String           @id @default(uuid()) @db.Uuid
+  userId     String           @db.Uuid
+  type       NotificationType
+  title      String
+  body       String
+  entityType String?
+  entityId   String?          @db.Uuid
+  isRead     Boolean          @default(false)
+  readAt     DateTime?        @db.Timestamptz(6)
+  createdAt  DateTime         @default(now()) @db.Timestamptz(6)
+  user       User             @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId, isRead, createdAt(sort: Desc)])
+}
+
+model NotificationPreference {
+  id           String           @id @default(uuid()) @db.Uuid
+  userId       String           @db.Uuid
+  type         NotificationType
+  inAppEnabled Boolean          @default(true)
+  emailEnabled Boolean          @default(true)
+  pushEnabled  Boolean          @default(false)
+  smsEnabled   Boolean          @default(false)
+  createdAt    DateTime         @default(now()) @db.Timestamptz(6)
+  updatedAt    DateTime         @updatedAt @db.Timestamptz(6)
+  user         User             @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, type])
+}
+
+model Report {
+  id                  String            @id @default(uuid()) @db.Uuid
+  reporterUserId      String            @db.Uuid
+  subjectType         ReportSubjectType
+  listingId           String?           @db.Uuid
+  userId              String?           @db.Uuid
+  businessId          String?           @db.Uuid
+  messageId           String?           @db.Uuid
+  communityPostId     String?           @db.Uuid
+  eventId             String?           @db.Uuid
+  reason              ReportReason
+  description         String?
+  status              ReportStatus      @default(OPEN)
+  priority            ReportPriority    @default(NORMAL)
+  assignedModeratorId String?           @db.Uuid
+  createdAt           DateTime          @default(now()) @db.Timestamptz(6)
+  updatedAt           DateTime          @updatedAt @db.Timestamptz(6)
+  resolvedAt          DateTime?         @db.Timestamptz(6)
+  reporter            User              @relation("ReportsMade", fields: [reporterUserId], references: [id], onDelete: Restrict)
+  reportedUser        User?             @relation("ReportsAboutUser", fields: [userId], references: [id], onDelete: Restrict)
+  listing             Listing?          @relation(fields: [listingId], references: [id], onDelete: Restrict)
+  business            Business?         @relation(fields: [businessId], references: [id], onDelete: Restrict)
+  message             Message?          @relation(fields: [messageId], references: [id], onDelete: Restrict)
+  communityPost       CommunityPost?    @relation(fields: [communityPostId], references: [id], onDelete: Restrict)
+  event               Event?            @relation(fields: [eventId], references: [id], onDelete: Restrict)
+  assignedModerator   User?             @relation("AssignedReports", fields: [assignedModeratorId], references: [id], onDelete: SetNull)
+
+  @@index([status, priority, createdAt])
+  @@index([assignedModeratorId, status])
+  @@index([reporterUserId])
+}
+
+model ModerationAction {
+  id                String               @id @default(uuid()) @db.Uuid
+  moderatorUserId   String               @db.Uuid
+  targetType        ModerationTargetType
+  targetId          String               @db.Uuid
+  actionType        ModerationActionType
+  reasonCode        String
+  notes             String?
+  previousStateJson Json?
+  newStateJson      Json?
+  createdAt         DateTime             @default(now()) @db.Timestamptz(6)
+  moderator         User                 @relation(fields: [moderatorUserId], references: [id], onDelete: Restrict)
+
+  @@index([targetType, targetId, createdAt])
+  @@index([moderatorUserId, createdAt])
+}
+
+model Block {
+  id            String   @id @default(uuid()) @db.Uuid
+  blockerUserId String   @db.Uuid
+  blockedUserId String   @db.Uuid
+  createdAt     DateTime @default(now()) @db.Timestamptz(6)
+  blocker       User     @relation("Blocker", fields: [blockerUserId], references: [id], onDelete: Cascade)
+  blocked       User     @relation("Blocked", fields: [blockedUserId], references: [id], onDelete: Cascade)
+
+  @@unique([blockerUserId, blockedUserId])
+  @@index([blockedUserId])
+}
+
+model AuditLog {
+  id               String         @id @default(uuid()) @db.Uuid
+  actorUserId      String?        @db.Uuid
+  actorType        AuditActorType
+  action           String
+  entityType       String
+  entityId         String?        @db.Uuid
+  ipHash           String?
+  userAgentSummary String?
+  metadataJson     Json?
+  createdAt        DateTime       @default(now()) @db.Timestamptz(6)
+  actor            User?          @relation(fields: [actorUserId], references: [id], onDelete: SetNull)
+
+  @@index([actorUserId, createdAt])
+  @@index([entityType, entityId, createdAt])
+  @@index([action, createdAt])
+}
+
+model Business {
+  id                 String              @id @default(uuid()) @db.Uuid
+  ownerUserId        String              @db.Uuid
+  name               String
+  slug               String
+  description        String
+  categoryId         String              @db.Uuid
+  status             BusinessStatus      @default(DRAFT)
+  verificationStatus VerificationStatus  @default(PENDING)
+  logoUrl            String?
+  coverImageUrl      String?
+  publicLocationId   String              @db.Uuid
+  streetAddress      String?
+  postalCode         String?
+  latitude           Decimal?            @db.Decimal(9, 6)
+  longitude          Decimal?            @db.Decimal(9, 6)
+  phonePublic        String?
+  emailPublic        String?
+  websiteUrl         String?
+  hoursJson          Json?
+  socialLinksJson    Json?
+  ratingAverage      Decimal?            @db.Decimal(3, 2)
+  ratingCount        Int                 @default(0)
+  createdAt          DateTime            @default(now()) @db.Timestamptz(6)
+  updatedAt          DateTime            @updatedAt @db.Timestamptz(6)
+  deletedAt          DateTime?           @db.Timestamptz(6)
+  owner              User                @relation(fields: [ownerUserId], references: [id], onDelete: Restrict)
+  category           Category            @relation(fields: [categoryId], references: [id], onDelete: Restrict)
+  publicLocation     Location            @relation(fields: [publicLocationId], references: [id], onDelete: Restrict)
+  verifications      Verification[]
+  conversations      Conversation[]
+  reports            Report[]
+  members            BusinessMember[]
+  images             BusinessImage[]
+  jobs               Job[]
+  events             Event[]
+
+  @@index([categoryId, status])
+  @@index([publicLocationId, status])
+  @@index([name])
+  @@index([ownerUserId, status])
+  @@index([slug])
+}
+
+model BusinessMember {
+  id          String             @id @default(uuid()) @db.Uuid
+  businessId  String             @db.Uuid
+  userId      String             @db.Uuid
+  role        BusinessMemberRole
+  invitedAt   DateTime           @default(now()) @db.Timestamptz(6)
+  acceptedAt  DateTime?          @db.Timestamptz(6)
+  removedAt   DateTime?          @db.Timestamptz(6)
+  business    Business           @relation(fields: [businessId], references: [id], onDelete: Restrict)
+  user        User               @relation(fields: [userId], references: [id], onDelete: Restrict)
+
+  @@unique([businessId, userId])
+  @@index([userId])
+}
+
+model BusinessImage {
+  id          String   @id @default(uuid()) @db.Uuid
+  businessId  String   @db.Uuid
+  storageKey  String
+  publicUrl   String
+  sortOrder   Int
+  altText     String?
+  createdAt   DateTime @default(now()) @db.Timestamptz(6)
+  business    Business @relation(fields: [businessId], references: [id], onDelete: Cascade)
+
+  @@unique([businessId, sortOrder])
+}
+
+model Job {
+  id                String               @id @default(uuid()) @db.Uuid
+  ownerUserId       String               @db.Uuid
+  businessId        String?              @db.Uuid
+  categoryId        String?              @db.Uuid
+  title             String
+  slug              String
+  employerName      String
+  description       String
+  publicLocationId  String?              @db.Uuid
+  workMode          JobWorkMode
+  employmentType    EmploymentType
+  salaryMin         Decimal?             @db.Decimal(12, 2)
+  salaryMax         Decimal?             @db.Decimal(12, 2)
+  salaryCurrency    String?
+  salaryPeriod      SalaryPeriod?
+  experienceText    String?
+  skillsJson        Json?
+  applicationMethod JobApplicationMethod
+  applicationUrl    String?
+  applicationEmail  String?
+  status            JobStatus            @default(DRAFT)
+  moderationState   ModerationState      @default(NOT_REVIEWED)
+  publishedAt       DateTime?            @db.Timestamptz(6)
+  expiresAt         DateTime?            @db.Timestamptz(6)
+  createdAt         DateTime             @default(now()) @db.Timestamptz(6)
+  updatedAt         DateTime             @updatedAt @db.Timestamptz(6)
+  deletedAt         DateTime?            @db.Timestamptz(6)
+  owner             User                 @relation(fields: [ownerUserId], references: [id], onDelete: Restrict)
+  business          Business?            @relation(fields: [businessId], references: [id], onDelete: Restrict)
+  category          Category?            @relation(fields: [categoryId], references: [id], onDelete: SetNull)
+  publicLocation    Location?            @relation(fields: [publicLocationId], references: [id], onDelete: SetNull)
+  conversations     Conversation[]
+
+  @@index([publicLocationId, status, publishedAt(sort: Desc)])
+  @@index([employmentType, status])
+  @@index([workMode, status])
+  @@index([businessId, status])
+  @@index([ownerUserId, status])
+  @@index([categoryId, status])
+  @@index([slug])
+}
+
+model Event {
+  id               String          @id @default(uuid()) @db.Uuid
+  ownerUserId      String          @db.Uuid
+  businessId       String?         @db.Uuid
+  title            String
+  slug             String
+  description      String
+  categoryId       String?         @db.Uuid
+  startAt          DateTime        @db.Timestamptz(6)
+  endAt            DateTime?       @db.Timestamptz(6)
+  timezone         String
+  publicLocationId String?         @db.Uuid
+  venueName        String?
+  streetAddress    String?
+  latitude         Decimal?        @db.Decimal(9, 6)
+  longitude        Decimal?        @db.Decimal(9, 6)
+  contactUrl       String?
+  contactEmail     String?
+  status           EventStatus     @default(DRAFT)
+  moderationState  ModerationState @default(NOT_REVIEWED)
+  publishedAt      DateTime?       @db.Timestamptz(6)
+  createdAt        DateTime        @default(now()) @db.Timestamptz(6)
+  updatedAt        DateTime        @updatedAt @db.Timestamptz(6)
+  deletedAt        DateTime?       @db.Timestamptz(6)
+  owner            User            @relation(fields: [ownerUserId], references: [id], onDelete: Restrict)
+  business         Business?       @relation(fields: [businessId], references: [id], onDelete: Restrict)
+  category         Category?       @relation(fields: [categoryId], references: [id], onDelete: SetNull)
+  publicLocation   Location?       @relation(fields: [publicLocationId], references: [id], onDelete: SetNull)
+  conversations    Conversation[]
+  reports          Report[]
+  images           EventImage[]
+
+  @@index([startAt, status])
+  @@index([publicLocationId, startAt])
+  @@index([categoryId, startAt])
+  @@index([ownerUserId, status])
+  @@index([businessId, status])
+  @@index([slug])
+}
+
+model EventImage {
+  id        String   @id @default(uuid()) @db.Uuid
+  eventId   String   @db.Uuid
+  storageKey String
+  publicUrl String
+  sortOrder Int
+  altText   String?
+  createdAt DateTime @default(now()) @db.Timestamptz(6)
+  event     Event    @relation(fields: [eventId], references: [id], onDelete: Cascade)
+
+  @@unique([eventId, sortOrder])
+}
+
+model CommunityPost {
+  id               String              @id @default(uuid()) @db.Uuid
+  authorUserId     String              @db.Uuid
+  type             CommunityPostType
+  title            String?
+  body             String
+  publicLocationId String?             @db.Uuid
+  status           CommunityPostStatus @default(ACTIVE)
+  moderationState  ModerationState     @default(NOT_REVIEWED)
+  createdAt        DateTime            @default(now()) @db.Timestamptz(6)
+  updatedAt        DateTime            @updatedAt @db.Timestamptz(6)
+  deletedAt        DateTime?           @db.Timestamptz(6)
+  author           User                @relation(fields: [authorUserId], references: [id], onDelete: Restrict)
+  publicLocation   Location?           @relation(fields: [publicLocationId], references: [id], onDelete: SetNull)
+  reports          Report[]
+
+  @@index([publicLocationId, status, createdAt])
+  @@index([authorUserId, status])
+  @@index([type, status, createdAt])
+}

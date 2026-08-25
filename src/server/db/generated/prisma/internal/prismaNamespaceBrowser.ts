@@ -51,7 +51,38 @@ export const AnyNull = runtime.AnyNull
 
 
 export const ModelName = {
-
+  User: 'User',
+  Profile: 'Profile',
+  Role: 'Role',
+  UserRole: 'UserRole',
+  Verification: 'Verification',
+  Location: 'Location',
+  MarketplaceRegion: 'MarketplaceRegion',
+  MarketplaceRegionLocation: 'MarketplaceRegionLocation',
+  Category: 'Category',
+  CategoryAttributeDefinition: 'CategoryAttributeDefinition',
+  CategoryAttributeOption: 'CategoryAttributeOption',
+  Listing: 'Listing',
+  ListingImage: 'ListingImage',
+  ListingAttributeValue: 'ListingAttributeValue',
+  Favorite: 'Favorite',
+  Conversation: 'Conversation',
+  ConversationParticipant: 'ConversationParticipant',
+  Message: 'Message',
+  MessageAttachment: 'MessageAttachment',
+  Notification: 'Notification',
+  NotificationPreference: 'NotificationPreference',
+  Report: 'Report',
+  ModerationAction: 'ModerationAction',
+  Block: 'Block',
+  AuditLog: 'AuditLog',
+  Business: 'Business',
+  BusinessMember: 'BusinessMember',
+  BusinessImage: 'BusinessImage',
+  Job: 'Job',
+  Event: 'Event',
+  EventImage: 'EventImage',
+  CommunityPost: 'CommunityPost'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -68,4 +99,604 @@ export const TransactionIsolationLevel = runtime.makeStrictEnum({
 } as const)
 
 export type TransactionIsolationLevel = (typeof TransactionIsolationLevel)[keyof typeof TransactionIsolationLevel]
+
+
+export const UserScalarFieldEnum = {
+  id: 'id',
+  email: 'email',
+  emailNormalized: 'emailNormalized',
+  emailVerifiedAt: 'emailVerifiedAt',
+  passwordHash: 'passwordHash',
+  status: 'status',
+  defaultRole: 'defaultRole',
+  lastLoginAt: 'lastLoginAt',
+  lastActiveAt: 'lastActiveAt',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt',
+  deletedAt: 'deletedAt'
+} as const
+
+export type UserScalarFieldEnum = (typeof UserScalarFieldEnum)[keyof typeof UserScalarFieldEnum]
+
+
+export const ProfileScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  displayName: 'displayName',
+  username: 'username',
+  bio: 'bio',
+  avatarUrl: 'avatarUrl',
+  cityLocationId: 'cityLocationId',
+  publicLocationText: 'publicLocationText',
+  joinedDisplayPreference: 'joinedDisplayPreference',
+  responseRatePercent: 'responseRatePercent',
+  medianResponseMinutes: 'medianResponseMinutes',
+  sellerRatingAverage: 'sellerRatingAverage',
+  sellerRatingCount: 'sellerRatingCount',
+  isPublic: 'isPublic',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type ProfileScalarFieldEnum = (typeof ProfileScalarFieldEnum)[keyof typeof ProfileScalarFieldEnum]
+
+
+export const RoleScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  createdAt: 'createdAt'
+} as const
+
+export type RoleScalarFieldEnum = (typeof RoleScalarFieldEnum)[keyof typeof RoleScalarFieldEnum]
+
+
+export const UserRoleScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  roleId: 'roleId',
+  grantedByUserId: 'grantedByUserId',
+  createdAt: 'createdAt',
+  revokedAt: 'revokedAt'
+} as const
+
+export type UserRoleScalarFieldEnum = (typeof UserRoleScalarFieldEnum)[keyof typeof UserRoleScalarFieldEnum]
+
+
+export const VerificationScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  businessId: 'businessId',
+  type: 'type',
+  status: 'status',
+  providerReference: 'providerReference',
+  verifiedAt: 'verifiedAt',
+  expiresAt: 'expiresAt',
+  reviewedByUserId: 'reviewedByUserId',
+  metadataJson: 'metadataJson',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type VerificationScalarFieldEnum = (typeof VerificationScalarFieldEnum)[keyof typeof VerificationScalarFieldEnum]
+
+
+export const LocationScalarFieldEnum = {
+  id: 'id',
+  type: 'type',
+  name: 'name',
+  slug: 'slug',
+  parentId: 'parentId',
+  countryCode: 'countryCode',
+  regionCode: 'regionCode',
+  postalCode: 'postalCode',
+  latitude: 'latitude',
+  longitude: 'longitude',
+  timezone: 'timezone',
+  isActive: 'isActive',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type LocationScalarFieldEnum = (typeof LocationScalarFieldEnum)[keyof typeof LocationScalarFieldEnum]
+
+
+export const MarketplaceRegionScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  slug: 'slug',
+  countryCode: 'countryCode',
+  defaultLatitude: 'defaultLatitude',
+  defaultLongitude: 'defaultLongitude',
+  defaultRadiusMiles: 'defaultRadiusMiles',
+  isLaunchMarket: 'isLaunchMarket',
+  isActive: 'isActive',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type MarketplaceRegionScalarFieldEnum = (typeof MarketplaceRegionScalarFieldEnum)[keyof typeof MarketplaceRegionScalarFieldEnum]
+
+
+export const MarketplaceRegionLocationScalarFieldEnum = {
+  id: 'id',
+  marketplaceRegionId: 'marketplaceRegionId',
+  locationId: 'locationId',
+  priority: 'priority'
+} as const
+
+export type MarketplaceRegionLocationScalarFieldEnum = (typeof MarketplaceRegionLocationScalarFieldEnum)[keyof typeof MarketplaceRegionLocationScalarFieldEnum]
+
+
+export const CategoryScalarFieldEnum = {
+  id: 'id',
+  parentId: 'parentId',
+  domainType: 'domainType',
+  name: 'name',
+  slug: 'slug',
+  description: 'description',
+  iconKey: 'iconKey',
+  sortOrder: 'sortOrder',
+  isActive: 'isActive',
+  isFeatured: 'isFeatured',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type CategoryScalarFieldEnum = (typeof CategoryScalarFieldEnum)[keyof typeof CategoryScalarFieldEnum]
+
+
+export const CategoryAttributeDefinitionScalarFieldEnum = {
+  id: 'id',
+  categoryId: 'categoryId',
+  key: 'key',
+  label: 'label',
+  dataType: 'dataType',
+  isRequired: 'isRequired',
+  isFilterable: 'isFilterable',
+  isSearchable: 'isSearchable',
+  unit: 'unit',
+  sortOrder: 'sortOrder',
+  validationJson: 'validationJson',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type CategoryAttributeDefinitionScalarFieldEnum = (typeof CategoryAttributeDefinitionScalarFieldEnum)[keyof typeof CategoryAttributeDefinitionScalarFieldEnum]
+
+
+export const CategoryAttributeOptionScalarFieldEnum = {
+  id: 'id',
+  attributeDefinitionId: 'attributeDefinitionId',
+  value: 'value',
+  label: 'label',
+  sortOrder: 'sortOrder',
+  isActive: 'isActive'
+} as const
+
+export type CategoryAttributeOptionScalarFieldEnum = (typeof CategoryAttributeOptionScalarFieldEnum)[keyof typeof CategoryAttributeOptionScalarFieldEnum]
+
+
+export const ListingScalarFieldEnum = {
+  id: 'id',
+  ownerUserId: 'ownerUserId',
+  categoryId: 'categoryId',
+  title: 'title',
+  slug: 'slug',
+  description: 'description',
+  priceAmount: 'priceAmount',
+  priceCurrency: 'priceCurrency',
+  priceType: 'priceType',
+  condition: 'condition',
+  status: 'status',
+  moderationState: 'moderationState',
+  publicLocationId: 'publicLocationId',
+  postalCode: 'postalCode',
+  latitude: 'latitude',
+  longitude: 'longitude',
+  locationPrecision: 'locationPrecision',
+  contactPreference: 'contactPreference',
+  availabilityText: 'availabilityText',
+  isFeatured: 'isFeatured',
+  featuredSource: 'featuredSource',
+  publishedAt: 'publishedAt',
+  expiresAt: 'expiresAt',
+  soldAt: 'soldAt',
+  archivedAt: 'archivedAt',
+  deletedAt: 'deletedAt',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type ListingScalarFieldEnum = (typeof ListingScalarFieldEnum)[keyof typeof ListingScalarFieldEnum]
+
+
+export const ListingImageScalarFieldEnum = {
+  id: 'id',
+  listingId: 'listingId',
+  storageKey: 'storageKey',
+  publicUrl: 'publicUrl',
+  width: 'width',
+  height: 'height',
+  mimeType: 'mimeType',
+  fileSizeBytes: 'fileSizeBytes',
+  sortOrder: 'sortOrder',
+  altText: 'altText',
+  moderationState: 'moderationState',
+  createdAt: 'createdAt'
+} as const
+
+export type ListingImageScalarFieldEnum = (typeof ListingImageScalarFieldEnum)[keyof typeof ListingImageScalarFieldEnum]
+
+
+export const ListingAttributeValueScalarFieldEnum = {
+  id: 'id',
+  listingId: 'listingId',
+  attributeDefinitionId: 'attributeDefinitionId',
+  textValue: 'textValue',
+  integerValue: 'integerValue',
+  decimalValue: 'decimalValue',
+  booleanValue: 'booleanValue',
+  dateValue: 'dateValue',
+  optionValue: 'optionValue',
+  multiOptionJson: 'multiOptionJson',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type ListingAttributeValueScalarFieldEnum = (typeof ListingAttributeValueScalarFieldEnum)[keyof typeof ListingAttributeValueScalarFieldEnum]
+
+
+export const FavoriteScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  listingId: 'listingId',
+  createdAt: 'createdAt'
+} as const
+
+export type FavoriteScalarFieldEnum = (typeof FavoriteScalarFieldEnum)[keyof typeof FavoriteScalarFieldEnum]
+
+
+export const ConversationScalarFieldEnum = {
+  id: 'id',
+  contextType: 'contextType',
+  listingId: 'listingId',
+  businessId: 'businessId',
+  jobId: 'jobId',
+  eventId: 'eventId',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt',
+  lastMessageAt: 'lastMessageAt'
+} as const
+
+export type ConversationScalarFieldEnum = (typeof ConversationScalarFieldEnum)[keyof typeof ConversationScalarFieldEnum]
+
+
+export const ConversationParticipantScalarFieldEnum = {
+  id: 'id',
+  conversationId: 'conversationId',
+  userId: 'userId',
+  joinedAt: 'joinedAt',
+  lastReadAt: 'lastReadAt',
+  isMuted: 'isMuted',
+  leftAt: 'leftAt'
+} as const
+
+export type ConversationParticipantScalarFieldEnum = (typeof ConversationParticipantScalarFieldEnum)[keyof typeof ConversationParticipantScalarFieldEnum]
+
+
+export const MessageScalarFieldEnum = {
+  id: 'id',
+  conversationId: 'conversationId',
+  senderUserId: 'senderUserId',
+  body: 'body',
+  messageType: 'messageType',
+  sentAt: 'sentAt',
+  editedAt: 'editedAt',
+  deletedAt: 'deletedAt',
+  moderationState: 'moderationState'
+} as const
+
+export type MessageScalarFieldEnum = (typeof MessageScalarFieldEnum)[keyof typeof MessageScalarFieldEnum]
+
+
+export const MessageAttachmentScalarFieldEnum = {
+  id: 'id',
+  messageId: 'messageId',
+  storageKey: 'storageKey',
+  publicUrl: 'publicUrl',
+  mimeType: 'mimeType',
+  fileSizeBytes: 'fileSizeBytes',
+  width: 'width',
+  height: 'height',
+  moderationState: 'moderationState',
+  createdAt: 'createdAt'
+} as const
+
+export type MessageAttachmentScalarFieldEnum = (typeof MessageAttachmentScalarFieldEnum)[keyof typeof MessageAttachmentScalarFieldEnum]
+
+
+export const NotificationScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  type: 'type',
+  title: 'title',
+  body: 'body',
+  entityType: 'entityType',
+  entityId: 'entityId',
+  isRead: 'isRead',
+  readAt: 'readAt',
+  createdAt: 'createdAt'
+} as const
+
+export type NotificationScalarFieldEnum = (typeof NotificationScalarFieldEnum)[keyof typeof NotificationScalarFieldEnum]
+
+
+export const NotificationPreferenceScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  type: 'type',
+  inAppEnabled: 'inAppEnabled',
+  emailEnabled: 'emailEnabled',
+  pushEnabled: 'pushEnabled',
+  smsEnabled: 'smsEnabled',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type NotificationPreferenceScalarFieldEnum = (typeof NotificationPreferenceScalarFieldEnum)[keyof typeof NotificationPreferenceScalarFieldEnum]
+
+
+export const ReportScalarFieldEnum = {
+  id: 'id',
+  reporterUserId: 'reporterUserId',
+  subjectType: 'subjectType',
+  listingId: 'listingId',
+  userId: 'userId',
+  businessId: 'businessId',
+  messageId: 'messageId',
+  communityPostId: 'communityPostId',
+  eventId: 'eventId',
+  reason: 'reason',
+  description: 'description',
+  status: 'status',
+  priority: 'priority',
+  assignedModeratorId: 'assignedModeratorId',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt',
+  resolvedAt: 'resolvedAt'
+} as const
+
+export type ReportScalarFieldEnum = (typeof ReportScalarFieldEnum)[keyof typeof ReportScalarFieldEnum]
+
+
+export const ModerationActionScalarFieldEnum = {
+  id: 'id',
+  moderatorUserId: 'moderatorUserId',
+  targetType: 'targetType',
+  targetId: 'targetId',
+  actionType: 'actionType',
+  reasonCode: 'reasonCode',
+  notes: 'notes',
+  previousStateJson: 'previousStateJson',
+  newStateJson: 'newStateJson',
+  createdAt: 'createdAt'
+} as const
+
+export type ModerationActionScalarFieldEnum = (typeof ModerationActionScalarFieldEnum)[keyof typeof ModerationActionScalarFieldEnum]
+
+
+export const BlockScalarFieldEnum = {
+  id: 'id',
+  blockerUserId: 'blockerUserId',
+  blockedUserId: 'blockedUserId',
+  createdAt: 'createdAt'
+} as const
+
+export type BlockScalarFieldEnum = (typeof BlockScalarFieldEnum)[keyof typeof BlockScalarFieldEnum]
+
+
+export const AuditLogScalarFieldEnum = {
+  id: 'id',
+  actorUserId: 'actorUserId',
+  actorType: 'actorType',
+  action: 'action',
+  entityType: 'entityType',
+  entityId: 'entityId',
+  ipHash: 'ipHash',
+  userAgentSummary: 'userAgentSummary',
+  metadataJson: 'metadataJson',
+  createdAt: 'createdAt'
+} as const
+
+export type AuditLogScalarFieldEnum = (typeof AuditLogScalarFieldEnum)[keyof typeof AuditLogScalarFieldEnum]
+
+
+export const BusinessScalarFieldEnum = {
+  id: 'id',
+  ownerUserId: 'ownerUserId',
+  name: 'name',
+  slug: 'slug',
+  description: 'description',
+  categoryId: 'categoryId',
+  status: 'status',
+  verificationStatus: 'verificationStatus',
+  logoUrl: 'logoUrl',
+  coverImageUrl: 'coverImageUrl',
+  publicLocationId: 'publicLocationId',
+  streetAddress: 'streetAddress',
+  postalCode: 'postalCode',
+  latitude: 'latitude',
+  longitude: 'longitude',
+  phonePublic: 'phonePublic',
+  emailPublic: 'emailPublic',
+  websiteUrl: 'websiteUrl',
+  hoursJson: 'hoursJson',
+  socialLinksJson: 'socialLinksJson',
+  ratingAverage: 'ratingAverage',
+  ratingCount: 'ratingCount',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt',
+  deletedAt: 'deletedAt'
+} as const
+
+export type BusinessScalarFieldEnum = (typeof BusinessScalarFieldEnum)[keyof typeof BusinessScalarFieldEnum]
+
+
+export const BusinessMemberScalarFieldEnum = {
+  id: 'id',
+  businessId: 'businessId',
+  userId: 'userId',
+  role: 'role',
+  invitedAt: 'invitedAt',
+  acceptedAt: 'acceptedAt',
+  removedAt: 'removedAt'
+} as const
+
+export type BusinessMemberScalarFieldEnum = (typeof BusinessMemberScalarFieldEnum)[keyof typeof BusinessMemberScalarFieldEnum]
+
+
+export const BusinessImageScalarFieldEnum = {
+  id: 'id',
+  businessId: 'businessId',
+  storageKey: 'storageKey',
+  publicUrl: 'publicUrl',
+  sortOrder: 'sortOrder',
+  altText: 'altText',
+  createdAt: 'createdAt'
+} as const
+
+export type BusinessImageScalarFieldEnum = (typeof BusinessImageScalarFieldEnum)[keyof typeof BusinessImageScalarFieldEnum]
+
+
+export const JobScalarFieldEnum = {
+  id: 'id',
+  ownerUserId: 'ownerUserId',
+  businessId: 'businessId',
+  categoryId: 'categoryId',
+  title: 'title',
+  slug: 'slug',
+  employerName: 'employerName',
+  description: 'description',
+  publicLocationId: 'publicLocationId',
+  workMode: 'workMode',
+  employmentType: 'employmentType',
+  salaryMin: 'salaryMin',
+  salaryMax: 'salaryMax',
+  salaryCurrency: 'salaryCurrency',
+  salaryPeriod: 'salaryPeriod',
+  experienceText: 'experienceText',
+  skillsJson: 'skillsJson',
+  applicationMethod: 'applicationMethod',
+  applicationUrl: 'applicationUrl',
+  applicationEmail: 'applicationEmail',
+  status: 'status',
+  moderationState: 'moderationState',
+  publishedAt: 'publishedAt',
+  expiresAt: 'expiresAt',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt',
+  deletedAt: 'deletedAt'
+} as const
+
+export type JobScalarFieldEnum = (typeof JobScalarFieldEnum)[keyof typeof JobScalarFieldEnum]
+
+
+export const EventScalarFieldEnum = {
+  id: 'id',
+  ownerUserId: 'ownerUserId',
+  businessId: 'businessId',
+  title: 'title',
+  slug: 'slug',
+  description: 'description',
+  categoryId: 'categoryId',
+  startAt: 'startAt',
+  endAt: 'endAt',
+  timezone: 'timezone',
+  publicLocationId: 'publicLocationId',
+  venueName: 'venueName',
+  streetAddress: 'streetAddress',
+  latitude: 'latitude',
+  longitude: 'longitude',
+  contactUrl: 'contactUrl',
+  contactEmail: 'contactEmail',
+  status: 'status',
+  moderationState: 'moderationState',
+  publishedAt: 'publishedAt',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt',
+  deletedAt: 'deletedAt'
+} as const
+
+export type EventScalarFieldEnum = (typeof EventScalarFieldEnum)[keyof typeof EventScalarFieldEnum]
+
+
+export const EventImageScalarFieldEnum = {
+  id: 'id',
+  eventId: 'eventId',
+  storageKey: 'storageKey',
+  publicUrl: 'publicUrl',
+  sortOrder: 'sortOrder',
+  altText: 'altText',
+  createdAt: 'createdAt'
+} as const
+
+export type EventImageScalarFieldEnum = (typeof EventImageScalarFieldEnum)[keyof typeof EventImageScalarFieldEnum]
+
+
+export const CommunityPostScalarFieldEnum = {
+  id: 'id',
+  authorUserId: 'authorUserId',
+  type: 'type',
+  title: 'title',
+  body: 'body',
+  publicLocationId: 'publicLocationId',
+  status: 'status',
+  moderationState: 'moderationState',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt',
+  deletedAt: 'deletedAt'
+} as const
+
+export type CommunityPostScalarFieldEnum = (typeof CommunityPostScalarFieldEnum)[keyof typeof CommunityPostScalarFieldEnum]
+
+
+export const SortOrder = {
+  asc: 'asc',
+  desc: 'desc'
+} as const
+
+export type SortOrder = (typeof SortOrder)[keyof typeof SortOrder]
+
+
+export const NullableJsonNullValueInput = {
+  DbNull: DbNull,
+  JsonNull: JsonNull
+} as const
+
+export type NullableJsonNullValueInput = (typeof NullableJsonNullValueInput)[keyof typeof NullableJsonNullValueInput]
+
+
+export const QueryMode = {
+  default: 'default',
+  insensitive: 'insensitive'
+} as const
+
+export type QueryMode = (typeof QueryMode)[keyof typeof QueryMode]
+
+
+export const NullsOrder = {
+  first: 'first',
+  last: 'last'
+} as const
+
+export type NullsOrder = (typeof NullsOrder)[keyof typeof NullsOrder]
+
+
+export const JsonNullValueFilter = {
+  DbNull: DbNull,
+  JsonNull: JsonNull,
+  AnyNull: AnyNull
+} as const
+
+export type JsonNullValueFilter = (typeof JsonNullValueFilter)[keyof typeof JsonNullValueFilter]
 
