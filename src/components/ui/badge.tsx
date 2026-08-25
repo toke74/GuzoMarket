@@ -4,7 +4,7 @@ import type { ComponentPropsWithoutRef } from "react";
 import { cn } from "@/lib/utils";
 
 const badgeVariants = cva(
-  "inline-flex items-center rounded-sm px-2.5 py-0.5 text-xs font-semibold",
+  "inline-flex items-center rounded-full px-2.5 py-1 text-xs font-semibold",
   {
     variants: {
       variant: {
@@ -13,6 +13,7 @@ const badgeVariants = cva(
         outline: "border border-border bg-surface text-text-secondary",
         warning: "bg-warning/10 text-warning",
         error: "bg-error/10 text-error",
+        success: "bg-success/10 text-success",
       },
     },
     defaultVariants: {

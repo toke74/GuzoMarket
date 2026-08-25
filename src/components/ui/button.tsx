@@ -5,7 +5,7 @@ import type { ComponentPropsWithoutRef } from "react";
 import { cn } from "@/lib/utils";
 
 const buttonVariants = cva(
-  "inline-flex min-h-10 items-center justify-center gap-2 rounded-sm px-4 py-2 text-sm font-semibold transition-colors disabled:pointer-events-none disabled:opacity-50",
+  "inline-flex min-h-11 items-center justify-center gap-2 rounded-md px-4 py-2 text-sm font-semibold transition-colors disabled:pointer-events-none disabled:opacity-50",
   {
     variants: {
       variant: {
@@ -16,10 +16,10 @@ const buttonVariants = cva(
         destructive: "bg-error text-text-inverse hover:bg-error/90",
       },
       size: {
-        default: "h-10",
+        default: "h-11",
         sm: "h-9 px-3",
-        lg: "h-11 px-5",
-        icon: "h-10 w-10 px-0",
+        lg: "h-12 px-5",
+        icon: "h-11 w-11 px-0",
       },
     },
     defaultVariants: {
