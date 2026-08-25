@@ -123,6 +123,9 @@ async function clearDemoRecords() {
   });
   const demoUserIds = demoUsers.map((user) => user.id);
 
+  await prisma.authToken.deleteMany({ where: { userId: { in: demoUserIds } } });
+  await prisma.authSession.deleteMany({ where: { userId: { in: demoUserIds } } });
+
   const demoListings = await prisma.listing.findMany({
     where: { slug: { in: [...listingSlugs] } },
     select: { id: true },

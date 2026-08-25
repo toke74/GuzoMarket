@@ -261,6 +261,8 @@ export type UserWhereInput = {
   jobs?: Prisma.JobListRelationFilter
   events?: Prisma.EventListRelationFilter
   communityPosts?: Prisma.CommunityPostListRelationFilter
+  authSessions?: Prisma.AuthSessionListRelationFilter
+  authTokens?: Prisma.AuthTokenListRelationFilter
 }
 
 export type UserOrderByWithRelationInput = {
@@ -299,6 +301,8 @@ export type UserOrderByWithRelationInput = {
   jobs?: Prisma.JobOrderByRelationAggregateInput
   events?: Prisma.EventOrderByRelationAggregateInput
   communityPosts?: Prisma.CommunityPostOrderByRelationAggregateInput
+  authSessions?: Prisma.AuthSessionOrderByRelationAggregateInput
+  authTokens?: Prisma.AuthTokenOrderByRelationAggregateInput
 }
 
 export type UserWhereUniqueInput = Prisma.AtLeast<{
@@ -340,6 +344,8 @@ export type UserWhereUniqueInput = Prisma.AtLeast<{
   jobs?: Prisma.JobListRelationFilter
   events?: Prisma.EventListRelationFilter
   communityPosts?: Prisma.CommunityPostListRelationFilter
+  authSessions?: Prisma.AuthSessionListRelationFilter
+  authTokens?: Prisma.AuthTokenListRelationFilter
 }, "id" | "emailNormalized">
 
 export type UserOrderByWithAggregationInput = {
@@ -414,6 +420,8 @@ export type UserCreateInput = {
   jobs?: Prisma.JobCreateNestedManyWithoutOwnerInput
   events?: Prisma.EventCreateNestedManyWithoutOwnerInput
   communityPosts?: Prisma.CommunityPostCreateNestedManyWithoutAuthorInput
+  authSessions?: Prisma.AuthSessionCreateNestedManyWithoutUserInput
+  authTokens?: Prisma.AuthTokenCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateInput = {
@@ -452,6 +460,8 @@ export type UserUncheckedCreateInput = {
   jobs?: Prisma.JobUncheckedCreateNestedManyWithoutOwnerInput
   events?: Prisma.EventUncheckedCreateNestedManyWithoutOwnerInput
   communityPosts?: Prisma.CommunityPostUncheckedCreateNestedManyWithoutAuthorInput
+  authSessions?: Prisma.AuthSessionUncheckedCreateNestedManyWithoutUserInput
+  authTokens?: Prisma.AuthTokenUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserUpdateInput = {
@@ -490,6 +500,8 @@ export type UserUpdateInput = {
   jobs?: Prisma.JobUpdateManyWithoutOwnerNestedInput
   events?: Prisma.EventUpdateManyWithoutOwnerNestedInput
   communityPosts?: Prisma.CommunityPostUpdateManyWithoutAuthorNestedInput
+  authSessions?: Prisma.AuthSessionUpdateManyWithoutUserNestedInput
+  authTokens?: Prisma.AuthTokenUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateInput = {
@@ -528,6 +540,8 @@ export type UserUncheckedUpdateInput = {
   jobs?: Prisma.JobUncheckedUpdateManyWithoutOwnerNestedInput
   events?: Prisma.EventUncheckedUpdateManyWithoutOwnerNestedInput
   communityPosts?: Prisma.CommunityPostUncheckedUpdateManyWithoutAuthorNestedInput
+  authSessions?: Prisma.AuthSessionUncheckedUpdateManyWithoutUserNestedInput
+  authTokens?: Prisma.AuthTokenUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateManyInput = {
@@ -652,6 +666,34 @@ export type EnumRoleNameFieldUpdateOperationsInput = {
 
 export type DateTimeFieldUpdateOperationsInput = {
   set?: Date | string
+}
+
+export type UserCreateNestedOneWithoutAuthSessionsInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutAuthSessionsInput, Prisma.UserUncheckedCreateWithoutAuthSessionsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutAuthSessionsInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
+export type UserUpdateOneRequiredWithoutAuthSessionsNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutAuthSessionsInput, Prisma.UserUncheckedCreateWithoutAuthSessionsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutAuthSessionsInput
+  upsert?: Prisma.UserUpsertWithoutAuthSessionsInput
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutAuthSessionsInput, Prisma.UserUpdateWithoutAuthSessionsInput>, Prisma.UserUncheckedUpdateWithoutAuthSessionsInput>
+}
+
+export type UserCreateNestedOneWithoutAuthTokensInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutAuthTokensInput, Prisma.UserUncheckedCreateWithoutAuthTokensInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutAuthTokensInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
+export type UserUpdateOneRequiredWithoutAuthTokensNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutAuthTokensInput, Prisma.UserUncheckedCreateWithoutAuthTokensInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutAuthTokensInput
+  upsert?: Prisma.UserUpsertWithoutAuthTokensInput
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutAuthTokensInput, Prisma.UserUpdateWithoutAuthTokensInput>, Prisma.UserUncheckedUpdateWithoutAuthTokensInput>
 }
 
 export type UserCreateNestedOneWithoutProfileInput = {
@@ -988,6 +1030,350 @@ export type UserUpdateOneRequiredWithoutCommunityPostsNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutCommunityPostsInput, Prisma.UserUpdateWithoutCommunityPostsInput>, Prisma.UserUncheckedUpdateWithoutCommunityPostsInput>
 }
 
+export type UserCreateWithoutAuthSessionsInput = {
+  id?: string
+  email: string
+  emailNormalized: string
+  emailVerifiedAt?: Date | string | null
+  passwordHash?: string | null
+  status?: $Enums.UserStatus
+  defaultRole?: $Enums.RoleName
+  lastLoginAt?: Date | string | null
+  lastActiveAt?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  deletedAt?: Date | string | null
+  profile?: Prisma.ProfileCreateNestedOneWithoutUserInput
+  grantedRoles?: Prisma.UserRoleCreateNestedManyWithoutGrantedByInput
+  roles?: Prisma.UserRoleCreateNestedManyWithoutUserInput
+  verifications?: Prisma.VerificationCreateNestedManyWithoutUserInput
+  reviewedVerifications?: Prisma.VerificationCreateNestedManyWithoutReviewedByInput
+  listings?: Prisma.ListingCreateNestedManyWithoutOwnerInput
+  favorites?: Prisma.FavoriteCreateNestedManyWithoutUserInput
+  conversationParticipants?: Prisma.ConversationParticipantCreateNestedManyWithoutUserInput
+  sentMessages?: Prisma.MessageCreateNestedManyWithoutSenderInput
+  notifications?: Prisma.NotificationCreateNestedManyWithoutUserInput
+  notificationPreferences?: Prisma.NotificationPreferenceCreateNestedManyWithoutUserInput
+  reportsMade?: Prisma.ReportCreateNestedManyWithoutReporterInput
+  reportsAboutUser?: Prisma.ReportCreateNestedManyWithoutReportedUserInput
+  assignedReports?: Prisma.ReportCreateNestedManyWithoutAssignedModeratorInput
+  moderationActions?: Prisma.ModerationActionCreateNestedManyWithoutModeratorInput
+  blockedUsers?: Prisma.BlockCreateNestedManyWithoutBlockerInput
+  blockedByUsers?: Prisma.BlockCreateNestedManyWithoutBlockedInput
+  auditLogs?: Prisma.AuditLogCreateNestedManyWithoutActorInput
+  businesses?: Prisma.BusinessCreateNestedManyWithoutOwnerInput
+  businessMemberships?: Prisma.BusinessMemberCreateNestedManyWithoutUserInput
+  jobs?: Prisma.JobCreateNestedManyWithoutOwnerInput
+  events?: Prisma.EventCreateNestedManyWithoutOwnerInput
+  communityPosts?: Prisma.CommunityPostCreateNestedManyWithoutAuthorInput
+  authTokens?: Prisma.AuthTokenCreateNestedManyWithoutUserInput
+}
+
+export type UserUncheckedCreateWithoutAuthSessionsInput = {
+  id?: string
+  email: string
+  emailNormalized: string
+  emailVerifiedAt?: Date | string | null
+  passwordHash?: string | null
+  status?: $Enums.UserStatus
+  defaultRole?: $Enums.RoleName
+  lastLoginAt?: Date | string | null
+  lastActiveAt?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  deletedAt?: Date | string | null
+  profile?: Prisma.ProfileUncheckedCreateNestedOneWithoutUserInput
+  grantedRoles?: Prisma.UserRoleUncheckedCreateNestedManyWithoutGrantedByInput
+  roles?: Prisma.UserRoleUncheckedCreateNestedManyWithoutUserInput
+  verifications?: Prisma.VerificationUncheckedCreateNestedManyWithoutUserInput
+  reviewedVerifications?: Prisma.VerificationUncheckedCreateNestedManyWithoutReviewedByInput
+  listings?: Prisma.ListingUncheckedCreateNestedManyWithoutOwnerInput
+  favorites?: Prisma.FavoriteUncheckedCreateNestedManyWithoutUserInput
+  conversationParticipants?: Prisma.ConversationParticipantUncheckedCreateNestedManyWithoutUserInput
+  sentMessages?: Prisma.MessageUncheckedCreateNestedManyWithoutSenderInput
+  notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
+  notificationPreferences?: Prisma.NotificationPreferenceUncheckedCreateNestedManyWithoutUserInput
+  reportsMade?: Prisma.ReportUncheckedCreateNestedManyWithoutReporterInput
+  reportsAboutUser?: Prisma.ReportUncheckedCreateNestedManyWithoutReportedUserInput
+  assignedReports?: Prisma.ReportUncheckedCreateNestedManyWithoutAssignedModeratorInput
+  moderationActions?: Prisma.ModerationActionUncheckedCreateNestedManyWithoutModeratorInput
+  blockedUsers?: Prisma.BlockUncheckedCreateNestedManyWithoutBlockerInput
+  blockedByUsers?: Prisma.BlockUncheckedCreateNestedManyWithoutBlockedInput
+  auditLogs?: Prisma.AuditLogUncheckedCreateNestedManyWithoutActorInput
+  businesses?: Prisma.BusinessUncheckedCreateNestedManyWithoutOwnerInput
+  businessMemberships?: Prisma.BusinessMemberUncheckedCreateNestedManyWithoutUserInput
+  jobs?: Prisma.JobUncheckedCreateNestedManyWithoutOwnerInput
+  events?: Prisma.EventUncheckedCreateNestedManyWithoutOwnerInput
+  communityPosts?: Prisma.CommunityPostUncheckedCreateNestedManyWithoutAuthorInput
+  authTokens?: Prisma.AuthTokenUncheckedCreateNestedManyWithoutUserInput
+}
+
+export type UserCreateOrConnectWithoutAuthSessionsInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutAuthSessionsInput, Prisma.UserUncheckedCreateWithoutAuthSessionsInput>
+}
+
+export type UserUpsertWithoutAuthSessionsInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutAuthSessionsInput, Prisma.UserUncheckedUpdateWithoutAuthSessionsInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutAuthSessionsInput, Prisma.UserUncheckedCreateWithoutAuthSessionsInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutAuthSessionsInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutAuthSessionsInput, Prisma.UserUncheckedUpdateWithoutAuthSessionsInput>
+}
+
+export type UserUpdateWithoutAuthSessionsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  emailNormalized?: Prisma.StringFieldUpdateOperationsInput | string
+  emailVerifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  passwordHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
+  defaultRole?: Prisma.EnumRoleNameFieldUpdateOperationsInput | $Enums.RoleName
+  lastLoginAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lastActiveAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  profile?: Prisma.ProfileUpdateOneWithoutUserNestedInput
+  grantedRoles?: Prisma.UserRoleUpdateManyWithoutGrantedByNestedInput
+  roles?: Prisma.UserRoleUpdateManyWithoutUserNestedInput
+  verifications?: Prisma.VerificationUpdateManyWithoutUserNestedInput
+  reviewedVerifications?: Prisma.VerificationUpdateManyWithoutReviewedByNestedInput
+  listings?: Prisma.ListingUpdateManyWithoutOwnerNestedInput
+  favorites?: Prisma.FavoriteUpdateManyWithoutUserNestedInput
+  conversationParticipants?: Prisma.ConversationParticipantUpdateManyWithoutUserNestedInput
+  sentMessages?: Prisma.MessageUpdateManyWithoutSenderNestedInput
+  notifications?: Prisma.NotificationUpdateManyWithoutUserNestedInput
+  notificationPreferences?: Prisma.NotificationPreferenceUpdateManyWithoutUserNestedInput
+  reportsMade?: Prisma.ReportUpdateManyWithoutReporterNestedInput
+  reportsAboutUser?: Prisma.ReportUpdateManyWithoutReportedUserNestedInput
+  assignedReports?: Prisma.ReportUpdateManyWithoutAssignedModeratorNestedInput
+  moderationActions?: Prisma.ModerationActionUpdateManyWithoutModeratorNestedInput
+  blockedUsers?: Prisma.BlockUpdateManyWithoutBlockerNestedInput
+  blockedByUsers?: Prisma.BlockUpdateManyWithoutBlockedNestedInput
+  auditLogs?: Prisma.AuditLogUpdateManyWithoutActorNestedInput
+  businesses?: Prisma.BusinessUpdateManyWithoutOwnerNestedInput
+  businessMemberships?: Prisma.BusinessMemberUpdateManyWithoutUserNestedInput
+  jobs?: Prisma.JobUpdateManyWithoutOwnerNestedInput
+  events?: Prisma.EventUpdateManyWithoutOwnerNestedInput
+  communityPosts?: Prisma.CommunityPostUpdateManyWithoutAuthorNestedInput
+  authTokens?: Prisma.AuthTokenUpdateManyWithoutUserNestedInput
+}
+
+export type UserUncheckedUpdateWithoutAuthSessionsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  emailNormalized?: Prisma.StringFieldUpdateOperationsInput | string
+  emailVerifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  passwordHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
+  defaultRole?: Prisma.EnumRoleNameFieldUpdateOperationsInput | $Enums.RoleName
+  lastLoginAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lastActiveAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  profile?: Prisma.ProfileUncheckedUpdateOneWithoutUserNestedInput
+  grantedRoles?: Prisma.UserRoleUncheckedUpdateManyWithoutGrantedByNestedInput
+  roles?: Prisma.UserRoleUncheckedUpdateManyWithoutUserNestedInput
+  verifications?: Prisma.VerificationUncheckedUpdateManyWithoutUserNestedInput
+  reviewedVerifications?: Prisma.VerificationUncheckedUpdateManyWithoutReviewedByNestedInput
+  listings?: Prisma.ListingUncheckedUpdateManyWithoutOwnerNestedInput
+  favorites?: Prisma.FavoriteUncheckedUpdateManyWithoutUserNestedInput
+  conversationParticipants?: Prisma.ConversationParticipantUncheckedUpdateManyWithoutUserNestedInput
+  sentMessages?: Prisma.MessageUncheckedUpdateManyWithoutSenderNestedInput
+  notifications?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
+  notificationPreferences?: Prisma.NotificationPreferenceUncheckedUpdateManyWithoutUserNestedInput
+  reportsMade?: Prisma.ReportUncheckedUpdateManyWithoutReporterNestedInput
+  reportsAboutUser?: Prisma.ReportUncheckedUpdateManyWithoutReportedUserNestedInput
+  assignedReports?: Prisma.ReportUncheckedUpdateManyWithoutAssignedModeratorNestedInput
+  moderationActions?: Prisma.ModerationActionUncheckedUpdateManyWithoutModeratorNestedInput
+  blockedUsers?: Prisma.BlockUncheckedUpdateManyWithoutBlockerNestedInput
+  blockedByUsers?: Prisma.BlockUncheckedUpdateManyWithoutBlockedNestedInput
+  auditLogs?: Prisma.AuditLogUncheckedUpdateManyWithoutActorNestedInput
+  businesses?: Prisma.BusinessUncheckedUpdateManyWithoutOwnerNestedInput
+  businessMemberships?: Prisma.BusinessMemberUncheckedUpdateManyWithoutUserNestedInput
+  jobs?: Prisma.JobUncheckedUpdateManyWithoutOwnerNestedInput
+  events?: Prisma.EventUncheckedUpdateManyWithoutOwnerNestedInput
+  communityPosts?: Prisma.CommunityPostUncheckedUpdateManyWithoutAuthorNestedInput
+  authTokens?: Prisma.AuthTokenUncheckedUpdateManyWithoutUserNestedInput
+}
+
+export type UserCreateWithoutAuthTokensInput = {
+  id?: string
+  email: string
+  emailNormalized: string
+  emailVerifiedAt?: Date | string | null
+  passwordHash?: string | null
+  status?: $Enums.UserStatus
+  defaultRole?: $Enums.RoleName
+  lastLoginAt?: Date | string | null
+  lastActiveAt?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  deletedAt?: Date | string | null
+  profile?: Prisma.ProfileCreateNestedOneWithoutUserInput
+  grantedRoles?: Prisma.UserRoleCreateNestedManyWithoutGrantedByInput
+  roles?: Prisma.UserRoleCreateNestedManyWithoutUserInput
+  verifications?: Prisma.VerificationCreateNestedManyWithoutUserInput
+  reviewedVerifications?: Prisma.VerificationCreateNestedManyWithoutReviewedByInput
+  listings?: Prisma.ListingCreateNestedManyWithoutOwnerInput
+  favorites?: Prisma.FavoriteCreateNestedManyWithoutUserInput
+  conversationParticipants?: Prisma.ConversationParticipantCreateNestedManyWithoutUserInput
+  sentMessages?: Prisma.MessageCreateNestedManyWithoutSenderInput
+  notifications?: Prisma.NotificationCreateNestedManyWithoutUserInput
+  notificationPreferences?: Prisma.NotificationPreferenceCreateNestedManyWithoutUserInput
+  reportsMade?: Prisma.ReportCreateNestedManyWithoutReporterInput
+  reportsAboutUser?: Prisma.ReportCreateNestedManyWithoutReportedUserInput
+  assignedReports?: Prisma.ReportCreateNestedManyWithoutAssignedModeratorInput
+  moderationActions?: Prisma.ModerationActionCreateNestedManyWithoutModeratorInput
+  blockedUsers?: Prisma.BlockCreateNestedManyWithoutBlockerInput
+  blockedByUsers?: Prisma.BlockCreateNestedManyWithoutBlockedInput
+  auditLogs?: Prisma.AuditLogCreateNestedManyWithoutActorInput
+  businesses?: Prisma.BusinessCreateNestedManyWithoutOwnerInput
+  businessMemberships?: Prisma.BusinessMemberCreateNestedManyWithoutUserInput
+  jobs?: Prisma.JobCreateNestedManyWithoutOwnerInput
+  events?: Prisma.EventCreateNestedManyWithoutOwnerInput
+  communityPosts?: Prisma.CommunityPostCreateNestedManyWithoutAuthorInput
+  authSessions?: Prisma.AuthSessionCreateNestedManyWithoutUserInput
+}
+
+export type UserUncheckedCreateWithoutAuthTokensInput = {
+  id?: string
+  email: string
+  emailNormalized: string
+  emailVerifiedAt?: Date | string | null
+  passwordHash?: string | null
+  status?: $Enums.UserStatus
+  defaultRole?: $Enums.RoleName
+  lastLoginAt?: Date | string | null
+  lastActiveAt?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  deletedAt?: Date | string | null
+  profile?: Prisma.ProfileUncheckedCreateNestedOneWithoutUserInput
+  grantedRoles?: Prisma.UserRoleUncheckedCreateNestedManyWithoutGrantedByInput
+  roles?: Prisma.UserRoleUncheckedCreateNestedManyWithoutUserInput
+  verifications?: Prisma.VerificationUncheckedCreateNestedManyWithoutUserInput
+  reviewedVerifications?: Prisma.VerificationUncheckedCreateNestedManyWithoutReviewedByInput
+  listings?: Prisma.ListingUncheckedCreateNestedManyWithoutOwnerInput
+  favorites?: Prisma.FavoriteUncheckedCreateNestedManyWithoutUserInput
+  conversationParticipants?: Prisma.ConversationParticipantUncheckedCreateNestedManyWithoutUserInput
+  sentMessages?: Prisma.MessageUncheckedCreateNestedManyWithoutSenderInput
+  notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
+  notificationPreferences?: Prisma.NotificationPreferenceUncheckedCreateNestedManyWithoutUserInput
+  reportsMade?: Prisma.ReportUncheckedCreateNestedManyWithoutReporterInput
+  reportsAboutUser?: Prisma.ReportUncheckedCreateNestedManyWithoutReportedUserInput
+  assignedReports?: Prisma.ReportUncheckedCreateNestedManyWithoutAssignedModeratorInput
+  moderationActions?: Prisma.ModerationActionUncheckedCreateNestedManyWithoutModeratorInput
+  blockedUsers?: Prisma.BlockUncheckedCreateNestedManyWithoutBlockerInput
+  blockedByUsers?: Prisma.BlockUncheckedCreateNestedManyWithoutBlockedInput
+  auditLogs?: Prisma.AuditLogUncheckedCreateNestedManyWithoutActorInput
+  businesses?: Prisma.BusinessUncheckedCreateNestedManyWithoutOwnerInput
+  businessMemberships?: Prisma.BusinessMemberUncheckedCreateNestedManyWithoutUserInput
+  jobs?: Prisma.JobUncheckedCreateNestedManyWithoutOwnerInput
+  events?: Prisma.EventUncheckedCreateNestedManyWithoutOwnerInput
+  communityPosts?: Prisma.CommunityPostUncheckedCreateNestedManyWithoutAuthorInput
+  authSessions?: Prisma.AuthSessionUncheckedCreateNestedManyWithoutUserInput
+}
+
+export type UserCreateOrConnectWithoutAuthTokensInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutAuthTokensInput, Prisma.UserUncheckedCreateWithoutAuthTokensInput>
+}
+
+export type UserUpsertWithoutAuthTokensInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutAuthTokensInput, Prisma.UserUncheckedUpdateWithoutAuthTokensInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutAuthTokensInput, Prisma.UserUncheckedCreateWithoutAuthTokensInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutAuthTokensInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutAuthTokensInput, Prisma.UserUncheckedUpdateWithoutAuthTokensInput>
+}
+
+export type UserUpdateWithoutAuthTokensInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  emailNormalized?: Prisma.StringFieldUpdateOperationsInput | string
+  emailVerifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  passwordHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
+  defaultRole?: Prisma.EnumRoleNameFieldUpdateOperationsInput | $Enums.RoleName
+  lastLoginAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lastActiveAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  profile?: Prisma.ProfileUpdateOneWithoutUserNestedInput
+  grantedRoles?: Prisma.UserRoleUpdateManyWithoutGrantedByNestedInput
+  roles?: Prisma.UserRoleUpdateManyWithoutUserNestedInput
+  verifications?: Prisma.VerificationUpdateManyWithoutUserNestedInput
+  reviewedVerifications?: Prisma.VerificationUpdateManyWithoutReviewedByNestedInput
+  listings?: Prisma.ListingUpdateManyWithoutOwnerNestedInput
+  favorites?: Prisma.FavoriteUpdateManyWithoutUserNestedInput
+  conversationParticipants?: Prisma.ConversationParticipantUpdateManyWithoutUserNestedInput
+  sentMessages?: Prisma.MessageUpdateManyWithoutSenderNestedInput
+  notifications?: Prisma.NotificationUpdateManyWithoutUserNestedInput
+  notificationPreferences?: Prisma.NotificationPreferenceUpdateManyWithoutUserNestedInput
+  reportsMade?: Prisma.ReportUpdateManyWithoutReporterNestedInput
+  reportsAboutUser?: Prisma.ReportUpdateManyWithoutReportedUserNestedInput
+  assignedReports?: Prisma.ReportUpdateManyWithoutAssignedModeratorNestedInput
+  moderationActions?: Prisma.ModerationActionUpdateManyWithoutModeratorNestedInput
+  blockedUsers?: Prisma.BlockUpdateManyWithoutBlockerNestedInput
+  blockedByUsers?: Prisma.BlockUpdateManyWithoutBlockedNestedInput
+  auditLogs?: Prisma.AuditLogUpdateManyWithoutActorNestedInput
+  businesses?: Prisma.BusinessUpdateManyWithoutOwnerNestedInput
+  businessMemberships?: Prisma.BusinessMemberUpdateManyWithoutUserNestedInput
+  jobs?: Prisma.JobUpdateManyWithoutOwnerNestedInput
+  events?: Prisma.EventUpdateManyWithoutOwnerNestedInput
+  communityPosts?: Prisma.CommunityPostUpdateManyWithoutAuthorNestedInput
+  authSessions?: Prisma.AuthSessionUpdateManyWithoutUserNestedInput
+}
+
+export type UserUncheckedUpdateWithoutAuthTokensInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  emailNormalized?: Prisma.StringFieldUpdateOperationsInput | string
+  emailVerifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  passwordHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
+  defaultRole?: Prisma.EnumRoleNameFieldUpdateOperationsInput | $Enums.RoleName
+  lastLoginAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lastActiveAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  profile?: Prisma.ProfileUncheckedUpdateOneWithoutUserNestedInput
+  grantedRoles?: Prisma.UserRoleUncheckedUpdateManyWithoutGrantedByNestedInput
+  roles?: Prisma.UserRoleUncheckedUpdateManyWithoutUserNestedInput
+  verifications?: Prisma.VerificationUncheckedUpdateManyWithoutUserNestedInput
+  reviewedVerifications?: Prisma.VerificationUncheckedUpdateManyWithoutReviewedByNestedInput
+  listings?: Prisma.ListingUncheckedUpdateManyWithoutOwnerNestedInput
+  favorites?: Prisma.FavoriteUncheckedUpdateManyWithoutUserNestedInput
+  conversationParticipants?: Prisma.ConversationParticipantUncheckedUpdateManyWithoutUserNestedInput
+  sentMessages?: Prisma.MessageUncheckedUpdateManyWithoutSenderNestedInput
+  notifications?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
+  notificationPreferences?: Prisma.NotificationPreferenceUncheckedUpdateManyWithoutUserNestedInput
+  reportsMade?: Prisma.ReportUncheckedUpdateManyWithoutReporterNestedInput
+  reportsAboutUser?: Prisma.ReportUncheckedUpdateManyWithoutReportedUserNestedInput
+  assignedReports?: Prisma.ReportUncheckedUpdateManyWithoutAssignedModeratorNestedInput
+  moderationActions?: Prisma.ModerationActionUncheckedUpdateManyWithoutModeratorNestedInput
+  blockedUsers?: Prisma.BlockUncheckedUpdateManyWithoutBlockerNestedInput
+  blockedByUsers?: Prisma.BlockUncheckedUpdateManyWithoutBlockedNestedInput
+  auditLogs?: Prisma.AuditLogUncheckedUpdateManyWithoutActorNestedInput
+  businesses?: Prisma.BusinessUncheckedUpdateManyWithoutOwnerNestedInput
+  businessMemberships?: Prisma.BusinessMemberUncheckedUpdateManyWithoutUserNestedInput
+  jobs?: Prisma.JobUncheckedUpdateManyWithoutOwnerNestedInput
+  events?: Prisma.EventUncheckedUpdateManyWithoutOwnerNestedInput
+  communityPosts?: Prisma.CommunityPostUncheckedUpdateManyWithoutAuthorNestedInput
+  authSessions?: Prisma.AuthSessionUncheckedUpdateManyWithoutUserNestedInput
+}
+
 export type UserCreateWithoutProfileInput = {
   id?: string
   email: string
@@ -1023,6 +1409,8 @@ export type UserCreateWithoutProfileInput = {
   jobs?: Prisma.JobCreateNestedManyWithoutOwnerInput
   events?: Prisma.EventCreateNestedManyWithoutOwnerInput
   communityPosts?: Prisma.CommunityPostCreateNestedManyWithoutAuthorInput
+  authSessions?: Prisma.AuthSessionCreateNestedManyWithoutUserInput
+  authTokens?: Prisma.AuthTokenCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutProfileInput = {
@@ -1060,6 +1448,8 @@ export type UserUncheckedCreateWithoutProfileInput = {
   jobs?: Prisma.JobUncheckedCreateNestedManyWithoutOwnerInput
   events?: Prisma.EventUncheckedCreateNestedManyWithoutOwnerInput
   communityPosts?: Prisma.CommunityPostUncheckedCreateNestedManyWithoutAuthorInput
+  authSessions?: Prisma.AuthSessionUncheckedCreateNestedManyWithoutUserInput
+  authTokens?: Prisma.AuthTokenUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutProfileInput = {
@@ -1113,6 +1503,8 @@ export type UserUpdateWithoutProfileInput = {
   jobs?: Prisma.JobUpdateManyWithoutOwnerNestedInput
   events?: Prisma.EventUpdateManyWithoutOwnerNestedInput
   communityPosts?: Prisma.CommunityPostUpdateManyWithoutAuthorNestedInput
+  authSessions?: Prisma.AuthSessionUpdateManyWithoutUserNestedInput
+  authTokens?: Prisma.AuthTokenUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutProfileInput = {
@@ -1150,6 +1542,8 @@ export type UserUncheckedUpdateWithoutProfileInput = {
   jobs?: Prisma.JobUncheckedUpdateManyWithoutOwnerNestedInput
   events?: Prisma.EventUncheckedUpdateManyWithoutOwnerNestedInput
   communityPosts?: Prisma.CommunityPostUncheckedUpdateManyWithoutAuthorNestedInput
+  authSessions?: Prisma.AuthSessionUncheckedUpdateManyWithoutUserNestedInput
+  authTokens?: Prisma.AuthTokenUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutRolesInput = {
@@ -1187,6 +1581,8 @@ export type UserCreateWithoutRolesInput = {
   jobs?: Prisma.JobCreateNestedManyWithoutOwnerInput
   events?: Prisma.EventCreateNestedManyWithoutOwnerInput
   communityPosts?: Prisma.CommunityPostCreateNestedManyWithoutAuthorInput
+  authSessions?: Prisma.AuthSessionCreateNestedManyWithoutUserInput
+  authTokens?: Prisma.AuthTokenCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutRolesInput = {
@@ -1224,6 +1620,8 @@ export type UserUncheckedCreateWithoutRolesInput = {
   jobs?: Prisma.JobUncheckedCreateNestedManyWithoutOwnerInput
   events?: Prisma.EventUncheckedCreateNestedManyWithoutOwnerInput
   communityPosts?: Prisma.CommunityPostUncheckedCreateNestedManyWithoutAuthorInput
+  authSessions?: Prisma.AuthSessionUncheckedCreateNestedManyWithoutUserInput
+  authTokens?: Prisma.AuthTokenUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutRolesInput = {
@@ -1266,6 +1664,8 @@ export type UserCreateWithoutGrantedRolesInput = {
   jobs?: Prisma.JobCreateNestedManyWithoutOwnerInput
   events?: Prisma.EventCreateNestedManyWithoutOwnerInput
   communityPosts?: Prisma.CommunityPostCreateNestedManyWithoutAuthorInput
+  authSessions?: Prisma.AuthSessionCreateNestedManyWithoutUserInput
+  authTokens?: Prisma.AuthTokenCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutGrantedRolesInput = {
@@ -1303,6 +1703,8 @@ export type UserUncheckedCreateWithoutGrantedRolesInput = {
   jobs?: Prisma.JobUncheckedCreateNestedManyWithoutOwnerInput
   events?: Prisma.EventUncheckedCreateNestedManyWithoutOwnerInput
   communityPosts?: Prisma.CommunityPostUncheckedCreateNestedManyWithoutAuthorInput
+  authSessions?: Prisma.AuthSessionUncheckedCreateNestedManyWithoutUserInput
+  authTokens?: Prisma.AuthTokenUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutGrantedRolesInput = {
@@ -1356,6 +1758,8 @@ export type UserUpdateWithoutRolesInput = {
   jobs?: Prisma.JobUpdateManyWithoutOwnerNestedInput
   events?: Prisma.EventUpdateManyWithoutOwnerNestedInput
   communityPosts?: Prisma.CommunityPostUpdateManyWithoutAuthorNestedInput
+  authSessions?: Prisma.AuthSessionUpdateManyWithoutUserNestedInput
+  authTokens?: Prisma.AuthTokenUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutRolesInput = {
@@ -1393,6 +1797,8 @@ export type UserUncheckedUpdateWithoutRolesInput = {
   jobs?: Prisma.JobUncheckedUpdateManyWithoutOwnerNestedInput
   events?: Prisma.EventUncheckedUpdateManyWithoutOwnerNestedInput
   communityPosts?: Prisma.CommunityPostUncheckedUpdateManyWithoutAuthorNestedInput
+  authSessions?: Prisma.AuthSessionUncheckedUpdateManyWithoutUserNestedInput
+  authTokens?: Prisma.AuthTokenUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserUpsertWithoutGrantedRolesInput = {
@@ -1441,6 +1847,8 @@ export type UserUpdateWithoutGrantedRolesInput = {
   jobs?: Prisma.JobUpdateManyWithoutOwnerNestedInput
   events?: Prisma.EventUpdateManyWithoutOwnerNestedInput
   communityPosts?: Prisma.CommunityPostUpdateManyWithoutAuthorNestedInput
+  authSessions?: Prisma.AuthSessionUpdateManyWithoutUserNestedInput
+  authTokens?: Prisma.AuthTokenUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutGrantedRolesInput = {
@@ -1478,6 +1886,8 @@ export type UserUncheckedUpdateWithoutGrantedRolesInput = {
   jobs?: Prisma.JobUncheckedUpdateManyWithoutOwnerNestedInput
   events?: Prisma.EventUncheckedUpdateManyWithoutOwnerNestedInput
   communityPosts?: Prisma.CommunityPostUncheckedUpdateManyWithoutAuthorNestedInput
+  authSessions?: Prisma.AuthSessionUncheckedUpdateManyWithoutUserNestedInput
+  authTokens?: Prisma.AuthTokenUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutVerificationsInput = {
@@ -1515,6 +1925,8 @@ export type UserCreateWithoutVerificationsInput = {
   jobs?: Prisma.JobCreateNestedManyWithoutOwnerInput
   events?: Prisma.EventCreateNestedManyWithoutOwnerInput
   communityPosts?: Prisma.CommunityPostCreateNestedManyWithoutAuthorInput
+  authSessions?: Prisma.AuthSessionCreateNestedManyWithoutUserInput
+  authTokens?: Prisma.AuthTokenCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutVerificationsInput = {
@@ -1552,6 +1964,8 @@ export type UserUncheckedCreateWithoutVerificationsInput = {
   jobs?: Prisma.JobUncheckedCreateNestedManyWithoutOwnerInput
   events?: Prisma.EventUncheckedCreateNestedManyWithoutOwnerInput
   communityPosts?: Prisma.CommunityPostUncheckedCreateNestedManyWithoutAuthorInput
+  authSessions?: Prisma.AuthSessionUncheckedCreateNestedManyWithoutUserInput
+  authTokens?: Prisma.AuthTokenUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutVerificationsInput = {
@@ -1594,6 +2008,8 @@ export type UserCreateWithoutReviewedVerificationsInput = {
   jobs?: Prisma.JobCreateNestedManyWithoutOwnerInput
   events?: Prisma.EventCreateNestedManyWithoutOwnerInput
   communityPosts?: Prisma.CommunityPostCreateNestedManyWithoutAuthorInput
+  authSessions?: Prisma.AuthSessionCreateNestedManyWithoutUserInput
+  authTokens?: Prisma.AuthTokenCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutReviewedVerificationsInput = {
@@ -1631,6 +2047,8 @@ export type UserUncheckedCreateWithoutReviewedVerificationsInput = {
   jobs?: Prisma.JobUncheckedCreateNestedManyWithoutOwnerInput
   events?: Prisma.EventUncheckedCreateNestedManyWithoutOwnerInput
   communityPosts?: Prisma.CommunityPostUncheckedCreateNestedManyWithoutAuthorInput
+  authSessions?: Prisma.AuthSessionUncheckedCreateNestedManyWithoutUserInput
+  authTokens?: Prisma.AuthTokenUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutReviewedVerificationsInput = {
@@ -1684,6 +2102,8 @@ export type UserUpdateWithoutVerificationsInput = {
   jobs?: Prisma.JobUpdateManyWithoutOwnerNestedInput
   events?: Prisma.EventUpdateManyWithoutOwnerNestedInput
   communityPosts?: Prisma.CommunityPostUpdateManyWithoutAuthorNestedInput
+  authSessions?: Prisma.AuthSessionUpdateManyWithoutUserNestedInput
+  authTokens?: Prisma.AuthTokenUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutVerificationsInput = {
@@ -1721,6 +2141,8 @@ export type UserUncheckedUpdateWithoutVerificationsInput = {
   jobs?: Prisma.JobUncheckedUpdateManyWithoutOwnerNestedInput
   events?: Prisma.EventUncheckedUpdateManyWithoutOwnerNestedInput
   communityPosts?: Prisma.CommunityPostUncheckedUpdateManyWithoutAuthorNestedInput
+  authSessions?: Prisma.AuthSessionUncheckedUpdateManyWithoutUserNestedInput
+  authTokens?: Prisma.AuthTokenUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserUpsertWithoutReviewedVerificationsInput = {
@@ -1769,6 +2191,8 @@ export type UserUpdateWithoutReviewedVerificationsInput = {
   jobs?: Prisma.JobUpdateManyWithoutOwnerNestedInput
   events?: Prisma.EventUpdateManyWithoutOwnerNestedInput
   communityPosts?: Prisma.CommunityPostUpdateManyWithoutAuthorNestedInput
+  authSessions?: Prisma.AuthSessionUpdateManyWithoutUserNestedInput
+  authTokens?: Prisma.AuthTokenUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutReviewedVerificationsInput = {
@@ -1806,6 +2230,8 @@ export type UserUncheckedUpdateWithoutReviewedVerificationsInput = {
   jobs?: Prisma.JobUncheckedUpdateManyWithoutOwnerNestedInput
   events?: Prisma.EventUncheckedUpdateManyWithoutOwnerNestedInput
   communityPosts?: Prisma.CommunityPostUncheckedUpdateManyWithoutAuthorNestedInput
+  authSessions?: Prisma.AuthSessionUncheckedUpdateManyWithoutUserNestedInput
+  authTokens?: Prisma.AuthTokenUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutListingsInput = {
@@ -1843,6 +2269,8 @@ export type UserCreateWithoutListingsInput = {
   jobs?: Prisma.JobCreateNestedManyWithoutOwnerInput
   events?: Prisma.EventCreateNestedManyWithoutOwnerInput
   communityPosts?: Prisma.CommunityPostCreateNestedManyWithoutAuthorInput
+  authSessions?: Prisma.AuthSessionCreateNestedManyWithoutUserInput
+  authTokens?: Prisma.AuthTokenCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutListingsInput = {
@@ -1880,6 +2308,8 @@ export type UserUncheckedCreateWithoutListingsInput = {
   jobs?: Prisma.JobUncheckedCreateNestedManyWithoutOwnerInput
   events?: Prisma.EventUncheckedCreateNestedManyWithoutOwnerInput
   communityPosts?: Prisma.CommunityPostUncheckedCreateNestedManyWithoutAuthorInput
+  authSessions?: Prisma.AuthSessionUncheckedCreateNestedManyWithoutUserInput
+  authTokens?: Prisma.AuthTokenUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutListingsInput = {
@@ -1933,6 +2363,8 @@ export type UserUpdateWithoutListingsInput = {
   jobs?: Prisma.JobUpdateManyWithoutOwnerNestedInput
   events?: Prisma.EventUpdateManyWithoutOwnerNestedInput
   communityPosts?: Prisma.CommunityPostUpdateManyWithoutAuthorNestedInput
+  authSessions?: Prisma.AuthSessionUpdateManyWithoutUserNestedInput
+  authTokens?: Prisma.AuthTokenUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutListingsInput = {
@@ -1970,6 +2402,8 @@ export type UserUncheckedUpdateWithoutListingsInput = {
   jobs?: Prisma.JobUncheckedUpdateManyWithoutOwnerNestedInput
   events?: Prisma.EventUncheckedUpdateManyWithoutOwnerNestedInput
   communityPosts?: Prisma.CommunityPostUncheckedUpdateManyWithoutAuthorNestedInput
+  authSessions?: Prisma.AuthSessionUncheckedUpdateManyWithoutUserNestedInput
+  authTokens?: Prisma.AuthTokenUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutFavoritesInput = {
@@ -2007,6 +2441,8 @@ export type UserCreateWithoutFavoritesInput = {
   jobs?: Prisma.JobCreateNestedManyWithoutOwnerInput
   events?: Prisma.EventCreateNestedManyWithoutOwnerInput
   communityPosts?: Prisma.CommunityPostCreateNestedManyWithoutAuthorInput
+  authSessions?: Prisma.AuthSessionCreateNestedManyWithoutUserInput
+  authTokens?: Prisma.AuthTokenCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutFavoritesInput = {
@@ -2044,6 +2480,8 @@ export type UserUncheckedCreateWithoutFavoritesInput = {
   jobs?: Prisma.JobUncheckedCreateNestedManyWithoutOwnerInput
   events?: Prisma.EventUncheckedCreateNestedManyWithoutOwnerInput
   communityPosts?: Prisma.CommunityPostUncheckedCreateNestedManyWithoutAuthorInput
+  authSessions?: Prisma.AuthSessionUncheckedCreateNestedManyWithoutUserInput
+  authTokens?: Prisma.AuthTokenUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutFavoritesInput = {
@@ -2097,6 +2535,8 @@ export type UserUpdateWithoutFavoritesInput = {
   jobs?: Prisma.JobUpdateManyWithoutOwnerNestedInput
   events?: Prisma.EventUpdateManyWithoutOwnerNestedInput
   communityPosts?: Prisma.CommunityPostUpdateManyWithoutAuthorNestedInput
+  authSessions?: Prisma.AuthSessionUpdateManyWithoutUserNestedInput
+  authTokens?: Prisma.AuthTokenUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutFavoritesInput = {
@@ -2134,6 +2574,8 @@ export type UserUncheckedUpdateWithoutFavoritesInput = {
   jobs?: Prisma.JobUncheckedUpdateManyWithoutOwnerNestedInput
   events?: Prisma.EventUncheckedUpdateManyWithoutOwnerNestedInput
   communityPosts?: Prisma.CommunityPostUncheckedUpdateManyWithoutAuthorNestedInput
+  authSessions?: Prisma.AuthSessionUncheckedUpdateManyWithoutUserNestedInput
+  authTokens?: Prisma.AuthTokenUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutConversationParticipantsInput = {
@@ -2171,6 +2613,8 @@ export type UserCreateWithoutConversationParticipantsInput = {
   jobs?: Prisma.JobCreateNestedManyWithoutOwnerInput
   events?: Prisma.EventCreateNestedManyWithoutOwnerInput
   communityPosts?: Prisma.CommunityPostCreateNestedManyWithoutAuthorInput
+  authSessions?: Prisma.AuthSessionCreateNestedManyWithoutUserInput
+  authTokens?: Prisma.AuthTokenCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutConversationParticipantsInput = {
@@ -2208,6 +2652,8 @@ export type UserUncheckedCreateWithoutConversationParticipantsInput = {
   jobs?: Prisma.JobUncheckedCreateNestedManyWithoutOwnerInput
   events?: Prisma.EventUncheckedCreateNestedManyWithoutOwnerInput
   communityPosts?: Prisma.CommunityPostUncheckedCreateNestedManyWithoutAuthorInput
+  authSessions?: Prisma.AuthSessionUncheckedCreateNestedManyWithoutUserInput
+  authTokens?: Prisma.AuthTokenUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutConversationParticipantsInput = {
@@ -2261,6 +2707,8 @@ export type UserUpdateWithoutConversationParticipantsInput = {
   jobs?: Prisma.JobUpdateManyWithoutOwnerNestedInput
   events?: Prisma.EventUpdateManyWithoutOwnerNestedInput
   communityPosts?: Prisma.CommunityPostUpdateManyWithoutAuthorNestedInput
+  authSessions?: Prisma.AuthSessionUpdateManyWithoutUserNestedInput
+  authTokens?: Prisma.AuthTokenUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutConversationParticipantsInput = {
@@ -2298,6 +2746,8 @@ export type UserUncheckedUpdateWithoutConversationParticipantsInput = {
   jobs?: Prisma.JobUncheckedUpdateManyWithoutOwnerNestedInput
   events?: Prisma.EventUncheckedUpdateManyWithoutOwnerNestedInput
   communityPosts?: Prisma.CommunityPostUncheckedUpdateManyWithoutAuthorNestedInput
+  authSessions?: Prisma.AuthSessionUncheckedUpdateManyWithoutUserNestedInput
+  authTokens?: Prisma.AuthTokenUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutSentMessagesInput = {
@@ -2335,6 +2785,8 @@ export type UserCreateWithoutSentMessagesInput = {
   jobs?: Prisma.JobCreateNestedManyWithoutOwnerInput
   events?: Prisma.EventCreateNestedManyWithoutOwnerInput
   communityPosts?: Prisma.CommunityPostCreateNestedManyWithoutAuthorInput
+  authSessions?: Prisma.AuthSessionCreateNestedManyWithoutUserInput
+  authTokens?: Prisma.AuthTokenCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutSentMessagesInput = {
@@ -2372,6 +2824,8 @@ export type UserUncheckedCreateWithoutSentMessagesInput = {
   jobs?: Prisma.JobUncheckedCreateNestedManyWithoutOwnerInput
   events?: Prisma.EventUncheckedCreateNestedManyWithoutOwnerInput
   communityPosts?: Prisma.CommunityPostUncheckedCreateNestedManyWithoutAuthorInput
+  authSessions?: Prisma.AuthSessionUncheckedCreateNestedManyWithoutUserInput
+  authTokens?: Prisma.AuthTokenUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutSentMessagesInput = {
@@ -2425,6 +2879,8 @@ export type UserUpdateWithoutSentMessagesInput = {
   jobs?: Prisma.JobUpdateManyWithoutOwnerNestedInput
   events?: Prisma.EventUpdateManyWithoutOwnerNestedInput
   communityPosts?: Prisma.CommunityPostUpdateManyWithoutAuthorNestedInput
+  authSessions?: Prisma.AuthSessionUpdateManyWithoutUserNestedInput
+  authTokens?: Prisma.AuthTokenUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutSentMessagesInput = {
@@ -2462,6 +2918,8 @@ export type UserUncheckedUpdateWithoutSentMessagesInput = {
   jobs?: Prisma.JobUncheckedUpdateManyWithoutOwnerNestedInput
   events?: Prisma.EventUncheckedUpdateManyWithoutOwnerNestedInput
   communityPosts?: Prisma.CommunityPostUncheckedUpdateManyWithoutAuthorNestedInput
+  authSessions?: Prisma.AuthSessionUncheckedUpdateManyWithoutUserNestedInput
+  authTokens?: Prisma.AuthTokenUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutNotificationsInput = {
@@ -2499,6 +2957,8 @@ export type UserCreateWithoutNotificationsInput = {
   jobs?: Prisma.JobCreateNestedManyWithoutOwnerInput
   events?: Prisma.EventCreateNestedManyWithoutOwnerInput
   communityPosts?: Prisma.CommunityPostCreateNestedManyWithoutAuthorInput
+  authSessions?: Prisma.AuthSessionCreateNestedManyWithoutUserInput
+  authTokens?: Prisma.AuthTokenCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutNotificationsInput = {
@@ -2536,6 +2996,8 @@ export type UserUncheckedCreateWithoutNotificationsInput = {
   jobs?: Prisma.JobUncheckedCreateNestedManyWithoutOwnerInput
   events?: Prisma.EventUncheckedCreateNestedManyWithoutOwnerInput
   communityPosts?: Prisma.CommunityPostUncheckedCreateNestedManyWithoutAuthorInput
+  authSessions?: Prisma.AuthSessionUncheckedCreateNestedManyWithoutUserInput
+  authTokens?: Prisma.AuthTokenUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutNotificationsInput = {
@@ -2589,6 +3051,8 @@ export type UserUpdateWithoutNotificationsInput = {
   jobs?: Prisma.JobUpdateManyWithoutOwnerNestedInput
   events?: Prisma.EventUpdateManyWithoutOwnerNestedInput
   communityPosts?: Prisma.CommunityPostUpdateManyWithoutAuthorNestedInput
+  authSessions?: Prisma.AuthSessionUpdateManyWithoutUserNestedInput
+  authTokens?: Prisma.AuthTokenUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutNotificationsInput = {
@@ -2626,6 +3090,8 @@ export type UserUncheckedUpdateWithoutNotificationsInput = {
   jobs?: Prisma.JobUncheckedUpdateManyWithoutOwnerNestedInput
   events?: Prisma.EventUncheckedUpdateManyWithoutOwnerNestedInput
   communityPosts?: Prisma.CommunityPostUncheckedUpdateManyWithoutAuthorNestedInput
+  authSessions?: Prisma.AuthSessionUncheckedUpdateManyWithoutUserNestedInput
+  authTokens?: Prisma.AuthTokenUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutNotificationPreferencesInput = {
@@ -2663,6 +3129,8 @@ export type UserCreateWithoutNotificationPreferencesInput = {
   jobs?: Prisma.JobCreateNestedManyWithoutOwnerInput
   events?: Prisma.EventCreateNestedManyWithoutOwnerInput
   communityPosts?: Prisma.CommunityPostCreateNestedManyWithoutAuthorInput
+  authSessions?: Prisma.AuthSessionCreateNestedManyWithoutUserInput
+  authTokens?: Prisma.AuthTokenCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutNotificationPreferencesInput = {
@@ -2700,6 +3168,8 @@ export type UserUncheckedCreateWithoutNotificationPreferencesInput = {
   jobs?: Prisma.JobUncheckedCreateNestedManyWithoutOwnerInput
   events?: Prisma.EventUncheckedCreateNestedManyWithoutOwnerInput
   communityPosts?: Prisma.CommunityPostUncheckedCreateNestedManyWithoutAuthorInput
+  authSessions?: Prisma.AuthSessionUncheckedCreateNestedManyWithoutUserInput
+  authTokens?: Prisma.AuthTokenUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutNotificationPreferencesInput = {
@@ -2753,6 +3223,8 @@ export type UserUpdateWithoutNotificationPreferencesInput = {
   jobs?: Prisma.JobUpdateManyWithoutOwnerNestedInput
   events?: Prisma.EventUpdateManyWithoutOwnerNestedInput
   communityPosts?: Prisma.CommunityPostUpdateManyWithoutAuthorNestedInput
+  authSessions?: Prisma.AuthSessionUpdateManyWithoutUserNestedInput
+  authTokens?: Prisma.AuthTokenUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutNotificationPreferencesInput = {
@@ -2790,6 +3262,8 @@ export type UserUncheckedUpdateWithoutNotificationPreferencesInput = {
   jobs?: Prisma.JobUncheckedUpdateManyWithoutOwnerNestedInput
   events?: Prisma.EventUncheckedUpdateManyWithoutOwnerNestedInput
   communityPosts?: Prisma.CommunityPostUncheckedUpdateManyWithoutAuthorNestedInput
+  authSessions?: Prisma.AuthSessionUncheckedUpdateManyWithoutUserNestedInput
+  authTokens?: Prisma.AuthTokenUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutReportsMadeInput = {
@@ -2827,6 +3301,8 @@ export type UserCreateWithoutReportsMadeInput = {
   jobs?: Prisma.JobCreateNestedManyWithoutOwnerInput
   events?: Prisma.EventCreateNestedManyWithoutOwnerInput
   communityPosts?: Prisma.CommunityPostCreateNestedManyWithoutAuthorInput
+  authSessions?: Prisma.AuthSessionCreateNestedManyWithoutUserInput
+  authTokens?: Prisma.AuthTokenCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutReportsMadeInput = {
@@ -2864,6 +3340,8 @@ export type UserUncheckedCreateWithoutReportsMadeInput = {
   jobs?: Prisma.JobUncheckedCreateNestedManyWithoutOwnerInput
   events?: Prisma.EventUncheckedCreateNestedManyWithoutOwnerInput
   communityPosts?: Prisma.CommunityPostUncheckedCreateNestedManyWithoutAuthorInput
+  authSessions?: Prisma.AuthSessionUncheckedCreateNestedManyWithoutUserInput
+  authTokens?: Prisma.AuthTokenUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutReportsMadeInput = {
@@ -2906,6 +3384,8 @@ export type UserCreateWithoutReportsAboutUserInput = {
   jobs?: Prisma.JobCreateNestedManyWithoutOwnerInput
   events?: Prisma.EventCreateNestedManyWithoutOwnerInput
   communityPosts?: Prisma.CommunityPostCreateNestedManyWithoutAuthorInput
+  authSessions?: Prisma.AuthSessionCreateNestedManyWithoutUserInput
+  authTokens?: Prisma.AuthTokenCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutReportsAboutUserInput = {
@@ -2943,6 +3423,8 @@ export type UserUncheckedCreateWithoutReportsAboutUserInput = {
   jobs?: Prisma.JobUncheckedCreateNestedManyWithoutOwnerInput
   events?: Prisma.EventUncheckedCreateNestedManyWithoutOwnerInput
   communityPosts?: Prisma.CommunityPostUncheckedCreateNestedManyWithoutAuthorInput
+  authSessions?: Prisma.AuthSessionUncheckedCreateNestedManyWithoutUserInput
+  authTokens?: Prisma.AuthTokenUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutReportsAboutUserInput = {
@@ -2985,6 +3467,8 @@ export type UserCreateWithoutAssignedReportsInput = {
   jobs?: Prisma.JobCreateNestedManyWithoutOwnerInput
   events?: Prisma.EventCreateNestedManyWithoutOwnerInput
   communityPosts?: Prisma.CommunityPostCreateNestedManyWithoutAuthorInput
+  authSessions?: Prisma.AuthSessionCreateNestedManyWithoutUserInput
+  authTokens?: Prisma.AuthTokenCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutAssignedReportsInput = {
@@ -3022,6 +3506,8 @@ export type UserUncheckedCreateWithoutAssignedReportsInput = {
   jobs?: Prisma.JobUncheckedCreateNestedManyWithoutOwnerInput
   events?: Prisma.EventUncheckedCreateNestedManyWithoutOwnerInput
   communityPosts?: Prisma.CommunityPostUncheckedCreateNestedManyWithoutAuthorInput
+  authSessions?: Prisma.AuthSessionUncheckedCreateNestedManyWithoutUserInput
+  authTokens?: Prisma.AuthTokenUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutAssignedReportsInput = {
@@ -3075,6 +3561,8 @@ export type UserUpdateWithoutReportsMadeInput = {
   jobs?: Prisma.JobUpdateManyWithoutOwnerNestedInput
   events?: Prisma.EventUpdateManyWithoutOwnerNestedInput
   communityPosts?: Prisma.CommunityPostUpdateManyWithoutAuthorNestedInput
+  authSessions?: Prisma.AuthSessionUpdateManyWithoutUserNestedInput
+  authTokens?: Prisma.AuthTokenUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutReportsMadeInput = {
@@ -3112,6 +3600,8 @@ export type UserUncheckedUpdateWithoutReportsMadeInput = {
   jobs?: Prisma.JobUncheckedUpdateManyWithoutOwnerNestedInput
   events?: Prisma.EventUncheckedUpdateManyWithoutOwnerNestedInput
   communityPosts?: Prisma.CommunityPostUncheckedUpdateManyWithoutAuthorNestedInput
+  authSessions?: Prisma.AuthSessionUncheckedUpdateManyWithoutUserNestedInput
+  authTokens?: Prisma.AuthTokenUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserUpsertWithoutReportsAboutUserInput = {
@@ -3160,6 +3650,8 @@ export type UserUpdateWithoutReportsAboutUserInput = {
   jobs?: Prisma.JobUpdateManyWithoutOwnerNestedInput
   events?: Prisma.EventUpdateManyWithoutOwnerNestedInput
   communityPosts?: Prisma.CommunityPostUpdateManyWithoutAuthorNestedInput
+  authSessions?: Prisma.AuthSessionUpdateManyWithoutUserNestedInput
+  authTokens?: Prisma.AuthTokenUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutReportsAboutUserInput = {
@@ -3197,6 +3689,8 @@ export type UserUncheckedUpdateWithoutReportsAboutUserInput = {
   jobs?: Prisma.JobUncheckedUpdateManyWithoutOwnerNestedInput
   events?: Prisma.EventUncheckedUpdateManyWithoutOwnerNestedInput
   communityPosts?: Prisma.CommunityPostUncheckedUpdateManyWithoutAuthorNestedInput
+  authSessions?: Prisma.AuthSessionUncheckedUpdateManyWithoutUserNestedInput
+  authTokens?: Prisma.AuthTokenUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserUpsertWithoutAssignedReportsInput = {
@@ -3245,6 +3739,8 @@ export type UserUpdateWithoutAssignedReportsInput = {
   jobs?: Prisma.JobUpdateManyWithoutOwnerNestedInput
   events?: Prisma.EventUpdateManyWithoutOwnerNestedInput
   communityPosts?: Prisma.CommunityPostUpdateManyWithoutAuthorNestedInput
+  authSessions?: Prisma.AuthSessionUpdateManyWithoutUserNestedInput
+  authTokens?: Prisma.AuthTokenUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutAssignedReportsInput = {
@@ -3282,6 +3778,8 @@ export type UserUncheckedUpdateWithoutAssignedReportsInput = {
   jobs?: Prisma.JobUncheckedUpdateManyWithoutOwnerNestedInput
   events?: Prisma.EventUncheckedUpdateManyWithoutOwnerNestedInput
   communityPosts?: Prisma.CommunityPostUncheckedUpdateManyWithoutAuthorNestedInput
+  authSessions?: Prisma.AuthSessionUncheckedUpdateManyWithoutUserNestedInput
+  authTokens?: Prisma.AuthTokenUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutModerationActionsInput = {
@@ -3319,6 +3817,8 @@ export type UserCreateWithoutModerationActionsInput = {
   jobs?: Prisma.JobCreateNestedManyWithoutOwnerInput
   events?: Prisma.EventCreateNestedManyWithoutOwnerInput
   communityPosts?: Prisma.CommunityPostCreateNestedManyWithoutAuthorInput
+  authSessions?: Prisma.AuthSessionCreateNestedManyWithoutUserInput
+  authTokens?: Prisma.AuthTokenCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutModerationActionsInput = {
@@ -3356,6 +3856,8 @@ export type UserUncheckedCreateWithoutModerationActionsInput = {
   jobs?: Prisma.JobUncheckedCreateNestedManyWithoutOwnerInput
   events?: Prisma.EventUncheckedCreateNestedManyWithoutOwnerInput
   communityPosts?: Prisma.CommunityPostUncheckedCreateNestedManyWithoutAuthorInput
+  authSessions?: Prisma.AuthSessionUncheckedCreateNestedManyWithoutUserInput
+  authTokens?: Prisma.AuthTokenUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutModerationActionsInput = {
@@ -3409,6 +3911,8 @@ export type UserUpdateWithoutModerationActionsInput = {
   jobs?: Prisma.JobUpdateManyWithoutOwnerNestedInput
   events?: Prisma.EventUpdateManyWithoutOwnerNestedInput
   communityPosts?: Prisma.CommunityPostUpdateManyWithoutAuthorNestedInput
+  authSessions?: Prisma.AuthSessionUpdateManyWithoutUserNestedInput
+  authTokens?: Prisma.AuthTokenUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutModerationActionsInput = {
@@ -3446,6 +3950,8 @@ export type UserUncheckedUpdateWithoutModerationActionsInput = {
   jobs?: Prisma.JobUncheckedUpdateManyWithoutOwnerNestedInput
   events?: Prisma.EventUncheckedUpdateManyWithoutOwnerNestedInput
   communityPosts?: Prisma.CommunityPostUncheckedUpdateManyWithoutAuthorNestedInput
+  authSessions?: Prisma.AuthSessionUncheckedUpdateManyWithoutUserNestedInput
+  authTokens?: Prisma.AuthTokenUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutBlockedUsersInput = {
@@ -3483,6 +3989,8 @@ export type UserCreateWithoutBlockedUsersInput = {
   jobs?: Prisma.JobCreateNestedManyWithoutOwnerInput
   events?: Prisma.EventCreateNestedManyWithoutOwnerInput
   communityPosts?: Prisma.CommunityPostCreateNestedManyWithoutAuthorInput
+  authSessions?: Prisma.AuthSessionCreateNestedManyWithoutUserInput
+  authTokens?: Prisma.AuthTokenCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutBlockedUsersInput = {
@@ -3520,6 +4028,8 @@ export type UserUncheckedCreateWithoutBlockedUsersInput = {
   jobs?: Prisma.JobUncheckedCreateNestedManyWithoutOwnerInput
   events?: Prisma.EventUncheckedCreateNestedManyWithoutOwnerInput
   communityPosts?: Prisma.CommunityPostUncheckedCreateNestedManyWithoutAuthorInput
+  authSessions?: Prisma.AuthSessionUncheckedCreateNestedManyWithoutUserInput
+  authTokens?: Prisma.AuthTokenUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutBlockedUsersInput = {
@@ -3562,6 +4072,8 @@ export type UserCreateWithoutBlockedByUsersInput = {
   jobs?: Prisma.JobCreateNestedManyWithoutOwnerInput
   events?: Prisma.EventCreateNestedManyWithoutOwnerInput
   communityPosts?: Prisma.CommunityPostCreateNestedManyWithoutAuthorInput
+  authSessions?: Prisma.AuthSessionCreateNestedManyWithoutUserInput
+  authTokens?: Prisma.AuthTokenCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutBlockedByUsersInput = {
@@ -3599,6 +4111,8 @@ export type UserUncheckedCreateWithoutBlockedByUsersInput = {
   jobs?: Prisma.JobUncheckedCreateNestedManyWithoutOwnerInput
   events?: Prisma.EventUncheckedCreateNestedManyWithoutOwnerInput
   communityPosts?: Prisma.CommunityPostUncheckedCreateNestedManyWithoutAuthorInput
+  authSessions?: Prisma.AuthSessionUncheckedCreateNestedManyWithoutUserInput
+  authTokens?: Prisma.AuthTokenUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutBlockedByUsersInput = {
@@ -3652,6 +4166,8 @@ export type UserUpdateWithoutBlockedUsersInput = {
   jobs?: Prisma.JobUpdateManyWithoutOwnerNestedInput
   events?: Prisma.EventUpdateManyWithoutOwnerNestedInput
   communityPosts?: Prisma.CommunityPostUpdateManyWithoutAuthorNestedInput
+  authSessions?: Prisma.AuthSessionUpdateManyWithoutUserNestedInput
+  authTokens?: Prisma.AuthTokenUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutBlockedUsersInput = {
@@ -3689,6 +4205,8 @@ export type UserUncheckedUpdateWithoutBlockedUsersInput = {
   jobs?: Prisma.JobUncheckedUpdateManyWithoutOwnerNestedInput
   events?: Prisma.EventUncheckedUpdateManyWithoutOwnerNestedInput
   communityPosts?: Prisma.CommunityPostUncheckedUpdateManyWithoutAuthorNestedInput
+  authSessions?: Prisma.AuthSessionUncheckedUpdateManyWithoutUserNestedInput
+  authTokens?: Prisma.AuthTokenUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserUpsertWithoutBlockedByUsersInput = {
@@ -3737,6 +4255,8 @@ export type UserUpdateWithoutBlockedByUsersInput = {
   jobs?: Prisma.JobUpdateManyWithoutOwnerNestedInput
   events?: Prisma.EventUpdateManyWithoutOwnerNestedInput
   communityPosts?: Prisma.CommunityPostUpdateManyWithoutAuthorNestedInput
+  authSessions?: Prisma.AuthSessionUpdateManyWithoutUserNestedInput
+  authTokens?: Prisma.AuthTokenUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutBlockedByUsersInput = {
@@ -3774,6 +4294,8 @@ export type UserUncheckedUpdateWithoutBlockedByUsersInput = {
   jobs?: Prisma.JobUncheckedUpdateManyWithoutOwnerNestedInput
   events?: Prisma.EventUncheckedUpdateManyWithoutOwnerNestedInput
   communityPosts?: Prisma.CommunityPostUncheckedUpdateManyWithoutAuthorNestedInput
+  authSessions?: Prisma.AuthSessionUncheckedUpdateManyWithoutUserNestedInput
+  authTokens?: Prisma.AuthTokenUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutAuditLogsInput = {
@@ -3811,6 +4333,8 @@ export type UserCreateWithoutAuditLogsInput = {
   jobs?: Prisma.JobCreateNestedManyWithoutOwnerInput
   events?: Prisma.EventCreateNestedManyWithoutOwnerInput
   communityPosts?: Prisma.CommunityPostCreateNestedManyWithoutAuthorInput
+  authSessions?: Prisma.AuthSessionCreateNestedManyWithoutUserInput
+  authTokens?: Prisma.AuthTokenCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutAuditLogsInput = {
@@ -3848,6 +4372,8 @@ export type UserUncheckedCreateWithoutAuditLogsInput = {
   jobs?: Prisma.JobUncheckedCreateNestedManyWithoutOwnerInput
   events?: Prisma.EventUncheckedCreateNestedManyWithoutOwnerInput
   communityPosts?: Prisma.CommunityPostUncheckedCreateNestedManyWithoutAuthorInput
+  authSessions?: Prisma.AuthSessionUncheckedCreateNestedManyWithoutUserInput
+  authTokens?: Prisma.AuthTokenUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutAuditLogsInput = {
@@ -3901,6 +4427,8 @@ export type UserUpdateWithoutAuditLogsInput = {
   jobs?: Prisma.JobUpdateManyWithoutOwnerNestedInput
   events?: Prisma.EventUpdateManyWithoutOwnerNestedInput
   communityPosts?: Prisma.CommunityPostUpdateManyWithoutAuthorNestedInput
+  authSessions?: Prisma.AuthSessionUpdateManyWithoutUserNestedInput
+  authTokens?: Prisma.AuthTokenUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutAuditLogsInput = {
@@ -3938,6 +4466,8 @@ export type UserUncheckedUpdateWithoutAuditLogsInput = {
   jobs?: Prisma.JobUncheckedUpdateManyWithoutOwnerNestedInput
   events?: Prisma.EventUncheckedUpdateManyWithoutOwnerNestedInput
   communityPosts?: Prisma.CommunityPostUncheckedUpdateManyWithoutAuthorNestedInput
+  authSessions?: Prisma.AuthSessionUncheckedUpdateManyWithoutUserNestedInput
+  authTokens?: Prisma.AuthTokenUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutBusinessesInput = {
@@ -3975,6 +4505,8 @@ export type UserCreateWithoutBusinessesInput = {
   jobs?: Prisma.JobCreateNestedManyWithoutOwnerInput
   events?: Prisma.EventCreateNestedManyWithoutOwnerInput
   communityPosts?: Prisma.CommunityPostCreateNestedManyWithoutAuthorInput
+  authSessions?: Prisma.AuthSessionCreateNestedManyWithoutUserInput
+  authTokens?: Prisma.AuthTokenCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutBusinessesInput = {
@@ -4012,6 +4544,8 @@ export type UserUncheckedCreateWithoutBusinessesInput = {
   jobs?: Prisma.JobUncheckedCreateNestedManyWithoutOwnerInput
   events?: Prisma.EventUncheckedCreateNestedManyWithoutOwnerInput
   communityPosts?: Prisma.CommunityPostUncheckedCreateNestedManyWithoutAuthorInput
+  authSessions?: Prisma.AuthSessionUncheckedCreateNestedManyWithoutUserInput
+  authTokens?: Prisma.AuthTokenUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutBusinessesInput = {
@@ -4065,6 +4599,8 @@ export type UserUpdateWithoutBusinessesInput = {
   jobs?: Prisma.JobUpdateManyWithoutOwnerNestedInput
   events?: Prisma.EventUpdateManyWithoutOwnerNestedInput
   communityPosts?: Prisma.CommunityPostUpdateManyWithoutAuthorNestedInput
+  authSessions?: Prisma.AuthSessionUpdateManyWithoutUserNestedInput
+  authTokens?: Prisma.AuthTokenUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutBusinessesInput = {
@@ -4102,6 +4638,8 @@ export type UserUncheckedUpdateWithoutBusinessesInput = {
   jobs?: Prisma.JobUncheckedUpdateManyWithoutOwnerNestedInput
   events?: Prisma.EventUncheckedUpdateManyWithoutOwnerNestedInput
   communityPosts?: Prisma.CommunityPostUncheckedUpdateManyWithoutAuthorNestedInput
+  authSessions?: Prisma.AuthSessionUncheckedUpdateManyWithoutUserNestedInput
+  authTokens?: Prisma.AuthTokenUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutBusinessMembershipsInput = {
@@ -4139,6 +4677,8 @@ export type UserCreateWithoutBusinessMembershipsInput = {
   jobs?: Prisma.JobCreateNestedManyWithoutOwnerInput
   events?: Prisma.EventCreateNestedManyWithoutOwnerInput
   communityPosts?: Prisma.CommunityPostCreateNestedManyWithoutAuthorInput
+  authSessions?: Prisma.AuthSessionCreateNestedManyWithoutUserInput
+  authTokens?: Prisma.AuthTokenCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutBusinessMembershipsInput = {
@@ -4176,6 +4716,8 @@ export type UserUncheckedCreateWithoutBusinessMembershipsInput = {
   jobs?: Prisma.JobUncheckedCreateNestedManyWithoutOwnerInput
   events?: Prisma.EventUncheckedCreateNestedManyWithoutOwnerInput
   communityPosts?: Prisma.CommunityPostUncheckedCreateNestedManyWithoutAuthorInput
+  authSessions?: Prisma.AuthSessionUncheckedCreateNestedManyWithoutUserInput
+  authTokens?: Prisma.AuthTokenUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutBusinessMembershipsInput = {
@@ -4229,6 +4771,8 @@ export type UserUpdateWithoutBusinessMembershipsInput = {
   jobs?: Prisma.JobUpdateManyWithoutOwnerNestedInput
   events?: Prisma.EventUpdateManyWithoutOwnerNestedInput
   communityPosts?: Prisma.CommunityPostUpdateManyWithoutAuthorNestedInput
+  authSessions?: Prisma.AuthSessionUpdateManyWithoutUserNestedInput
+  authTokens?: Prisma.AuthTokenUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutBusinessMembershipsInput = {
@@ -4266,6 +4810,8 @@ export type UserUncheckedUpdateWithoutBusinessMembershipsInput = {
   jobs?: Prisma.JobUncheckedUpdateManyWithoutOwnerNestedInput
   events?: Prisma.EventUncheckedUpdateManyWithoutOwnerNestedInput
   communityPosts?: Prisma.CommunityPostUncheckedUpdateManyWithoutAuthorNestedInput
+  authSessions?: Prisma.AuthSessionUncheckedUpdateManyWithoutUserNestedInput
+  authTokens?: Prisma.AuthTokenUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutJobsInput = {
@@ -4303,6 +4849,8 @@ export type UserCreateWithoutJobsInput = {
   businessMemberships?: Prisma.BusinessMemberCreateNestedManyWithoutUserInput
   events?: Prisma.EventCreateNestedManyWithoutOwnerInput
   communityPosts?: Prisma.CommunityPostCreateNestedManyWithoutAuthorInput
+  authSessions?: Prisma.AuthSessionCreateNestedManyWithoutUserInput
+  authTokens?: Prisma.AuthTokenCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutJobsInput = {
@@ -4340,6 +4888,8 @@ export type UserUncheckedCreateWithoutJobsInput = {
   businessMemberships?: Prisma.BusinessMemberUncheckedCreateNestedManyWithoutUserInput
   events?: Prisma.EventUncheckedCreateNestedManyWithoutOwnerInput
   communityPosts?: Prisma.CommunityPostUncheckedCreateNestedManyWithoutAuthorInput
+  authSessions?: Prisma.AuthSessionUncheckedCreateNestedManyWithoutUserInput
+  authTokens?: Prisma.AuthTokenUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutJobsInput = {
@@ -4393,6 +4943,8 @@ export type UserUpdateWithoutJobsInput = {
   businessMemberships?: Prisma.BusinessMemberUpdateManyWithoutUserNestedInput
   events?: Prisma.EventUpdateManyWithoutOwnerNestedInput
   communityPosts?: Prisma.CommunityPostUpdateManyWithoutAuthorNestedInput
+  authSessions?: Prisma.AuthSessionUpdateManyWithoutUserNestedInput
+  authTokens?: Prisma.AuthTokenUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutJobsInput = {
@@ -4430,6 +4982,8 @@ export type UserUncheckedUpdateWithoutJobsInput = {
   businessMemberships?: Prisma.BusinessMemberUncheckedUpdateManyWithoutUserNestedInput
   events?: Prisma.EventUncheckedUpdateManyWithoutOwnerNestedInput
   communityPosts?: Prisma.CommunityPostUncheckedUpdateManyWithoutAuthorNestedInput
+  authSessions?: Prisma.AuthSessionUncheckedUpdateManyWithoutUserNestedInput
+  authTokens?: Prisma.AuthTokenUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutEventsInput = {
@@ -4467,6 +5021,8 @@ export type UserCreateWithoutEventsInput = {
   businessMemberships?: Prisma.BusinessMemberCreateNestedManyWithoutUserInput
   jobs?: Prisma.JobCreateNestedManyWithoutOwnerInput
   communityPosts?: Prisma.CommunityPostCreateNestedManyWithoutAuthorInput
+  authSessions?: Prisma.AuthSessionCreateNestedManyWithoutUserInput
+  authTokens?: Prisma.AuthTokenCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutEventsInput = {
@@ -4504,6 +5060,8 @@ export type UserUncheckedCreateWithoutEventsInput = {
   businessMemberships?: Prisma.BusinessMemberUncheckedCreateNestedManyWithoutUserInput
   jobs?: Prisma.JobUncheckedCreateNestedManyWithoutOwnerInput
   communityPosts?: Prisma.CommunityPostUncheckedCreateNestedManyWithoutAuthorInput
+  authSessions?: Prisma.AuthSessionUncheckedCreateNestedManyWithoutUserInput
+  authTokens?: Prisma.AuthTokenUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutEventsInput = {
@@ -4557,6 +5115,8 @@ export type UserUpdateWithoutEventsInput = {
   businessMemberships?: Prisma.BusinessMemberUpdateManyWithoutUserNestedInput
   jobs?: Prisma.JobUpdateManyWithoutOwnerNestedInput
   communityPosts?: Prisma.CommunityPostUpdateManyWithoutAuthorNestedInput
+  authSessions?: Prisma.AuthSessionUpdateManyWithoutUserNestedInput
+  authTokens?: Prisma.AuthTokenUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutEventsInput = {
@@ -4594,6 +5154,8 @@ export type UserUncheckedUpdateWithoutEventsInput = {
   businessMemberships?: Prisma.BusinessMemberUncheckedUpdateManyWithoutUserNestedInput
   jobs?: Prisma.JobUncheckedUpdateManyWithoutOwnerNestedInput
   communityPosts?: Prisma.CommunityPostUncheckedUpdateManyWithoutAuthorNestedInput
+  authSessions?: Prisma.AuthSessionUncheckedUpdateManyWithoutUserNestedInput
+  authTokens?: Prisma.AuthTokenUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutCommunityPostsInput = {
@@ -4631,6 +5193,8 @@ export type UserCreateWithoutCommunityPostsInput = {
   businessMemberships?: Prisma.BusinessMemberCreateNestedManyWithoutUserInput
   jobs?: Prisma.JobCreateNestedManyWithoutOwnerInput
   events?: Prisma.EventCreateNestedManyWithoutOwnerInput
+  authSessions?: Prisma.AuthSessionCreateNestedManyWithoutUserInput
+  authTokens?: Prisma.AuthTokenCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutCommunityPostsInput = {
@@ -4668,6 +5232,8 @@ export type UserUncheckedCreateWithoutCommunityPostsInput = {
   businessMemberships?: Prisma.BusinessMemberUncheckedCreateNestedManyWithoutUserInput
   jobs?: Prisma.JobUncheckedCreateNestedManyWithoutOwnerInput
   events?: Prisma.EventUncheckedCreateNestedManyWithoutOwnerInput
+  authSessions?: Prisma.AuthSessionUncheckedCreateNestedManyWithoutUserInput
+  authTokens?: Prisma.AuthTokenUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutCommunityPostsInput = {
@@ -4721,6 +5287,8 @@ export type UserUpdateWithoutCommunityPostsInput = {
   businessMemberships?: Prisma.BusinessMemberUpdateManyWithoutUserNestedInput
   jobs?: Prisma.JobUpdateManyWithoutOwnerNestedInput
   events?: Prisma.EventUpdateManyWithoutOwnerNestedInput
+  authSessions?: Prisma.AuthSessionUpdateManyWithoutUserNestedInput
+  authTokens?: Prisma.AuthTokenUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutCommunityPostsInput = {
@@ -4758,6 +5326,8 @@ export type UserUncheckedUpdateWithoutCommunityPostsInput = {
   businessMemberships?: Prisma.BusinessMemberUncheckedUpdateManyWithoutUserNestedInput
   jobs?: Prisma.JobUncheckedUpdateManyWithoutOwnerNestedInput
   events?: Prisma.EventUncheckedUpdateManyWithoutOwnerNestedInput
+  authSessions?: Prisma.AuthSessionUncheckedUpdateManyWithoutUserNestedInput
+  authTokens?: Prisma.AuthTokenUncheckedUpdateManyWithoutUserNestedInput
 }
 
 
@@ -4788,6 +5358,8 @@ export type UserCountOutputType = {
   jobs: number
   events: number
   communityPosts: number
+  authSessions: number
+  authTokens: number
 }
 
 export type UserCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -4813,6 +5385,8 @@ export type UserCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.I
   jobs?: boolean | UserCountOutputTypeCountJobsArgs
   events?: boolean | UserCountOutputTypeCountEventsArgs
   communityPosts?: boolean | UserCountOutputTypeCountCommunityPostsArgs
+  authSessions?: boolean | UserCountOutputTypeCountAuthSessionsArgs
+  authTokens?: boolean | UserCountOutputTypeCountAuthTokensArgs
 }
 
 /**
@@ -4979,6 +5553,20 @@ export type UserCountOutputTypeCountCommunityPostsArgs<ExtArgs extends runtime.T
   where?: Prisma.CommunityPostWhereInput
 }
 
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountAuthSessionsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.AuthSessionWhereInput
+}
+
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountAuthTokensArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.AuthTokenWhereInput
+}
+
 
 export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -5016,6 +5604,8 @@ export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
   jobs?: boolean | Prisma.User$jobsArgs<ExtArgs>
   events?: boolean | Prisma.User$eventsArgs<ExtArgs>
   communityPosts?: boolean | Prisma.User$communityPostsArgs<ExtArgs>
+  authSessions?: boolean | Prisma.User$authSessionsArgs<ExtArgs>
+  authTokens?: boolean | Prisma.User$authTokensArgs<ExtArgs>
   _count?: boolean | Prisma.UserCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["user"]>
 
@@ -5089,6 +5679,8 @@ export type UserInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = 
   jobs?: boolean | Prisma.User$jobsArgs<ExtArgs>
   events?: boolean | Prisma.User$eventsArgs<ExtArgs>
   communityPosts?: boolean | Prisma.User$communityPostsArgs<ExtArgs>
+  authSessions?: boolean | Prisma.User$authSessionsArgs<ExtArgs>
+  authTokens?: boolean | Prisma.User$authTokensArgs<ExtArgs>
   _count?: boolean | Prisma.UserCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type UserIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {}
@@ -5120,6 +5712,8 @@ export type $UserPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
     jobs: Prisma.$JobPayload<ExtArgs>[]
     events: Prisma.$EventPayload<ExtArgs>[]
     communityPosts: Prisma.$CommunityPostPayload<ExtArgs>[]
+    authSessions: Prisma.$AuthSessionPayload<ExtArgs>[]
+    authTokens: Prisma.$AuthTokenPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -5551,6 +6145,8 @@ export interface Prisma__UserClient<T, Null = never, ExtArgs extends runtime.Typ
   jobs<T extends Prisma.User$jobsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$jobsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$JobPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   events<T extends Prisma.User$eventsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$eventsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$EventPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   communityPosts<T extends Prisma.User$communityPostsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$communityPostsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$CommunityPostPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  authSessions<T extends Prisma.User$authSessionsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$authSessionsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$AuthSessionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  authTokens<T extends Prisma.User$authTokensArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$authTokensArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$AuthTokenPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -6529,6 +7125,54 @@ export type User$communityPostsArgs<ExtArgs extends runtime.Types.Extensions.Int
   take?: number
   skip?: number
   distinct?: Prisma.CommunityPostScalarFieldEnum | Prisma.CommunityPostScalarFieldEnum[]
+}
+
+/**
+ * User.authSessions
+ */
+export type User$authSessionsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the AuthSession
+   */
+  select?: Prisma.AuthSessionSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the AuthSession
+   */
+  omit?: Prisma.AuthSessionOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.AuthSessionInclude<ExtArgs> | null
+  where?: Prisma.AuthSessionWhereInput
+  orderBy?: Prisma.AuthSessionOrderByWithRelationInput | Prisma.AuthSessionOrderByWithRelationInput[]
+  cursor?: Prisma.AuthSessionWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.AuthSessionScalarFieldEnum | Prisma.AuthSessionScalarFieldEnum[]
+}
+
+/**
+ * User.authTokens
+ */
+export type User$authTokensArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the AuthToken
+   */
+  select?: Prisma.AuthTokenSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the AuthToken
+   */
+  omit?: Prisma.AuthTokenOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.AuthTokenInclude<ExtArgs> | null
+  where?: Prisma.AuthTokenWhereInput
+  orderBy?: Prisma.AuthTokenOrderByWithRelationInput | Prisma.AuthTokenOrderByWithRelationInput[]
+  cursor?: Prisma.AuthTokenWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.AuthTokenScalarFieldEnum | Prisma.AuthTokenScalarFieldEnum[]
 }
 
 /**

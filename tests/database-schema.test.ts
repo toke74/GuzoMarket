@@ -1,14 +1,18 @@
-import { readFileSync } from "node:fs";
+import { existsSync, readdirSync, readFileSync } from "node:fs";
 import { join } from "node:path";
 
 import { describe, expect, it } from "vitest";
 
 const rootDir = process.cwd();
 const schema = readFileSync(join(rootDir, "prisma", "schema.prisma"), "utf8");
-const migration = readFileSync(
-  join(rootDir, "prisma", "migrations", "20260824200000_init_core_schema", "migration.sql"),
-  "utf8",
-);
+const migration = readdirSync(join(rootDir, "prisma", "migrations"))
+  .filter((migrationDir) =>
+    existsSync(join(rootDir, "prisma", "migrations", migrationDir, "migration.sql")),
+  )
+  .map((migrationDir) => {
+    return readFileSync(join(rootDir, "prisma", "migrations", migrationDir, "migration.sql"), "utf8");
+  })
+  .join("\n");
 
 describe("database schema foundation", () => {
   it("models the Stage 2 MVP domain tables", () => {
@@ -38,6 +42,8 @@ describe("database schema foundation", () => {
       "ModerationAction",
       "Block",
       "AuditLog",
+      "AuthSession",
+      "AuthToken",
       "Business",
       "BusinessMember",
       "BusinessImage",
@@ -63,6 +69,7 @@ describe("database schema foundation", () => {
       "JobStatus",
       "EventStatus",
       "CommunityPostStatus",
+      "AuthTokenType",
     ]) {
       expect(schema).toContain(`enum ${enumName} {`);
       expect(migration).toContain(`CREATE TYPE "${enumName}" AS ENUM`);
