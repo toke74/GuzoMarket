@@ -1,12 +1,23 @@
 import { LocateFixed, MapPin } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
+import type { PublicLocationDTO } from "@/server/marketplace/locations";
 
 type LocationSelectorShellProps = {
   selectedLabel?: string;
+  locations?: Pick<PublicLocationDTO, "id" | "label">[];
 };
 
-export function LocationSelectorShell({ selectedLabel = "Washington, DC" }: LocationSelectorShellProps) {
+const fallbackLocations = [
+  { id: "washington-dc", label: "Washington, DC" },
+  { id: "silver-spring-md", label: "Silver Spring, MD" },
+  { id: "arlington-va", label: "Arlington, VA" },
+];
+
+export function LocationSelectorShell({
+  selectedLabel = "Washington, DC",
+  locations = fallbackLocations,
+}: LocationSelectorShellProps) {
   return (
     <div className="rounded-lg border border-border bg-surface p-4">
       <div className="flex items-start gap-3">
@@ -17,9 +28,14 @@ export function LocationSelectorShell({ selectedLabel = "Washington, DC" }: Loca
         </div>
       </div>
       <div className="mt-4 flex flex-wrap gap-2">
-        {["Washington, DC", "Silver Spring, MD", "Arlington, VA"].map((label) => (
-          <Button key={label} type="button" variant={label === selectedLabel ? "secondary" : "outline"} size="sm">
-            {label}
+        {locations.map((location) => (
+          <Button
+            key={location.id}
+            type="button"
+            variant={location.label === selectedLabel ? "secondary" : "outline"}
+            size="sm"
+          >
+            {location.label}
           </Button>
         ))}
         <Button type="button" variant="ghost" size="sm">
