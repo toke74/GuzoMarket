@@ -49,6 +49,7 @@
 html {
   min-height: 100%;
   background: var(--color-background);
+  overflow-x: hidden;
 }
 
 body {
@@ -58,6 +59,7 @@ body {
   color: var(--color-text-primary);
   font-family: var(--font-inter), system-ui, sans-serif;
   text-rendering: optimizeLegibility;
+  overflow-x: hidden;
 }
 
 a {

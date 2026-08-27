@@ -18,7 +18,7 @@ export function HeaderClient({ displayName }: HeaderClientProps) {
 
   return (
     <>
-      <nav className="hidden items-center gap-1 lg:flex" aria-label="Primary navigation">
+      <nav className="hidden items-center gap-1 xl:flex" aria-label="Primary navigation">
         {desktopNavItems.map((item) => {
           const active = pathname === item.href || pathname.startsWith(`${item.href}/`);
 

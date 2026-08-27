@@ -45,4 +45,27 @@ describe("development seed fixtures", () => {
 
     expect(verifySeed).toContain("Seed verification passed");
   });
+
+  it("includes homepage-ready synthetic fixture density without fake ratings", () => {
+    for (const requiredText of [
+      "demo-adams-morgan-office-chair",
+      "demo-rockville-iphone-12-pro",
+      "demo-alexandria-bookshelf",
+      "demo-wheaton-room-available",
+      "demo-dc-macbook-pro",
+      "demo-selam-cleaning-services",
+      "demo-ethio-market-grocery",
+      "demo-habesha-auto-care",
+      "demo-zemen-construction",
+      "demo-community-soccer-meetup",
+      "demo-local-food-pop-up",
+    ]) {
+      expect(seed).toContain(requiredText);
+    }
+
+    expect(seed).not.toContain("ratingAverage:");
+    expect(seed).not.toContain("ratingCount:");
+    expect(verifySeed).toContain("Expected homepage-ready active demo listings");
+    expect(verifySeed).toContain("Expected homepage-ready demo business fixtures");
+  });
 });

@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Inter, Manrope } from "next/font/google";
 import type { ReactNode } from "react";
 
+import { getBaseUrl } from "@/lib/config/base-url";
 import { Footer } from "@/components/navigation/footer";
 import { GlobalHeader } from "@/components/navigation/global-header";
 import { MobileBottomNav } from "@/components/navigation/mobile-bottom-nav";
@@ -21,6 +22,7 @@ const manrope = Manrope({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL(getBaseUrl()),
   title: "GuzoMarket",
   description: "Buy. Sell. Connect.",
 };

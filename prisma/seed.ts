@@ -61,11 +61,26 @@ const listingSlugs = [
   "demo-silver-spring-room-near-metro",
   "demo-solid-wood-dining-table-sold",
   "demo-mirrorless-camera-kit",
+  "demo-adams-morgan-office-chair",
+  "demo-rockville-iphone-12-pro",
+  "demo-alexandria-bookshelf",
+  "demo-wheaton-room-available",
+  "demo-dc-macbook-pro",
 ] as const;
 
-const businessSlugs = ["demo-buna-market-cafe"] as const;
+const businessSlugs = [
+  "demo-buna-market-cafe",
+  "demo-selam-cleaning-services",
+  "demo-ethio-market-grocery",
+  "demo-habesha-auto-care",
+  "demo-zemen-construction",
+] as const;
 const jobSlugs = ["demo-weekend-barista"] as const;
-const eventSlugs = ["demo-dmv-small-business-meetup"] as const;
+const eventSlugs = [
+  "demo-dmv-small-business-meetup",
+  "demo-community-soccer-meetup",
+  "demo-local-food-pop-up",
+] as const;
 
 type LocationSeed = {
   key: string;
@@ -685,6 +700,144 @@ async function seedListings(
         },
       },
     }),
+    officeChair: await prisma.listing.create({
+      data: {
+        ownerUserId: users.sellerAmina.id,
+        categoryId: categories.furniture.id,
+        title: "Demo ergonomic office chair",
+        slug: "demo-adams-morgan-office-chair",
+        description: "Synthetic active fixture for homepage marketplace density.",
+        priceAmount: "85.00",
+        priceType: PriceType.FIXED,
+        condition: "good",
+        status: ListingStatus.ACTIVE,
+        moderationState: ModerationState.AUTO_CLEARED,
+        publicLocationId: locations["adams-morgan"].id,
+        locationPrecision: LocationPrecision.NEIGHBORHOOD,
+        contactPreference: ContactPreference.IN_APP_MESSAGE,
+        publishedAt: new Date("2026-08-23T15:00:00.000Z"),
+        expiresAt: new Date("2026-09-22T15:00:00.000Z"),
+        images: { create: [image("demo-table", "/fixtures/listings/demo-table.svg", "Demo placeholder image for a furniture listing", 0)] },
+        attributeValues: {
+          create: [
+            { attributeDefinitionId: attributes["furniture.condition"].id, optionValue: "good" },
+            { attributeDefinitionId: attributes["furniture.brand"].id, textValue: "Demo Office" },
+            { attributeDefinitionId: attributes["furniture.delivery_available"].id, booleanValue: true },
+          ],
+        },
+      },
+    }),
+    iphone: await prisma.listing.create({
+      data: {
+        ownerUserId: users.buyerSamir.id,
+        categoryId: categories.electronics.id,
+        title: "Demo iPhone 12 Pro 128GB",
+        slug: "demo-rockville-iphone-12-pro",
+        description: "Synthetic active electronics fixture for homepage browsing.",
+        priceAmount: "420.00",
+        priceType: PriceType.NEGOTIABLE,
+        condition: "good",
+        status: ListingStatus.ACTIVE,
+        moderationState: ModerationState.AUTO_CLEARED,
+        publicLocationId: locations.rockville.id,
+        locationPrecision: LocationPrecision.CITY,
+        contactPreference: ContactPreference.IN_APP_MESSAGE,
+        publishedAt: new Date("2026-08-22T15:00:00.000Z"),
+        expiresAt: new Date("2026-09-21T15:00:00.000Z"),
+        images: { create: [image("demo-camera", "/fixtures/listings/demo-camera.svg", "Demo placeholder image for an electronics listing", 0)] },
+        attributeValues: {
+          create: [
+            { attributeDefinitionId: attributes["electronics.condition"].id, optionValue: "good" },
+            { attributeDefinitionId: attributes["electronics.brand"].id, textValue: "DemoPhone" },
+            { attributeDefinitionId: attributes["electronics.delivery_available"].id, booleanValue: false },
+          ],
+        },
+      },
+    }),
+    bookshelf: await prisma.listing.create({
+      data: {
+        ownerUserId: users.sellerAmina.id,
+        categoryId: categories.furniture.id,
+        title: "Demo tall walnut bookshelf",
+        slug: "demo-alexandria-bookshelf",
+        description: "Synthetic active home-goods fixture for responsive homepage cards.",
+        priceAmount: "140.00",
+        priceType: PriceType.FIXED,
+        condition: "like_new",
+        status: ListingStatus.ACTIVE,
+        moderationState: ModerationState.AUTO_CLEARED,
+        publicLocationId: locations.alexandria.id,
+        locationPrecision: LocationPrecision.CITY,
+        contactPreference: ContactPreference.IN_APP_MESSAGE,
+        publishedAt: new Date("2026-08-21T15:00:00.000Z"),
+        expiresAt: new Date("2026-09-20T15:00:00.000Z"),
+        images: { create: [image("demo-table", "/fixtures/listings/demo-table.svg", "Demo placeholder image for a bookshelf listing", 0)] },
+        attributeValues: {
+          create: [
+            { attributeDefinitionId: attributes["furniture.condition"].id, optionValue: "like_new" },
+            { attributeDefinitionId: attributes["furniture.brand"].id, textValue: "Demo Home" },
+            { attributeDefinitionId: attributes["furniture.delivery_available"].id, booleanValue: false },
+          ],
+        },
+      },
+    }),
+    activeRoom: await prisma.listing.create({
+      data: {
+        ownerUserId: users.sellerMaya.id,
+        categoryId: categories.rooms.id,
+        title: "Demo furnished room in Wheaton",
+        slug: "demo-wheaton-room-available",
+        description: "Synthetic active housing fixture with approximate public location only.",
+        priceAmount: "1050.00",
+        priceType: PriceType.PER_MONTH,
+        status: ListingStatus.ACTIVE,
+        moderationState: ModerationState.AUTO_CLEARED,
+        publicLocationId: locations.wheaton.id,
+        locationPrecision: LocationPrecision.NEIGHBORHOOD,
+        contactPreference: ContactPreference.IN_APP_MESSAGE,
+        isFeatured: true,
+        featuredSource: "demo_seed",
+        publishedAt: new Date("2026-08-19T15:00:00.000Z"),
+        expiresAt: new Date("2026-09-18T15:00:00.000Z"),
+        images: { create: [image("demo-event", "/fixtures/listings/demo-event.svg", "Demo placeholder image for a room listing", 0)] },
+        attributeValues: {
+          create: [
+            { attributeDefinitionId: attributes["rooms.housing_type"].id, optionValue: "private_room" },
+            { attributeDefinitionId: attributes["rooms.bedrooms"].id, integerValue: 1 },
+            { attributeDefinitionId: attributes["rooms.bathrooms"].id, decimalValue: "1.0000" },
+            { attributeDefinitionId: attributes["rooms.furnished"].id, booleanValue: true },
+            { attributeDefinitionId: attributes["rooms.lease_term"].id, optionValue: "month_to_month" },
+          ],
+        },
+      },
+    }),
+    macbook: await prisma.listing.create({
+      data: {
+        ownerUserId: users.buyerSamir.id,
+        categoryId: categories.electronics.id,
+        title: "Demo MacBook Pro 13 inch",
+        slug: "demo-dc-macbook-pro",
+        description: "Synthetic active electronics fixture for homepage card density.",
+        priceAmount: "650.00",
+        priceType: PriceType.FIXED,
+        condition: "good",
+        status: ListingStatus.ACTIVE,
+        moderationState: ModerationState.AUTO_CLEARED,
+        publicLocationId: locations["dc-city"].id,
+        locationPrecision: LocationPrecision.CITY,
+        contactPreference: ContactPreference.IN_APP_MESSAGE,
+        publishedAt: new Date("2026-08-18T15:00:00.000Z"),
+        expiresAt: new Date("2026-09-17T15:00:00.000Z"),
+        images: { create: [image("demo-camera", "/fixtures/listings/demo-camera.svg", "Demo placeholder image for a laptop listing", 0)] },
+        attributeValues: {
+          create: [
+            { attributeDefinitionId: attributes["electronics.condition"].id, optionValue: "good" },
+            { attributeDefinitionId: attributes["electronics.brand"].id, textValue: "DemoBook" },
+            { attributeDefinitionId: attributes["electronics.delivery_available"].id, booleanValue: true },
+          ],
+        },
+      },
+    }),
   };
 }
 
@@ -743,29 +896,89 @@ async function seedEngagement(users: Record<string, { id: string }>, listings: R
 }
 
 async function seedBusiness(users: Record<string, { id: string }>, locations: Record<string, { id: string }>, categories: Record<string, { id: string }>) {
-  return prisma.business.create({
-    data: {
+  async function createDemoBusiness(data: {
+    name: string;
+    slug: string;
+    description: string;
+    categoryId: string;
+    publicLocationId: string;
+    phonePublic?: string;
+    emailPublic?: string;
+    websiteUrl?: string;
+  }) {
+    return prisma.business.create({
+      data: {
       ownerUserId: users.sellerMaya.id,
-      name: "Demo Buna Market Cafe",
-      slug: "demo-buna-market-cafe",
-      description: "Synthetic DMV cafe profile for business directory development fixtures.",
-      categoryId: categories.restaurants.id,
+      name: data.name,
+      slug: data.slug,
+      description: data.description,
+      categoryId: data.categoryId,
       status: BusinessStatus.ACTIVE,
       verificationStatus: VerificationStatus.PENDING,
       logoUrl: "/fixtures/listings/demo-business.svg",
-      publicLocationId: locations.shaw.id,
-      phonePublic: "202-555-0199",
-      emailPublic: "hello-demo@guzomarket.test",
-      websiteUrl: "https://example.test/demo-buna-market-cafe",
+      publicLocationId: data.publicLocationId,
+      phonePublic: data.phonePublic,
+      emailPublic: data.emailPublic,
+      websiteUrl: data.websiteUrl,
       hoursJson: { monday: "8:00-16:00", saturday: "9:00-14:00" },
       members: {
         create: [{ userId: users.sellerMaya.id, role: BusinessMemberRole.OWNER, acceptedAt: new Date("2026-08-01T12:00:00.000Z") }],
       },
       images: {
-        create: [{ storageKey: "fixtures/listings/demo-business.svg", publicUrl: "/fixtures/listings/demo-business.svg", sortOrder: 0, altText: "Demo placeholder image for a local cafe" }],
+        create: [{ storageKey: "fixtures/listings/demo-business.svg", publicUrl: "/fixtures/listings/demo-business.svg", sortOrder: 0, altText: `Demo placeholder image for ${data.name}` }],
       },
     },
+    });
+  }
+
+  const cafe = await createDemoBusiness({
+    name: "Demo Buna Market Cafe",
+    slug: "demo-buna-market-cafe",
+    description: "Synthetic DMV cafe profile for business directory development fixtures.",
+    categoryId: categories.restaurants.id,
+    publicLocationId: locations.shaw.id,
+    phonePublic: "202-555-0199",
+    emailPublic: "hello-demo@guzomarket.test",
+    websiteUrl: "https://example.test/demo-buna-market-cafe",
   });
+
+  await createDemoBusiness({
+    name: "Demo Selam Cleaning Services",
+    slug: "demo-selam-cleaning-services",
+    description: "Synthetic local services fixture for homepage business density.",
+    categoryId: categories.servicesRoot.id,
+    publicLocationId: locations.rockville.id,
+    websiteUrl: "https://example.test/demo-selam-cleaning-services",
+  });
+
+  await createDemoBusiness({
+    name: "Demo Ethio Market Grocery",
+    slug: "demo-ethio-market-grocery",
+    description: "Synthetic grocery business fixture for development browsing.",
+    categoryId: categories.restaurants.id,
+    publicLocationId: locations.hyattsville.id,
+    websiteUrl: "https://example.test/demo-ethio-market-grocery",
+  });
+
+  await createDemoBusiness({
+    name: "Demo Habesha Auto Care",
+    slug: "demo-habesha-auto-care",
+    description: "Synthetic auto service business fixture for local discovery surfaces.",
+    categoryId: categories.businessesRoot.id,
+    publicLocationId: locations["silver-spring"].id,
+    websiteUrl: "https://example.test/demo-habesha-auto-care",
+  });
+
+  await createDemoBusiness({
+    name: "Demo Zemen Construction",
+    slug: "demo-zemen-construction",
+    description: "Synthetic contractor business fixture for responsive card testing.",
+    categoryId: categories.businessesRoot.id,
+    publicLocationId: locations.bethesda.id,
+    websiteUrl: "https://example.test/demo-zemen-construction",
+  });
+
+  return cafe;
 }
 
 async function seedJobs(users: Record<string, { id: string }>, locations: Record<string, { id: string }>, categories: Record<string, { id: string }>, businessId: string) {
@@ -797,41 +1010,107 @@ async function seedJobs(users: Record<string, { id: string }>, locations: Record
 }
 
 async function seedEvents(users: Record<string, { id: string }>, locations: Record<string, { id: string }>, categories: Record<string, { id: string }>, businessId: string) {
-  return prisma.event.create({
-    data: {
+  async function createDemoEvent(data: {
+    title: string;
+    slug: string;
+    description: string;
+    startAt: Date;
+    endAt: Date;
+    publicLocationId: string;
+    venueName: string;
+    contactUrl: string;
+  }) {
+    return prisma.event.create({
+      data: {
       ownerUserId: users.sellerMaya.id,
       businessId,
-      title: "Demo DMV small business meetup",
-      slug: "demo-dmv-small-business-meetup",
-      description: "Synthetic event fixture for later event discovery development.",
+      title: data.title,
+      slug: data.slug,
+      description: data.description,
       categoryId: categories.networkingEvents.id,
-      startAt: new Date("2026-09-12T14:00:00.000Z"),
-      endAt: new Date("2026-09-12T16:00:00.000Z"),
+      startAt: data.startAt,
+      endAt: data.endAt,
       timezone: "America/New_York",
-      publicLocationId: locations.shaw.id,
-      venueName: "Demo Buna Market Cafe",
-      contactUrl: "https://example.test/demo-dmv-small-business-meetup",
+      publicLocationId: data.publicLocationId,
+      venueName: data.venueName,
+      contactUrl: data.contactUrl,
       status: EventStatus.ACTIVE,
       moderationState: ModerationState.AUTO_CLEARED,
       publishedAt: new Date("2026-08-21T15:00:00.000Z"),
       images: {
-        create: [{ storageKey: "fixtures/listings/demo-event.svg", publicUrl: "/fixtures/listings/demo-event.svg", sortOrder: 0, altText: "Demo placeholder image for a local business meetup" }],
+        create: [{ storageKey: "fixtures/listings/demo-event.svg", publicUrl: "/fixtures/listings/demo-event.svg", sortOrder: 0, altText: `Demo placeholder image for ${data.title}` }],
       },
     },
+    });
+  }
+
+  const meetup = await createDemoEvent({
+    title: "Demo DMV small business meetup",
+    slug: "demo-dmv-small-business-meetup",
+    description: "Synthetic event fixture for later event discovery development.",
+    startAt: new Date("2026-09-12T14:00:00.000Z"),
+    endAt: new Date("2026-09-12T16:00:00.000Z"),
+    publicLocationId: locations.shaw.id,
+    venueName: "Demo Buna Market Cafe",
+    contactUrl: "https://example.test/demo-dmv-small-business-meetup",
   });
+
+  await createDemoEvent({
+    title: "Demo community soccer meetup",
+    slug: "demo-community-soccer-meetup",
+    description: "Synthetic local event fixture for homepage community density.",
+    startAt: new Date("2026-09-14T13:00:00.000Z"),
+    endAt: new Date("2026-09-14T15:00:00.000Z"),
+    publicLocationId: locations["old-town"].id,
+    venueName: "Demo Old Town field",
+    contactUrl: "https://example.test/demo-community-soccer-meetup",
+  });
+
+  await createDemoEvent({
+    title: "Demo local food pop-up",
+    slug: "demo-local-food-pop-up",
+    description: "Synthetic food event fixture for responsive homepage testing.",
+    startAt: new Date("2026-09-19T18:00:00.000Z"),
+    endAt: new Date("2026-09-19T21:00:00.000Z"),
+    publicLocationId: locations.hyattsville.id,
+    venueName: "Demo community kitchen",
+    contactUrl: "https://example.test/demo-local-food-pop-up",
+  });
+
+  return meetup;
 }
 
 async function seedCommunity(users: Record<string, { id: string }>, locations: Record<string, { id: string }>) {
-  await prisma.communityPost.create({
-    data: {
-      authorUserId: users.buyerSamir.id,
-      type: CommunityPostType.RECOMMENDATION,
-      title: "Demo: favorite Ethiopian grocery spots?",
-      body: "Synthetic community fixture for later local discussion development.",
-      publicLocationId: locations.arlington.id,
-      status: CommunityPostStatus.ACTIVE,
-      moderationState: ModerationState.AUTO_CLEARED,
-    },
+  await prisma.communityPost.createMany({
+    data: [
+      {
+        authorUserId: users.buyerSamir.id,
+        type: CommunityPostType.RECOMMENDATION,
+        title: "Demo: favorite Ethiopian grocery spots?",
+        body: "Synthetic community fixture for later local discussion development.",
+        publicLocationId: locations.arlington.id,
+        status: CommunityPostStatus.ACTIVE,
+        moderationState: ModerationState.AUTO_CLEARED,
+      },
+      {
+        authorUserId: users.sellerAmina.id,
+        type: CommunityPostType.QUESTION,
+        title: "Demo: looking for moving-box recommendations",
+        body: "Synthetic community question fixture for homepage density.",
+        publicLocationId: locations["silver-spring"].id,
+        status: CommunityPostStatus.ACTIVE,
+        moderationState: ModerationState.AUTO_CLEARED,
+      },
+      {
+        authorUserId: users.sellerMaya.id,
+        type: CommunityPostType.LOCAL_INFORMATION,
+        title: "Demo: weekend market street closures",
+        body: "Synthetic local information fixture for community browsing.",
+        publicLocationId: locations["dc-city"].id,
+        status: CommunityPostStatus.ACTIVE,
+        moderationState: ModerationState.AUTO_CLEARED,
+      },
+    ],
   });
 }
 
