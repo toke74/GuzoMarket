@@ -38,8 +38,8 @@ export function SearchDiscoveryPage({
 
   return (
     <div className="bg-background">
-      <section className="border-b border-border bg-surface">
-        <div className="mx-auto grid w-full max-w-7xl gap-5 px-4 py-6 sm:px-6 lg:px-8">
+      <section className="border-b border-border bg-surface shadow-sm">
+        <div className="mx-auto grid w-full max-w-[92rem] gap-5 px-4 py-6 sm:px-6 lg:px-8">
           <Breadcrumbs
             items={[
               { href: "/", label: "Home" },
@@ -48,7 +48,7 @@ export function SearchDiscoveryPage({
             ]}
           />
           <div className="grid gap-2">
-            <h1 className="font-display text-3xl font-bold text-navy md:text-4xl">{title}</h1>
+            <h1 className="font-display text-3xl font-extrabold text-navy md:text-4xl">{title}</h1>
             <p className="max-w-3xl text-sm leading-6 text-text-secondary">{description}</p>
             <p className="text-sm font-semibold text-brand-primary">Showing {result.activeLocationLabel}</p>
           </div>
@@ -56,7 +56,7 @@ export function SearchDiscoveryPage({
         </div>
       </section>
 
-      <div className="mx-auto grid w-full max-w-7xl gap-6 px-4 py-6 pb-24 sm:px-6 lg:grid-cols-[17rem_1fr] lg:px-8">
+      <div className="mx-auto grid w-full max-w-[92rem] gap-6 px-4 py-6 pb-24 sm:px-6 lg:grid-cols-[16rem_1fr] lg:px-8">
         <aside className="hidden lg:block">
           <div className="sticky top-24 grid gap-5">
             <CategoryPanel result={result} pathname={pathname} />
@@ -69,7 +69,7 @@ export function SearchDiscoveryPage({
             <SubcategoryShortcuts result={result} pathname={pathname} />
           ) : null}
 
-          <div className="flex flex-wrap items-center justify-between gap-3">
+          <div className="flex flex-wrap items-center justify-between gap-3 rounded-lg border border-border bg-surface p-3 shadow-sm">
             <div>
               <p className="text-sm font-semibold text-text-primary">
                 {result.resultCount.toLocaleString()} {result.resultCount === 1 ? "result" : "results"}
@@ -78,7 +78,7 @@ export function SearchDiscoveryPage({
                 Deterministic results sorted by {searchSortOptions.find((option) => option.value === criteria.sort)?.label}.
               </p>
             </div>
-            <div className="flex items-center gap-2">
+            <div className="flex min-w-0 items-center gap-2">
               <MobileFilterSheet result={result} pathname={pathname} />
               <SortForm criteria={criteria} pathname={pathname} />
             </div>
@@ -87,7 +87,7 @@ export function SearchDiscoveryPage({
           <SelectedFilterChips result={result} />
 
           {result.listings.length ? (
-            <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-3">
+            <div className="grid gap-3 sm:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4">
               {result.listings.map((listing) => (
                 <ListingCard
                   key={listing.id}
@@ -138,25 +138,25 @@ export function SearchDiscoveryError() {
 
 function SearchForm({ criteria, pathname }: { criteria: SearchCriteria; pathname: string }) {
   return (
-    <form action={pathname} className="grid gap-3 rounded-lg border border-border bg-background p-3 md:grid-cols-[1fr_16rem_auto]">
+    <form action={pathname} className="grid min-w-0 gap-2 rounded-lg border border-border bg-background p-2 shadow-inner md:grid-cols-[minmax(0,1fr)_15rem_auto]">
       <input type="hidden" name="category" value={criteria.category} />
-      <label className="relative block">
+      <label className="relative block min-w-0">
         <span className="sr-only">Search GuzoMarket</span>
         <Search className="pointer-events-none absolute left-3 top-1/2 h-5 w-5 -translate-y-1/2 text-text-secondary" aria-hidden="true" />
-        <Input name="q" defaultValue={criteria.q} placeholder="What are you looking for?" className="pl-10" />
+        <Input name="q" defaultValue={criteria.q} placeholder="What are you looking for?" className="min-w-0 pl-10" />
       </label>
-      <label className="block">
+      <label className="block min-w-0">
         <span className="sr-only">Location</span>
-        <Input name="location" defaultValue={criteria.location} placeholder="Washington, DC" />
+        <Input name="location" defaultValue={criteria.location} placeholder="Washington, DC" className="min-w-0" />
       </label>
-      <Button type="submit">Search</Button>
+      <Button type="submit" className="h-11">Search</Button>
     </form>
   );
 }
 
 function SortForm({ criteria, pathname }: { criteria: SearchCriteria; pathname: string }) {
   return (
-    <form action={pathname} className="w-44">
+    <form action={pathname} className="w-40 sm:w-44">
       {hiddenCriteriaFields(criteria, ["sort", "cursor"]).map(([key, value]) => (
         <input key={key} type="hidden" name={key} value={value} />
       ))}
@@ -199,7 +199,7 @@ function MobileFilterSheet({ result, pathname }: { result: SearchResultDTO; path
 
 function CategoryPanel({ result, pathname }: { result: SearchResultDTO; pathname: string }) {
   return (
-    <section aria-labelledby="category-filter-title" className="grid gap-3 rounded-lg border border-border bg-surface p-4">
+    <section aria-labelledby="category-filter-title" className="grid gap-3 rounded-lg border border-border bg-surface p-4 shadow-sm">
       <h2 id="category-filter-title" className="flex items-center gap-2 font-semibold text-text-primary">
         <Filter className="h-4 w-4" aria-hidden="true" />
         Categories
@@ -207,7 +207,7 @@ function CategoryPanel({ result, pathname }: { result: SearchResultDTO; pathname
       <div className="grid gap-1">
         <Link
           href={buildSearchHref(result.criteria, { category: "", attributes: {}, cursor: null }, pathname)}
-          className="rounded-md px-3 py-2 text-sm font-medium hover:bg-surface-muted"
+          className="rounded-md px-3 py-2 text-sm font-semibold text-text-secondary hover:bg-surface-muted hover:text-text-primary"
         >
           All categories
         </Link>
@@ -244,7 +244,7 @@ function CategoryLink({
     <Link
       href={href}
       aria-current={active ? "page" : undefined}
-      className={`rounded-md px-3 py-2 text-sm font-medium hover:bg-surface-muted ${
+      className={`rounded-md px-3 py-2 text-sm font-semibold hover:bg-surface-muted ${
         child ? "ml-4 text-text-secondary" : "text-text-primary"
       } ${active ? "bg-brand-light text-brand-primary" : ""}`}
     >
@@ -261,12 +261,12 @@ function SubcategoryShortcuts({ result, pathname }: { result: SearchResultDTO; p
 
   return (
     <nav aria-label="Subcategories" className="-mx-4 overflow-hidden px-4 sm:mx-0 sm:px-0">
-      <div className="grid auto-cols-[minmax(10rem,70vw)] grid-flow-col gap-3 overflow-x-auto pb-1 sm:auto-cols-fr sm:grid-flow-row sm:grid-cols-2 lg:grid-cols-3">
+      <div className="grid auto-cols-[minmax(10rem,70vw)] grid-flow-col gap-3 overflow-x-auto pb-1 sm:auto-cols-fr sm:grid-flow-row sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
         {children.map((category) => (
           <Link
             key={category.id}
             href={getCategoryNavigationHref(result, category.slug, pathname)}
-            className="rounded-lg border border-border bg-surface p-4 text-sm font-semibold text-text-primary hover:border-brand-primary"
+            className="rounded-md border border-border bg-surface p-4 text-sm font-bold text-text-primary shadow-sm hover:border-brand-primary hover:bg-brand-light"
           >
             {category.name}
           </Link>
@@ -318,7 +318,7 @@ function FilterForm({
   pathname: string;
 }) {
   return (
-    <form action={pathname} className="grid gap-4 rounded-lg border border-border bg-surface p-4">
+    <form action={pathname} className="grid gap-4 rounded-lg border border-border bg-surface p-4 shadow-sm">
       <h2 className="font-semibold text-text-primary">Filters</h2>
       {hiddenCriteriaFields(criteria, ["minPrice", "maxPrice", "cursor"]).map(([key, value]) => (
         <input key={key} type="hidden" name={key} value={value} />
@@ -381,18 +381,20 @@ function SelectedFilterChips({ result }: { result: SearchResultDTO }) {
   }
 
   return (
-    <div className="flex flex-wrap gap-2" aria-label="Selected filters">
-      {result.selectedFilterChips.map((chip) => (
-        <Link
-          key={chip.key}
-          href={chip.href}
-          className="inline-flex min-h-9 items-center gap-2 rounded-full border border-border bg-surface px-3 text-sm font-medium text-text-primary hover:border-brand-primary"
-          data-analytics-event="search_filter_removed"
-        >
-          {chip.label}
-          <X className="h-3.5 w-3.5" aria-hidden="true" />
-        </Link>
-      ))}
+    <div className="-mx-4 overflow-hidden px-4 sm:mx-0 sm:px-0">
+      <div className="flex max-w-full gap-2 overflow-x-auto pb-1 sm:flex-wrap sm:overflow-visible sm:pb-0" aria-label="Selected filters">
+        {result.selectedFilterChips.map((chip) => (
+          <Link
+            key={chip.key}
+            href={chip.href}
+            className="inline-flex min-h-9 shrink-0 items-center gap-2 rounded-full border border-border bg-surface px-3 text-sm font-medium text-text-primary hover:border-brand-primary"
+            data-analytics-event="search_filter_removed"
+          >
+            {chip.label}
+            <X className="h-3.5 w-3.5" aria-hidden="true" />
+          </Link>
+        ))}
+      </div>
     </div>
   );
 }

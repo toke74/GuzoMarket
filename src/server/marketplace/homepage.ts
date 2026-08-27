@@ -2,15 +2,7 @@ import { unstable_cache } from "next/cache";
 
 import { formatDate } from "@/lib/formatting/date";
 import { prisma } from "@/server/db/client";
-import {
-  BusinessStatus,
-  CommunityPostStatus,
-  EventStatus,
-  ListingStatus,
-  ModerationState,
-  PriceType,
-  VerificationStatus,
-} from "@/server/db/generated/prisma/client";
+import { BusinessStatus, CommunityPostStatus, EventStatus, ListingStatus, ModerationState, PriceType } from "@/server/db/generated/prisma/client";
 import { formatPublicLocationLabel } from "@/server/marketplace/locations";
 
 const HOMEPAGE_CACHE_SECONDS = 120;
@@ -36,8 +28,6 @@ export type HomepageBusinessDTO = {
   locationLabel: string;
   imageSrc: string | null;
   imageAlt: string | null;
-  ratingLabel: string | null;
-  isBusinessVerified: boolean;
 };
 
 export type HomepageCommunityDTO = {
@@ -148,9 +138,6 @@ export async function queryFeaturedBusinesses(): Promise<HomepageBusinessDTO[]> 
       name: true,
       logoUrl: true,
       coverImageUrl: true,
-      verificationStatus: true,
-      ratingAverage: true,
-      ratingCount: true,
       category: { select: { name: true } },
       publicLocation: {
         select: {
@@ -176,24 +163,15 @@ export async function queryFeaturedBusinesses(): Promise<HomepageBusinessDTO[]> 
     },
   });
 
-  return businesses.map((business) => {
-    const ratingLabel =
-      business.ratingAverage && business.ratingCount > 0
-        ? `${Number(business.ratingAverage).toFixed(1)} (${business.ratingCount})`
-        : null;
-
-    return {
-      id: business.id,
-      href: `/businesses/${business.slug}-${business.id}`,
-      name: business.name,
-      categoryLabel: business.category.name,
-      locationLabel: formatPublicLocationLabel(business.publicLocation),
-      imageSrc: business.coverImageUrl ?? business.logoUrl,
-      imageAlt: business.name,
-      ratingLabel,
-      isBusinessVerified: business.verificationStatus === VerificationStatus.VERIFIED,
-    };
-  });
+  return businesses.map((business) => ({
+    id: business.id,
+    href: `/businesses/${business.slug}-${business.id}`,
+    name: business.name,
+    categoryLabel: business.category.name,
+    locationLabel: formatPublicLocationLabel(business.publicLocation),
+    imageSrc: business.coverImageUrl ?? business.logoUrl,
+    imageAlt: business.name,
+  }));
 }
 
 export async function queryCommunityNearYou(): Promise<HomepageCommunityDTO[]> {

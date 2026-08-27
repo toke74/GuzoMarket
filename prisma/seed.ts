@@ -610,7 +610,7 @@ async function seedListings(
         featuredSource: "demo_seed",
         publishedAt: new Date("2026-08-20T15:00:00.000Z"),
         expiresAt: new Date("2026-09-19T15:00:00.000Z"),
-        images: { create: [image("demo-car", "/fixtures/listings/demo-car.svg", "Demo placeholder image for a sedan listing", 0)] },
+        images: { create: [image("demo-car", "/fixtures/listings/demo-car.svg", "Synthetic fixture image for a sedan listing", 0)] },
         attributeValues: {
           create: [
             { attributeDefinitionId: attributes["cars.make"].id, optionValue: "toyota" },
@@ -664,7 +664,7 @@ async function seedListings(
         contactPreference: ContactPreference.IN_APP_MESSAGE,
         publishedAt: new Date("2026-07-15T15:00:00.000Z"),
         soldAt: new Date("2026-07-18T15:00:00.000Z"),
-        images: { create: [image("demo-table", "/fixtures/listings/demo-table.svg", "Demo placeholder image for a dining table listing", 0)] },
+        images: { create: [image("demo-table", "/fixtures/listings/demo-table.svg", "Synthetic fixture image for a dining table listing", 0)] },
         attributeValues: {
           create: [
             { attributeDefinitionId: attributes["furniture.condition"].id, optionValue: "good" },
@@ -690,7 +690,7 @@ async function seedListings(
         locationPrecision: LocationPrecision.NEIGHBORHOOD,
         contactPreference: ContactPreference.IN_APP_MESSAGE,
         publishedAt: new Date("2026-08-24T15:00:00.000Z"),
-        images: { create: [image("demo-camera", "/fixtures/listings/demo-camera.svg", "Demo placeholder image for a camera listing", 0)] },
+        images: { create: [image("demo-camera", "/fixtures/listings/demo-camera.svg", "Synthetic fixture image for a camera listing", 0)] },
         attributeValues: {
           create: [
             { attributeDefinitionId: attributes["electronics.condition"].id, optionValue: "like_new" },
@@ -717,7 +717,7 @@ async function seedListings(
         contactPreference: ContactPreference.IN_APP_MESSAGE,
         publishedAt: new Date("2026-08-23T15:00:00.000Z"),
         expiresAt: new Date("2026-09-22T15:00:00.000Z"),
-        images: { create: [image("demo-table", "/fixtures/listings/demo-table.svg", "Demo placeholder image for a furniture listing", 0)] },
+        images: { create: [image("demo-chair", "/fixtures/listings/demo-chair.svg", "Synthetic fixture image for an office chair listing", 0)] },
         attributeValues: {
           create: [
             { attributeDefinitionId: attributes["furniture.condition"].id, optionValue: "good" },
@@ -744,7 +744,7 @@ async function seedListings(
         contactPreference: ContactPreference.IN_APP_MESSAGE,
         publishedAt: new Date("2026-08-22T15:00:00.000Z"),
         expiresAt: new Date("2026-09-21T15:00:00.000Z"),
-        images: { create: [image("demo-camera", "/fixtures/listings/demo-camera.svg", "Demo placeholder image for an electronics listing", 0)] },
+        images: { create: [image("demo-phone", "/fixtures/listings/demo-phone.svg", "Synthetic fixture image for a phone listing", 0)] },
         attributeValues: {
           create: [
             { attributeDefinitionId: attributes["electronics.condition"].id, optionValue: "good" },
@@ -771,7 +771,7 @@ async function seedListings(
         contactPreference: ContactPreference.IN_APP_MESSAGE,
         publishedAt: new Date("2026-08-21T15:00:00.000Z"),
         expiresAt: new Date("2026-09-20T15:00:00.000Z"),
-        images: { create: [image("demo-table", "/fixtures/listings/demo-table.svg", "Demo placeholder image for a bookshelf listing", 0)] },
+        images: { create: [image("demo-bookshelf", "/fixtures/listings/demo-bookshelf.svg", "Synthetic fixture image for a bookshelf listing", 0)] },
         attributeValues: {
           create: [
             { attributeDefinitionId: attributes["furniture.condition"].id, optionValue: "like_new" },
@@ -799,7 +799,7 @@ async function seedListings(
         featuredSource: "demo_seed",
         publishedAt: new Date("2026-08-19T15:00:00.000Z"),
         expiresAt: new Date("2026-09-18T15:00:00.000Z"),
-        images: { create: [image("demo-event", "/fixtures/listings/demo-event.svg", "Demo placeholder image for a room listing", 0)] },
+        images: { create: [image("demo-room", "/fixtures/listings/demo-room.svg", "Synthetic fixture image for a furnished room listing", 0)] },
         attributeValues: {
           create: [
             { attributeDefinitionId: attributes["rooms.housing_type"].id, optionValue: "private_room" },
@@ -828,7 +828,7 @@ async function seedListings(
         contactPreference: ContactPreference.IN_APP_MESSAGE,
         publishedAt: new Date("2026-08-18T15:00:00.000Z"),
         expiresAt: new Date("2026-09-17T15:00:00.000Z"),
-        images: { create: [image("demo-camera", "/fixtures/listings/demo-camera.svg", "Demo placeholder image for a laptop listing", 0)] },
+        images: { create: [image("demo-laptop", "/fixtures/listings/demo-laptop.svg", "Synthetic fixture image for a laptop listing", 0)] },
         attributeValues: {
           create: [
             { attributeDefinitionId: attributes["electronics.condition"].id, optionValue: "good" },
@@ -925,7 +925,7 @@ async function seedBusiness(users: Record<string, { id: string }>, locations: Re
         create: [{ userId: users.sellerMaya.id, role: BusinessMemberRole.OWNER, acceptedAt: new Date("2026-08-01T12:00:00.000Z") }],
       },
       images: {
-        create: [{ storageKey: "fixtures/listings/demo-business.svg", publicUrl: "/fixtures/listings/demo-business.svg", sortOrder: 0, altText: `Demo placeholder image for ${data.name}` }],
+        create: [{ storageKey: "fixtures/listings/demo-business.svg", publicUrl: "/fixtures/listings/demo-business.svg", sortOrder: 0, altText: `Synthetic fixture image for ${data.name}` }],
       },
     },
     });
@@ -1038,7 +1038,7 @@ async function seedEvents(users: Record<string, { id: string }>, locations: Reco
       moderationState: ModerationState.AUTO_CLEARED,
       publishedAt: new Date("2026-08-21T15:00:00.000Z"),
       images: {
-        create: [{ storageKey: "fixtures/listings/demo-event.svg", publicUrl: "/fixtures/listings/demo-event.svg", sortOrder: 0, altText: `Demo placeholder image for ${data.title}` }],
+        create: [{ storageKey: "fixtures/listings/demo-event.svg", publicUrl: "/fixtures/listings/demo-event.svg", sortOrder: 0, altText: `Synthetic fixture image for ${data.title}` }],
       },
     },
     });

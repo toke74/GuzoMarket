@@ -1,12 +1,5 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800" role="img" aria-labelledby="title desc">
-  <title id="title">Demo furniture fixture</title>
-  <desc id="desc">Synthetic placeholder image for a demo dining table listing.</desc>
-  <rect width="1200" height="800" fill="#f7f4ef"/>
-  <rect x="230" y="355" width="740" height="72" rx="10" fill="#7a583a"/>
-  <rect x="285" y="425" width="52" height="230" fill="#5f422b"/>
-  <rect x="865" y="425" width="52" height="230" fill="#5f422b"/>
-  <rect x="365" y="488" width="470" height="28" fill="#6b4b31"/>
-  <circle cx="600" cy="390" r="118" fill="#d7b48a" opacity="0.34"/>
-  <text x="80" y="130" fill="#3d3025" font-family="Arial, sans-serif" font-size="42" font-weight="700">GuzoMarket Demo</text>
-  <text x="80" y="185" fill="#6a5541" font-family="Arial, sans-serif" font-size="28">Local fixture image, not a real item photo</text>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800" role="img" aria-label="Synthetic photo-style image of wood furniture">
+  <defs><linearGradient id="wall" x1="0" x2="1" y1="0" y2="1"><stop offset="0" stop-color="#f8fafc"/><stop offset="1" stop-color="#e2e8f0"/></linearGradient><linearGradient id="wood" x1="0" x2="1"><stop offset="0" stop-color="#7c2d12"/><stop offset=".48" stop-color="#b45309"/><stop offset="1" stop-color="#92400e"/></linearGradient><filter id="shadow" x="-20%" y="-20%" width="140%" height="150%"><feDropShadow dx="0" dy="22" stdDeviation="24" flood-color="#0f172a" flood-opacity=".2"/></filter></defs>
+  <rect width="1200" height="800" fill="url(#wall)"/><rect y="524" width="1200" height="276" fill="#d6d3d1"/><g opacity=".28"><rect x="80" y="130" width="230" height="180" rx="20" fill="#bbf7d0"/><rect x="920" y="116" width="176" height="248" rx="20" fill="#bae6fd"/></g>
+  <g filter="url(#shadow)"><rect x="226" y="366" width="748" height="76" rx="18" fill="url(#wood)"/><rect x="286" y="442" width="70" height="206" rx="12" fill="#78350f"/><rect x="846" y="442" width="70" height="206" rx="12" fill="#78350f"/><rect x="380" y="296" width="440" height="72" rx="34" fill="#f8fafc"/><path d="M430 296c17-78 85-132 170-132s153 54 170 132z" fill="#065f46"/><rect x="500" y="218" width="200" height="76" rx="38" fill="#fbbf24"/></g>
 </svg>

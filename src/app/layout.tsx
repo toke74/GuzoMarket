@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Inter, Manrope } from "next/font/google";
 import type { ReactNode } from "react";
 
@@ -25,6 +25,11 @@ export const metadata: Metadata = {
   metadataBase: new URL(getBaseUrl()),
   title: "GuzoMarket",
   description: "Buy. Sell. Connect.",
+};
+
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
 };
 
 export default function RootLayout({ children }: Readonly<{ children: ReactNode }>) {

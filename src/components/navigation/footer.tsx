@@ -45,18 +45,18 @@ export function Footer() {
   const year = new Date().getFullYear();
 
   return (
-    <footer className="border-t border-border bg-surface pb-20 md:pb-0">
-      <Container className="grid gap-8 py-10 md:grid-cols-[1.4fr_repeat(4,1fr)]">
+    <footer className="border-t border-border bg-surface pb-20 shadow-[0_-1px_0_rgba(15,23,42,0.02)] md:pb-0">
+      <Container className="grid gap-8 py-10 md:grid-cols-[1.35fr_repeat(4,1fr)]">
         <div>
-          <p className="font-display text-xl font-bold text-brand-primary">GuzoMarket</p>
+          <p className="font-display text-2xl font-extrabold text-navy">GuzoMarket</p>
           <p className="mt-3 max-w-sm text-sm leading-6 text-text-secondary">
-            Buy. Sell. Connect. A local marketplace foundation for the DMV.
+            Buy. Sell. Connect. A local marketplace for the Ethiopian and African community across the DMV.
           </p>
         </div>
         {footerGroups.map((group) => (
           <div key={group.title}>
-            <h2 className="text-sm font-semibold text-text-primary">{group.title}</h2>
-            <ul className="mt-3 grid gap-2 text-sm text-text-secondary">
+            <h2 className="text-sm font-bold text-text-primary">{group.title}</h2>
+            <ul className="mt-3 grid gap-2 text-sm font-medium text-text-secondary">
               {group.links.map((link) => (
                 <li key={link.href}>
                   <Link className="hover:text-brand-primary" href={link.href}>

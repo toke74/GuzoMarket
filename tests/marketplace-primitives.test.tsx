@@ -13,7 +13,7 @@ describe("marketplace primitives", () => {
     expect(screen.getByRole("button", { name: "Search" })).toBeInTheDocument();
   });
 
-  it("renders listing card content without fake verification or ratings", () => {
+  it("renders listing card content without unsupported save, verification, or rating affordances", () => {
     render(
       <ListingCard
         href="/listings/demo-1"
@@ -25,7 +25,7 @@ describe("marketplace primitives", () => {
     );
 
     expect(screen.getByRole("link", { name: "Demo camera" })).toHaveAttribute("href", "/listings/demo-1");
-    expect(screen.getByRole("button", { name: "Save Demo camera" })).toBeInTheDocument();
+    expect(screen.queryByRole("button", { name: "Save Demo camera" })).not.toBeInTheDocument();
     expect(screen.queryByText(/verified/i)).not.toBeInTheDocument();
     expect(screen.queryByText(/rating/i)).not.toBeInTheDocument();
   });

@@ -9,7 +9,6 @@ import {
   LocationType,
   ModerationState,
   PriceType,
-  VerificationStatus,
 } from "@/server/db/generated/prisma/client";
 import {
   queryCommunityNearYou,
@@ -84,7 +83,7 @@ describe("homepage marketplace data", () => {
     expect(listings[0]).not.toHaveProperty("isSaved");
   });
 
-  it("does not invent business ratings when rating data is absent", async () => {
+  it("does not expose unsupported business ratings or verification claims", async () => {
     prismaMock.business.findMany.mockResolvedValueOnce([
       {
         id: "22222222-2222-4222-8222-222222222222",
@@ -92,9 +91,6 @@ describe("homepage marketplace data", () => {
         name: "Demo Cafe",
         logoUrl: "/fixtures/listings/demo-business.svg",
         coverImageUrl: null,
-        verificationStatus: VerificationStatus.PENDING,
-        ratingAverage: null,
-        ratingCount: 0,
         category: { name: "Restaurants & Cafes" },
         publicLocation: location("Silver Spring", "MD"),
       },
@@ -107,8 +103,8 @@ describe("homepage marketplace data", () => {
         where: { status: BusinessStatus.ACTIVE, deletedAt: null },
       }),
     );
-    expect(businesses[0].ratingLabel).toBeNull();
-    expect(businesses[0].isBusinessVerified).toBe(false);
+    expect(businesses[0]).not.toHaveProperty("ratingLabel");
+    expect(businesses[0]).not.toHaveProperty("isBusinessVerified");
     expect(businesses[0].locationLabel).toBe("Silver Spring, MD");
   });
 

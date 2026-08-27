@@ -1,15 +1,6 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800" role="img" aria-labelledby="title desc">
-  <title id="title">Demo car fixture</title>
-  <desc id="desc">Synthetic placeholder image for a demo sedan listing.</desc>
-  <rect width="1200" height="800" fill="#f3f7f1"/>
-  <rect x="95" y="510" width="1010" height="70" rx="20" fill="#2f4f3a"/>
-  <path d="M260 485h650c58 0 102 38 132 95H146c24-58 62-95 114-95Z" fill="#6f9b62"/>
-  <path d="M390 365h350c75 0 136 50 178 120H250c34-76 82-120 140-120Z" fill="#8fc07f"/>
-  <path d="M430 392h122v82H335c22-47 54-82 95-82Zm160 0h132c52 0 95 31 130 82H590v-82Z" fill="#dcebd8"/>
-  <circle cx="330" cy="590" r="76" fill="#1f2b22"/>
-  <circle cx="330" cy="590" r="34" fill="#d9e6d3"/>
-  <circle cx="875" cy="590" r="76" fill="#1f2b22"/>
-  <circle cx="875" cy="590" r="34" fill="#d9e6d3"/>
-  <text x="80" y="130" fill="#203528" font-family="Arial, sans-serif" font-size="42" font-weight="700">GuzoMarket Demo</text>
-  <text x="80" y="185" fill="#45624d" font-family="Arial, sans-serif" font-size="28">Local fixture image, not a real vehicle photo</text>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800" role="img" aria-label="Synthetic photo-style image of a silver sedan">
+  <defs><linearGradient id="sky" x1="0" x2="1" y1="0" y2="1"><stop offset="0" stop-color="#dbeafe"/><stop offset=".55" stop-color="#f8fafc"/><stop offset="1" stop-color="#cbd5e1"/></linearGradient><linearGradient id="car" x1="0" x2="1"><stop offset="0" stop-color="#f1f5f9"/><stop offset=".45" stop-color="#94a3b8"/><stop offset="1" stop-color="#e2e8f0"/></linearGradient><filter id="shadow" x="-10%" y="-10%" width="120%" height="130%"><feDropShadow dx="0" dy="26" stdDeviation="22" flood-color="#0f172a" flood-opacity=".24"/></filter></defs>
+  <rect width="1200" height="800" fill="url(#sky)"/><rect y="510" width="1200" height="290" fill="#334155"/><path d="M0 550c170-52 338-54 501-6 188 56 417 55 699-8v264H0z" fill="#475569"/>
+  <g opacity=".18" fill="#0f172a"><rect x="66" y="146" width="78" height="364" rx="4"/><rect x="180" y="108" width="120" height="402" rx="4"/><rect x="916" y="126" width="108" height="384" rx="4"/><rect x="1046" y="176" width="78" height="334" rx="4"/></g>
+  <g filter="url(#shadow)" transform="translate(85 118)"><path d="M206 384c30-98 99-151 213-161l210-16c96-7 176 35 239 126l66 15c47 11 78 49 78 93v55H153v-40c0-38 20-64 53-72z" fill="url(#car)"/><path d="M355 253h252c76 0 131 31 166 93H272c22-54 49-84 83-93z" fill="#1e3a5f"/><path d="M392 268h105v78H315c20-42 44-68 77-78zm141 0h74c53 0 94 26 123 78H533z" fill="#93c5fd"/><rect x="176" y="415" width="808" height="83" rx="34" fill="#cbd5e1"/><circle cx="313" cy="502" r="72" fill="#0f172a"/><circle cx="313" cy="502" r="34" fill="#e2e8f0"/><circle cx="826" cy="502" r="72" fill="#0f172a"/><circle cx="826" cy="502" r="34" fill="#e2e8f0"/><rect x="904" y="398" width="66" height="24" rx="12" fill="#fbbf24"/><rect x="177" y="401" width="62" height="24" rx="12" fill="#ef4444"/></g>
 </svg>
