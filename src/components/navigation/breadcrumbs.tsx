@@ -18,14 +18,17 @@ export function Breadcrumbs({ items }: BreadcrumbsProps) {
           const current = index === items.length - 1;
 
           return (
-            <li key={`${item.label}-${index}`} className="flex items-center gap-2">
+            <li key={`${item.label}-${index}`} className="flex min-w-0 items-center gap-2">
               {index > 0 ? <ChevronRight className="h-4 w-4" aria-hidden="true" /> : null}
               {item.href && !current ? (
-                <Link href={item.href} className="hover:text-brand-primary">
+                <Link href={item.href} className="min-w-0 break-words hover:text-brand-primary">
                   {item.label}
                 </Link>
               ) : (
-                <span aria-current={current ? "page" : undefined} className={current ? "text-text-primary" : undefined}>
+                <span
+                  aria-current={current ? "page" : undefined}
+                  className={current ? "min-w-0 break-words text-text-primary" : "min-w-0 break-words"}
+                >
                   {item.label}
                 </span>
               )}
