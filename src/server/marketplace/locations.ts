@@ -7,7 +7,7 @@ import { LocationType } from "@/server/db/generated/prisma/client";
 const DMV_REGION_SLUG = "dmv";
 const LOCATION_CACHE_SECONDS = 300;
 const LOCATION_CACHE_TAG = "marketplace:locations";
-const uuidPattern = /^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{12}$/i;
+const uuidPattern = /^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i;
 
 export type PublicMarketplaceRegionDTO = {
   id: string;

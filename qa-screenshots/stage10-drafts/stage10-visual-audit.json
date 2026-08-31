@@ -1,0 +1,1238 @@
+[
+  {
+    "kind": "cars",
+    "width": 360,
+    "phase": "category",
+    "audit": {
+      "stepText": "Step 1 of 6",
+      "currentStep": "Category",
+      "overflowing": false,
+      "missingLabels": [],
+      "badDescriptions": [],
+      "progressLabel": "Listing posting progress",
+      "hasLocationDisclosure": false,
+      "hasPublicReview": false,
+      "canReachActions": true,
+      "errors": []
+    }
+  },
+  {
+    "kind": "cars",
+    "width": 360,
+    "phase": "details",
+    "audit": {
+      "stepText": "Step 2 of 6",
+      "currentStep": "Details",
+      "overflowing": false,
+      "missingLabels": [],
+      "badDescriptions": [],
+      "progressLabel": "Listing posting progress",
+      "hasLocationDisclosure": false,
+      "hasPublicReview": false,
+      "canReachActions": true,
+      "errors": []
+    }
+  },
+  {
+    "kind": "cars",
+    "width": 360,
+    "phase": "validation",
+    "audit": {
+      "stepText": "Step 4 of 6",
+      "currentStep": "Location",
+      "overflowing": false,
+      "missingLabels": [],
+      "badDescriptions": [],
+      "progressLabel": "Listing posting progress",
+      "hasLocationDisclosure": true,
+      "hasPublicReview": false,
+      "canReachActions": true,
+      "errors": []
+    }
+  },
+  {
+    "kind": "cars",
+    "width": 360,
+    "phase": "location",
+    "audit": {
+      "stepText": "Step 4 of 6",
+      "currentStep": "Location",
+      "overflowing": false,
+      "missingLabels": [],
+      "badDescriptions": [],
+      "progressLabel": "Listing posting progress",
+      "hasLocationDisclosure": true,
+      "hasPublicReview": false,
+      "canReachActions": true,
+      "errors": []
+    }
+  },
+  {
+    "kind": "cars",
+    "width": 360,
+    "phase": "review",
+    "audit": {
+      "stepText": "Step 5 of 6",
+      "currentStep": "Review",
+      "overflowing": false,
+      "missingLabels": [],
+      "badDescriptions": [],
+      "progressLabel": "Listing posting progress",
+      "hasLocationDisclosure": false,
+      "hasPublicReview": true,
+      "canReachActions": true,
+      "errors": []
+    }
+  },
+  {
+    "kind": "cars",
+    "width": 360,
+    "phase": "resume",
+    "persisted": true,
+    "audit": {
+      "stepText": "Step 1 of 6",
+      "currentStep": "Category",
+      "overflowing": false,
+      "missingLabels": [],
+      "badDescriptions": [],
+      "progressLabel": "Listing posting progress",
+      "hasLocationDisclosure": false,
+      "hasPublicReview": false,
+      "canReachActions": true,
+      "errors": []
+    }
+  },
+  {
+    "kind": "housing",
+    "width": 360,
+    "phase": "category",
+    "audit": {
+      "stepText": "Step 1 of 6",
+      "currentStep": "Category",
+      "overflowing": false,
+      "missingLabels": [],
+      "badDescriptions": [],
+      "progressLabel": "Listing posting progress",
+      "hasLocationDisclosure": false,
+      "hasPublicReview": false,
+      "canReachActions": true,
+      "errors": []
+    }
+  },
+  {
+    "kind": "housing",
+    "width": 360,
+    "phase": "details",
+    "audit": {
+      "stepText": "Step 2 of 6",
+      "currentStep": "Details",
+      "overflowing": false,
+      "missingLabels": [],
+      "badDescriptions": [],
+      "progressLabel": "Listing posting progress",
+      "hasLocationDisclosure": false,
+      "hasPublicReview": false,
+      "canReachActions": true,
+      "errors": []
+    }
+  },
+  {
+    "kind": "housing",
+    "width": 360,
+    "phase": "validation",
+    "audit": {
+      "stepText": "Step 4 of 6",
+      "currentStep": "Location",
+      "overflowing": false,
+      "missingLabels": [],
+      "badDescriptions": [],
+      "progressLabel": "Listing posting progress",
+      "hasLocationDisclosure": true,
+      "hasPublicReview": false,
+      "canReachActions": true,
+      "errors": []
+    }
+  },
+  {
+    "kind": "housing",
+    "width": 360,
+    "phase": "location",
+    "audit": {
+      "stepText": "Step 4 of 6",
+      "currentStep": "Location",
+      "overflowing": false,
+      "missingLabels": [],
+      "badDescriptions": [],
+      "progressLabel": "Listing posting progress",
+      "hasLocationDisclosure": true,
+      "hasPublicReview": false,
+      "canReachActions": true,
+      "errors": []
+    }
+  },
+  {
+    "kind": "housing",
+    "width": 360,
+    "phase": "review",
+    "audit": {
+      "stepText": "Step 5 of 6",
+      "currentStep": "Review",
+      "overflowing": false,
+      "missingLabels": [],
+      "badDescriptions": [],
+      "progressLabel": "Listing posting progress",
+      "hasLocationDisclosure": false,
+      "hasPublicReview": true,
+      "canReachActions": true,
+      "errors": []
+    }
+  },
+  {
+    "kind": "housing",
+    "width": 360,
+    "phase": "resume",
+    "persisted": true,
+    "audit": {
+      "stepText": "Step 1 of 6",
+      "currentStep": "Category",
+      "overflowing": false,
+      "missingLabels": [],
+      "badDescriptions": [],
+      "progressLabel": "Listing posting progress",
+      "hasLocationDisclosure": false,
+      "hasPublicReview": false,
+      "canReachActions": true,
+      "errors": []
+    }
+  },
+  {
+    "kind": "cars",
+    "width": 390,
+    "phase": "category",
+    "audit": {
+      "stepText": "Step 1 of 6",
+      "currentStep": "Category",
+      "overflowing": false,
+      "missingLabels": [],
+      "badDescriptions": [],
+      "progressLabel": "Listing posting progress",
+      "hasLocationDisclosure": false,
+      "hasPublicReview": false,
+      "canReachActions": true,
+      "errors": []
+    }
+  },
+  {
+    "kind": "cars",
+    "width": 390,
+    "phase": "details",
+    "audit": {
+      "stepText": "Step 2 of 6",
+      "currentStep": "Details",
+      "overflowing": false,
+      "missingLabels": [],
+      "badDescriptions": [],
+      "progressLabel": "Listing posting progress",
+      "hasLocationDisclosure": false,
+      "hasPublicReview": false,
+      "canReachActions": true,
+      "errors": []
+    }
+  },
+  {
+    "kind": "cars",
+    "width": 390,
+    "phase": "validation",
+    "audit": {
+      "stepText": "Step 4 of 6",
+      "currentStep": "Location",
+      "overflowing": false,
+      "missingLabels": [],
+      "badDescriptions": [],
+      "progressLabel": "Listing posting progress",
+      "hasLocationDisclosure": true,
+      "hasPublicReview": false,
+      "canReachActions": true,
+      "errors": []
+    }
+  },
+  {
+    "kind": "cars",
+    "width": 390,
+    "phase": "location",
+    "audit": {
+      "stepText": "Step 4 of 6",
+      "currentStep": "Location",
+      "overflowing": false,
+      "missingLabels": [],
+      "badDescriptions": [],
+      "progressLabel": "Listing posting progress",
+      "hasLocationDisclosure": true,
+      "hasPublicReview": false,
+      "canReachActions": true,
+      "errors": []
+    }
+  },
+  {
+    "kind": "cars",
+    "width": 390,
+    "phase": "review",
+    "audit": {
+      "stepText": "Step 5 of 6",
+      "currentStep": "Review",
+      "overflowing": false,
+      "missingLabels": [],
+      "badDescriptions": [],
+      "progressLabel": "Listing posting progress",
+      "hasLocationDisclosure": false,
+      "hasPublicReview": true,
+      "canReachActions": true,
+      "errors": []
+    }
+  },
+  {
+    "kind": "cars",
+    "width": 390,
+    "phase": "resume",
+    "persisted": true,
+    "audit": {
+      "stepText": "Step 1 of 6",
+      "currentStep": "Category",
+      "overflowing": false,
+      "missingLabels": [],
+      "badDescriptions": [],
+      "progressLabel": "Listing posting progress",
+      "hasLocationDisclosure": false,
+      "hasPublicReview": false,
+      "canReachActions": true,
+      "errors": []
+    }
+  },
+  {
+    "kind": "housing",
+    "width": 390,
+    "phase": "category",
+    "audit": {
+      "stepText": "Step 1 of 6",
+      "currentStep": "Category",
+      "overflowing": false,
+      "missingLabels": [],
+      "badDescriptions": [],
+      "progressLabel": "Listing posting progress",
+      "hasLocationDisclosure": false,
+      "hasPublicReview": false,
+      "canReachActions": true,
+      "errors": []
+    }
+  },
+  {
+    "kind": "housing",
+    "width": 390,
+    "phase": "details",
+    "audit": {
+      "stepText": "Step 2 of 6",
+      "currentStep": "Details",
+      "overflowing": false,
+      "missingLabels": [],
+      "badDescriptions": [],
+      "progressLabel": "Listing posting progress",
+      "hasLocationDisclosure": false,
+      "hasPublicReview": false,
+      "canReachActions": true,
+      "errors": []
+    }
+  },
+  {
+    "kind": "housing",
+    "width": 390,
+    "phase": "validation",
+    "audit": {
+      "stepText": "Step 4 of 6",
+      "currentStep": "Location",
+      "overflowing": false,
+      "missingLabels": [],
+      "badDescriptions": [],
+      "progressLabel": "Listing posting progress",
+      "hasLocationDisclosure": true,
+      "hasPublicReview": false,
+      "canReachActions": true,
+      "errors": []
+    }
+  },
+  {
+    "kind": "housing",
+    "width": 390,
+    "phase": "location",
+    "audit": {
+      "stepText": "Step 4 of 6",
+      "currentStep": "Location",
+      "overflowing": false,
+      "missingLabels": [],
+      "badDescriptions": [],
+      "progressLabel": "Listing posting progress",
+      "hasLocationDisclosure": true,
+      "hasPublicReview": false,
+      "canReachActions": true,
+      "errors": []
+    }
+  },
+  {
+    "kind": "housing",
+    "width": 390,
+    "phase": "review",
+    "audit": {
+      "stepText": "Step 5 of 6",
+      "currentStep": "Review",
+      "overflowing": false,
+      "missingLabels": [],
+      "badDescriptions": [],
+      "progressLabel": "Listing posting progress",
+      "hasLocationDisclosure": false,
+      "hasPublicReview": true,
+      "canReachActions": true,
+      "errors": []
+    }
+  },
+  {
+    "kind": "housing",
+    "width": 390,
+    "phase": "resume",
+    "persisted": true,
+    "audit": {
+      "stepText": "Step 1 of 6",
+      "currentStep": "Category",
+      "overflowing": false,
+      "missingLabels": [],
+      "badDescriptions": [],
+      "progressLabel": "Listing posting progress",
+      "hasLocationDisclosure": false,
+      "hasPublicReview": false,
+      "canReachActions": true,
+      "errors": []
+    }
+  },
+  {
+    "kind": "cars",
+    "width": 768,
+    "phase": "category",
+    "audit": {
+      "stepText": "Step 1 of 6",
+      "currentStep": "Category",
+      "overflowing": false,
+      "missingLabels": [],
+      "badDescriptions": [],
+      "progressLabel": "Listing posting progress",
+      "hasLocationDisclosure": false,
+      "hasPublicReview": false,
+      "canReachActions": true,
+      "errors": []
+    }
+  },
+  {
+    "kind": "cars",
+    "width": 768,
+    "phase": "details",
+    "audit": {
+      "stepText": "Step 2 of 6",
+      "currentStep": "Details",
+      "overflowing": false,
+      "missingLabels": [],
+      "badDescriptions": [],
+      "progressLabel": "Listing posting progress",
+      "hasLocationDisclosure": false,
+      "hasPublicReview": false,
+      "canReachActions": true,
+      "errors": []
+    }
+  },
+  {
+    "kind": "cars",
+    "width": 768,
+    "phase": "validation",
+    "audit": {
+      "stepText": "Step 4 of 6",
+      "currentStep": "Location",
+      "overflowing": false,
+      "missingLabels": [],
+      "badDescriptions": [],
+      "progressLabel": "Listing posting progress",
+      "hasLocationDisclosure": true,
+      "hasPublicReview": false,
+      "canReachActions": true,
+      "errors": []
+    }
+  },
+  {
+    "kind": "cars",
+    "width": 768,
+    "phase": "location",
+    "audit": {
+      "stepText": "Step 4 of 6",
+      "currentStep": "Location",
+      "overflowing": false,
+      "missingLabels": [],
+      "badDescriptions": [],
+      "progressLabel": "Listing posting progress",
+      "hasLocationDisclosure": true,
+      "hasPublicReview": false,
+      "canReachActions": true,
+      "errors": []
+    }
+  },
+  {
+    "kind": "cars",
+    "width": 768,
+    "phase": "review",
+    "audit": {
+      "stepText": "Step 5 of 6",
+      "currentStep": "Review",
+      "overflowing": false,
+      "missingLabels": [],
+      "badDescriptions": [],
+      "progressLabel": "Listing posting progress",
+      "hasLocationDisclosure": false,
+      "hasPublicReview": true,
+      "canReachActions": true,
+      "errors": []
+    }
+  },
+  {
+    "kind": "cars",
+    "width": 768,
+    "phase": "resume",
+    "persisted": true,
+    "audit": {
+      "stepText": "Step 1 of 6",
+      "currentStep": "Category",
+      "overflowing": false,
+      "missingLabels": [],
+      "badDescriptions": [],
+      "progressLabel": "Listing posting progress",
+      "hasLocationDisclosure": false,
+      "hasPublicReview": false,
+      "canReachActions": true,
+      "errors": []
+    }
+  },
+  {
+    "kind": "housing",
+    "width": 768,
+    "phase": "category",
+    "audit": {
+      "stepText": "Step 1 of 6",
+      "currentStep": "Category",
+      "overflowing": false,
+      "missingLabels": [],
+      "badDescriptions": [],
+      "progressLabel": "Listing posting progress",
+      "hasLocationDisclosure": false,
+      "hasPublicReview": false,
+      "canReachActions": true,
+      "errors": []
+    }
+  },
+  {
+    "kind": "housing",
+    "width": 768,
+    "phase": "details",
+    "audit": {
+      "stepText": "Step 2 of 6",
+      "currentStep": "Details",
+      "overflowing": false,
+      "missingLabels": [],
+      "badDescriptions": [],
+      "progressLabel": "Listing posting progress",
+      "hasLocationDisclosure": false,
+      "hasPublicReview": false,
+      "canReachActions": true,
+      "errors": []
+    }
+  },
+  {
+    "kind": "housing",
+    "width": 768,
+    "phase": "validation",
+    "audit": {
+      "stepText": "Step 4 of 6",
+      "currentStep": "Location",
+      "overflowing": false,
+      "missingLabels": [],
+      "badDescriptions": [],
+      "progressLabel": "Listing posting progress",
+      "hasLocationDisclosure": true,
+      "hasPublicReview": false,
+      "canReachActions": true,
+      "errors": []
+    }
+  },
+  {
+    "kind": "housing",
+    "width": 768,
+    "phase": "location",
+    "audit": {
+      "stepText": "Step 4 of 6",
+      "currentStep": "Location",
+      "overflowing": false,
+      "missingLabels": [],
+      "badDescriptions": [],
+      "progressLabel": "Listing posting progress",
+      "hasLocationDisclosure": true,
+      "hasPublicReview": false,
+      "canReachActions": true,
+      "errors": []
+    }
+  },
+  {
+    "kind": "housing",
+    "width": 768,
+    "phase": "review",
+    "audit": {
+      "stepText": "Step 5 of 6",
+      "currentStep": "Review",
+      "overflowing": false,
+      "missingLabels": [],
+      "badDescriptions": [],
+      "progressLabel": "Listing posting progress",
+      "hasLocationDisclosure": false,
+      "hasPublicReview": true,
+      "canReachActions": true,
+      "errors": []
+    }
+  },
+  {
+    "kind": "housing",
+    "width": 768,
+    "phase": "resume",
+    "persisted": true,
+    "audit": {
+      "stepText": "Step 1 of 6",
+      "currentStep": "Category",
+      "overflowing": false,
+      "missingLabels": [],
+      "badDescriptions": [],
+      "progressLabel": "Listing posting progress",
+      "hasLocationDisclosure": false,
+      "hasPublicReview": false,
+      "canReachActions": true,
+      "errors": []
+    }
+  },
+  {
+    "kind": "cars",
+    "width": 1024,
+    "phase": "category",
+    "audit": {
+      "stepText": "Step 1 of 6",
+      "currentStep": "Category",
+      "overflowing": false,
+      "missingLabels": [],
+      "badDescriptions": [],
+      "progressLabel": "Listing posting progress",
+      "hasLocationDisclosure": false,
+      "hasPublicReview": false,
+      "canReachActions": true,
+      "errors": []
+    }
+  },
+  {
+    "kind": "cars",
+    "width": 1024,
+    "phase": "details",
+    "audit": {
+      "stepText": "Step 2 of 6",
+      "currentStep": "Details",
+      "overflowing": false,
+      "missingLabels": [],
+      "badDescriptions": [],
+      "progressLabel": "Listing posting progress",
+      "hasLocationDisclosure": false,
+      "hasPublicReview": false,
+      "canReachActions": true,
+      "errors": []
+    }
+  },
+  {
+    "kind": "cars",
+    "width": 1024,
+    "phase": "validation",
+    "audit": {
+      "stepText": "Step 4 of 6",
+      "currentStep": "Location",
+      "overflowing": false,
+      "missingLabels": [],
+      "badDescriptions": [],
+      "progressLabel": "Listing posting progress",
+      "hasLocationDisclosure": true,
+      "hasPublicReview": false,
+      "canReachActions": true,
+      "errors": []
+    }
+  },
+  {
+    "kind": "cars",
+    "width": 1024,
+    "phase": "location",
+    "audit": {
+      "stepText": "Step 4 of 6",
+      "currentStep": "Location",
+      "overflowing": false,
+      "missingLabels": [],
+      "badDescriptions": [],
+      "progressLabel": "Listing posting progress",
+      "hasLocationDisclosure": true,
+      "hasPublicReview": false,
+      "canReachActions": true,
+      "errors": []
+    }
+  },
+  {
+    "kind": "cars",
+    "width": 1024,
+    "phase": "review",
+    "audit": {
+      "stepText": "Step 5 of 6",
+      "currentStep": "Review",
+      "overflowing": false,
+      "missingLabels": [],
+      "badDescriptions": [],
+      "progressLabel": "Listing posting progress",
+      "hasLocationDisclosure": false,
+      "hasPublicReview": true,
+      "canReachActions": true,
+      "errors": []
+    }
+  },
+  {
+    "kind": "cars",
+    "width": 1024,
+    "phase": "resume",
+    "persisted": true,
+    "audit": {
+      "stepText": "Step 1 of 6",
+      "currentStep": "Category",
+      "overflowing": false,
+      "missingLabels": [],
+      "badDescriptions": [],
+      "progressLabel": "Listing posting progress",
+      "hasLocationDisclosure": false,
+      "hasPublicReview": false,
+      "canReachActions": true,
+      "errors": []
+    }
+  },
+  {
+    "kind": "housing",
+    "width": 1024,
+    "phase": "category",
+    "audit": {
+      "stepText": "Step 1 of 6",
+      "currentStep": "Category",
+      "overflowing": false,
+      "missingLabels": [],
+      "badDescriptions": [],
+      "progressLabel": "Listing posting progress",
+      "hasLocationDisclosure": false,
+      "hasPublicReview": false,
+      "canReachActions": true,
+      "errors": []
+    }
+  },
+  {
+    "kind": "housing",
+    "width": 1024,
+    "phase": "details",
+    "audit": {
+      "stepText": "Step 2 of 6",
+      "currentStep": "Details",
+      "overflowing": false,
+      "missingLabels": [],
+      "badDescriptions": [],
+      "progressLabel": "Listing posting progress",
+      "hasLocationDisclosure": false,
+      "hasPublicReview": false,
+      "canReachActions": true,
+      "errors": []
+    }
+  },
+  {
+    "kind": "housing",
+    "width": 1024,
+    "phase": "validation",
+    "audit": {
+      "stepText": "Step 4 of 6",
+      "currentStep": "Location",
+      "overflowing": false,
+      "missingLabels": [],
+      "badDescriptions": [],
+      "progressLabel": "Listing posting progress",
+      "hasLocationDisclosure": true,
+      "hasPublicReview": false,
+      "canReachActions": true,
+      "errors": []
+    }
+  },
+  {
+    "kind": "housing",
+    "width": 1024,
+    "phase": "location",
+    "audit": {
+      "stepText": "Step 4 of 6",
+      "currentStep": "Location",
+      "overflowing": false,
+      "missingLabels": [],
+      "badDescriptions": [],
+      "progressLabel": "Listing posting progress",
+      "hasLocationDisclosure": true,
+      "hasPublicReview": false,
+      "canReachActions": true,
+      "errors": []
+    }
+  },
+  {
+    "kind": "housing",
+    "width": 1024,
+    "phase": "review",
+    "audit": {
+      "stepText": "Step 5 of 6",
+      "currentStep": "Review",
+      "overflowing": false,
+      "missingLabels": [],
+      "badDescriptions": [],
+      "progressLabel": "Listing posting progress",
+      "hasLocationDisclosure": false,
+      "hasPublicReview": true,
+      "canReachActions": true,
+      "errors": []
+    }
+  },
+  {
+    "kind": "housing",
+    "width": 1024,
+    "phase": "resume",
+    "persisted": true,
+    "audit": {
+      "stepText": "Step 1 of 6",
+      "currentStep": "Category",
+      "overflowing": false,
+      "missingLabels": [],
+      "badDescriptions": [],
+      "progressLabel": "Listing posting progress",
+      "hasLocationDisclosure": false,
+      "hasPublicReview": false,
+      "canReachActions": true,
+      "errors": []
+    }
+  },
+  {
+    "kind": "cars",
+    "width": 1280,
+    "phase": "category",
+    "audit": {
+      "stepText": "Step 1 of 6",
+      "currentStep": "Category",
+      "overflowing": false,
+      "missingLabels": [],
+      "badDescriptions": [],
+      "progressLabel": "Listing posting progress",
+      "hasLocationDisclosure": false,
+      "hasPublicReview": false,
+      "canReachActions": true,
+      "errors": []
+    }
+  },
+  {
+    "kind": "cars",
+    "width": 1280,
+    "phase": "details",
+    "audit": {
+      "stepText": "Step 2 of 6",
+      "currentStep": "Details",
+      "overflowing": false,
+      "missingLabels": [],
+      "badDescriptions": [],
+      "progressLabel": "Listing posting progress",
+      "hasLocationDisclosure": false,
+      "hasPublicReview": false,
+      "canReachActions": true,
+      "errors": []
+    }
+  },
+  {
+    "kind": "cars",
+    "width": 1280,
+    "phase": "validation",
+    "audit": {
+      "stepText": "Step 4 of 6",
+      "currentStep": "Location",
+      "overflowing": false,
+      "missingLabels": [],
+      "badDescriptions": [],
+      "progressLabel": "Listing posting progress",
+      "hasLocationDisclosure": true,
+      "hasPublicReview": false,
+      "canReachActions": true,
+      "errors": []
+    }
+  },
+  {
+    "kind": "cars",
+    "width": 1280,
+    "phase": "location",
+    "audit": {
+      "stepText": "Step 4 of 6",
+      "currentStep": "Location",
+      "overflowing": false,
+      "missingLabels": [],
+      "badDescriptions": [],
+      "progressLabel": "Listing posting progress",
+      "hasLocationDisclosure": true,
+      "hasPublicReview": false,
+      "canReachActions": true,
+      "errors": []
+    }
+  },
+  {
+    "kind": "cars",
+    "width": 1280,
+    "phase": "review",
+    "audit": {
+      "stepText": "Step 5 of 6",
+      "currentStep": "Review",
+      "overflowing": false,
+      "missingLabels": [],
+      "badDescriptions": [],
+      "progressLabel": "Listing posting progress",
+      "hasLocationDisclosure": false,
+      "hasPublicReview": true,
+      "canReachActions": true,
+      "errors": []
+    }
+  },
+  {
+    "kind": "cars",
+    "width": 1280,
+    "phase": "resume",
+    "persisted": true,
+    "audit": {
+      "stepText": "Step 1 of 6",
+      "currentStep": "Category",
+      "overflowing": false,
+      "missingLabels": [],
+      "badDescriptions": [],
+      "progressLabel": "Listing posting progress",
+      "hasLocationDisclosure": false,
+      "hasPublicReview": false,
+      "canReachActions": true,
+      "errors": []
+    }
+  },
+  {
+    "kind": "housing",
+    "width": 1280,
+    "phase": "category",
+    "audit": {
+      "stepText": "Step 1 of 6",
+      "currentStep": "Category",
+      "overflowing": false,
+      "missingLabels": [],
+      "badDescriptions": [],
+      "progressLabel": "Listing posting progress",
+      "hasLocationDisclosure": false,
+      "hasPublicReview": false,
+      "canReachActions": true,
+      "errors": []
+    }
+  },
+  {
+    "kind": "housing",
+    "width": 1280,
+    "phase": "details",
+    "audit": {
+      "stepText": "Step 2 of 6",
+      "currentStep": "Details",
+      "overflowing": false,
+      "missingLabels": [],
+      "badDescriptions": [],
+      "progressLabel": "Listing posting progress",
+      "hasLocationDisclosure": false,
+      "hasPublicReview": false,
+      "canReachActions": true,
+      "errors": []
+    }
+  },
+  {
+    "kind": "housing",
+    "width": 1280,
+    "phase": "validation",
+    "audit": {
+      "stepText": "Step 4 of 6",
+      "currentStep": "Location",
+      "overflowing": false,
+      "missingLabels": [],
+      "badDescriptions": [],
+      "progressLabel": "Listing posting progress",
+      "hasLocationDisclosure": true,
+      "hasPublicReview": false,
+      "canReachActions": true,
+      "errors": []
+    }
+  },
+  {
+    "kind": "housing",
+    "width": 1280,
+    "phase": "location",
+    "audit": {
+      "stepText": "Step 4 of 6",
+      "currentStep": "Location",
+      "overflowing": false,
+      "missingLabels": [],
+      "badDescriptions": [],
+      "progressLabel": "Listing posting progress",
+      "hasLocationDisclosure": true,
+      "hasPublicReview": false,
+      "canReachActions": true,
+      "errors": []
+    }
+  },
+  {
+    "kind": "housing",
+    "width": 1280,
+    "phase": "review",
+    "audit": {
+      "stepText": "Step 5 of 6",
+      "currentStep": "Review",
+      "overflowing": false,
+      "missingLabels": [],
+      "badDescriptions": [],
+      "progressLabel": "Listing posting progress",
+      "hasLocationDisclosure": false,
+      "hasPublicReview": true,
+      "canReachActions": true,
+      "errors": []
+    }
+  },
+  {
+    "kind": "housing",
+    "width": 1280,
+    "phase": "resume",
+    "persisted": true,
+    "audit": {
+      "stepText": "Step 1 of 6",
+      "currentStep": "Category",
+      "overflowing": false,
+      "missingLabels": [],
+      "badDescriptions": [],
+      "progressLabel": "Listing posting progress",
+      "hasLocationDisclosure": false,
+      "hasPublicReview": false,
+      "canReachActions": true,
+      "errors": []
+    }
+  },
+  {
+    "kind": "cars",
+    "width": 1440,
+    "phase": "category",
+    "audit": {
+      "stepText": "Step 1 of 6",
+      "currentStep": "Category",
+      "overflowing": false,
+      "missingLabels": [],
+      "badDescriptions": [],
+      "progressLabel": "Listing posting progress",
+      "hasLocationDisclosure": false,
+      "hasPublicReview": false,
+      "canReachActions": true,
+      "errors": []
+    }
+  },
+  {
+    "kind": "cars",
+    "width": 1440,
+    "phase": "details",
+    "audit": {
+      "stepText": "Step 2 of 6",
+      "currentStep": "Details",
+      "overflowing": false,
+      "missingLabels": [],
+      "badDescriptions": [],
+      "progressLabel": "Listing posting progress",
+      "hasLocationDisclosure": false,
+      "hasPublicReview": false,
+      "canReachActions": true,
+      "errors": []
+    }
+  },
+  {
+    "kind": "cars",
+    "width": 1440,
+    "phase": "validation",
+    "audit": {
+      "stepText": "Step 4 of 6",
+      "currentStep": "Location",
+      "overflowing": false,
+      "missingLabels": [],
+      "badDescriptions": [],
+      "progressLabel": "Listing posting progress",
+      "hasLocationDisclosure": true,
+      "hasPublicReview": false,
+      "canReachActions": true,
+      "errors": []
+    }
+  },
+  {
+    "kind": "cars",
+    "width": 1440,
+    "phase": "location",
+    "audit": {
+      "stepText": "Step 4 of 6",
+      "currentStep": "Location",
+      "overflowing": false,
+      "missingLabels": [],
+      "badDescriptions": [],
+      "progressLabel": "Listing posting progress",
+      "hasLocationDisclosure": true,
+      "hasPublicReview": false,
+      "canReachActions": true,
+      "errors": []
+    }
+  },
+  {
+    "kind": "cars",
+    "width": 1440,
+    "phase": "review",
+    "audit": {
+      "stepText": "Step 5 of 6",
+      "currentStep": "Review",
+      "overflowing": false,
+      "missingLabels": [],
+      "badDescriptions": [],
+      "progressLabel": "Listing posting progress",
+      "hasLocationDisclosure": false,
+      "hasPublicReview": true,
+      "canReachActions": true,
+      "errors": []
+    }
+  },
+  {
+    "kind": "cars",
+    "width": 1440,
+    "phase": "resume",
+    "persisted": true,
+    "audit": {
+      "stepText": "Step 1 of 6",
+      "currentStep": "Category",
+      "overflowing": false,
+      "missingLabels": [],
+      "badDescriptions": [],
+      "progressLabel": "Listing posting progress",
+      "hasLocationDisclosure": false,
+      "hasPublicReview": false,
+      "canReachActions": true,
+      "errors": []
+    }
+  },
+  {
+    "kind": "housing",
+    "width": 1440,
+    "phase": "category",
+    "audit": {
+      "stepText": "Step 1 of 6",
+      "currentStep": "Category",
+      "overflowing": false,
+      "missingLabels": [],
+      "badDescriptions": [],
+      "progressLabel": "Listing posting progress",
+      "hasLocationDisclosure": false,
+      "hasPublicReview": false,
+      "canReachActions": true,
+      "errors": []
+    }
+  },
+  {
+    "kind": "housing",
+    "width": 1440,
+    "phase": "details",
+    "audit": {
+      "stepText": "Step 2 of 6",
+      "currentStep": "Details",
+      "overflowing": false,
+      "missingLabels": [],
+      "badDescriptions": [],
+      "progressLabel": "Listing posting progress",
+      "hasLocationDisclosure": false,
+      "hasPublicReview": false,
+      "canReachActions": true,
+      "errors": []
+    }
+  },
+  {
+    "kind": "housing",
+    "width": 1440,
+    "phase": "validation",
+    "audit": {
+      "stepText": "Step 4 of 6",
+      "currentStep": "Location",
+      "overflowing": false,
+      "missingLabels": [],
+      "badDescriptions": [],
+      "progressLabel": "Listing posting progress",
+      "hasLocationDisclosure": true,
+      "hasPublicReview": false,
+      "canReachActions": true,
+      "errors": []
+    }
+  },
+  {
+    "kind": "housing",
+    "width": 1440,
+    "phase": "location",
+    "audit": {
+      "stepText": "Step 4 of 6",
+      "currentStep": "Location",
+      "overflowing": false,
+      "missingLabels": [],
+      "badDescriptions": [],
+      "progressLabel": "Listing posting progress",
+      "hasLocationDisclosure": true,
+      "hasPublicReview": false,
+      "canReachActions": true,
+      "errors": []
+    }
+  },
+  {
+    "kind": "housing",
+    "width": 1440,
+    "phase": "review",
+    "audit": {
+      "stepText": "Step 5 of 6",
+      "currentStep": "Review",
+      "overflowing": false,
+      "missingLabels": [],
+      "badDescriptions": [],
+      "progressLabel": "Listing posting progress",
+      "hasLocationDisclosure": false,
+      "hasPublicReview": true,
+      "canReachActions": true,
+      "errors": []
+    }
+  },
+  {
+    "kind": "housing",
+    "width": 1440,
+    "phase": "resume",
+    "persisted": true,
+    "audit": {
+      "stepText": "Step 1 of 6",
+      "currentStep": "Category",
+      "overflowing": false,
+      "missingLabels": [],
+      "badDescriptions": [],
+      "progressLabel": "Listing posting progress",
+      "hasLocationDisclosure": false,
+      "hasPublicReview": false,
+      "canReachActions": true,
+      "errors": []
+    }
+  }
+]
