@@ -11,9 +11,11 @@ import {
 import { queryPublicListingDetail } from "@/server/marketplace/listing-detail";
 import {
   getOrCreatePostListingDraft,
+  getOwnedListingEditDraft,
   publishListingDraftFromFormData,
   resetListingSubmissionTokensForTests,
   saveListingDraftFromFormData,
+  updateOwnedListingFromFormData,
   validateCreateListingInput,
 } from "@/server/marketplace/listing-create";
 
@@ -119,6 +121,52 @@ describe("listing creation and durable drafts", () => {
     const saveResult = await saveListingDraftFromFormData("attacker-user-id", validFormData());
     expect(saveResult.ok).toBe(false);
     expect(prismaMock.listing.update).not.toHaveBeenCalled();
+  });
+
+  it("another user cannot open an owned listing for edit", async () => {
+    prismaMock.listing.findFirst.mockResolvedValueOnce(null);
+
+    await expect(
+      getOwnedListingEditDraft("attacker-user-id", "33333333-3333-4333-8333-333333333333"),
+    ).rejects.toThrow("Listing not found or not editable.");
+  });
+
+  it("updates only an owned editable listing and strips privileged edit fields", async () => {
+    prismaMock.listing.findFirst.mockResolvedValueOnce({
+      id: "33333333-3333-4333-8333-333333333333",
+      status: ListingStatus.ACTIVE,
+      publishedAt: new Date("2026-08-30T12:00:00.000Z"),
+    });
+    prismaMock.listing.update.mockResolvedValueOnce({ id: "33333333-3333-4333-8333-333333333333", slug: "2016-toyota-camry-se" });
+    const formData = validFormData({
+      ownerUserId: "attacker-user-id",
+      status: ListingStatus.REMOVED,
+      moderationState: ModerationState.REMOVED,
+      latitude: "38.9",
+      longitude: "-77.0",
+    });
+
+    const result = await updateOwnedListingFromFormData("owner-user-id", "33333333-3333-4333-8333-333333333333", formData);
+
+    expect(result).toEqual({ ok: true, href: "/listings/2016-toyota-camry-se-33333333-3333-4333-8333-333333333333" });
+    expect(prismaMock.listing.updateMany).toHaveBeenCalledWith(
+      expect.objectContaining({
+        where: {
+          id: "33333333-3333-4333-8333-333333333333",
+          ownerUserId: "owner-user-id",
+          status: { in: [ListingStatus.ACTIVE, ListingStatus.PENDING_REVIEW] },
+          deletedAt: null,
+        },
+        data: expect.objectContaining({
+          latitude: null,
+          longitude: null,
+          postalCode: null,
+        }),
+      }),
+    );
+    expect(prismaMock.listing.updateMany.mock.calls[0][0].data).not.toHaveProperty("ownerUserId");
+    expect(prismaMock.listing.updateMany.mock.calls[0][0].data).not.toHaveProperty("status");
+    expect(prismaMock.listing.updateMany.mock.calls[0][0].data).not.toHaveProperty("moderationState");
   });
 
   it("save preserves valid progress server-side for refresh/resume", async () => {
@@ -253,6 +301,23 @@ describe("listing creation and durable drafts", () => {
     }
   });
 
+  it("treats condition as a core listing field instead of a category attribute", async () => {
+    prismaMock.category.findFirst.mockResolvedValue(categoryFixture({ includeDuplicateConditionAttribute: true }));
+    prismaMock.listing.findFirst.mockResolvedValueOnce({ id: "33333333-3333-4333-8333-333333333333" });
+    const formData = validFormData({
+      condition: "good",
+      attr_condition: "fair",
+    });
+
+    const result = await publishListingDraftFromFormData("owner-user-id", formData);
+
+    expect(result.ok).toBe(false);
+    if (!result.ok) {
+      expect(result.state.fieldErrors?.attr_condition).toEqual(["This detail is not valid for the selected category."]);
+    }
+    expect(prismaMock.listing.updateMany).not.toHaveBeenCalled();
+  });
+
   it("rejects malformed, negative, or out-of-range prices", async () => {
     await expectValidationError(validFormData({ price: "-1" }), "price", "Enter a valid price.");
     await expectValidationError(validFormData({ price: "10000000.01" }), "price", "Enter a price from $0 to $10,000,000.");
@@ -277,7 +342,7 @@ describe("listing creation and durable drafts", () => {
     expect(result.ok).toBe(false);
     if (!result.ok) {
       expect(result.state.fieldErrors?.media).toEqual([
-        "Photo upload storage is not available in this stage. Remove photos to publish.",
+        "Photo uploads are temporarily unavailable. You can continue without photos.",
       ]);
     }
     expect(prismaMock.listing.updateMany).not.toHaveBeenCalled();
@@ -346,12 +411,23 @@ function validFormData(overrides: Record<string, string> = {}) {
   return formData;
 }
 
-function categoryFixture() {
+function categoryFixture({
+  includeDuplicateConditionAttribute = false,
+}: { includeDuplicateConditionAttribute?: boolean } = {}) {
   return {
     id: "11111111-1111-4111-8111-111111111111",
     children: [],
     domainType: CategoryDomainType.LISTING,
     attributeDefinitions: [
+      ...(includeDuplicateConditionAttribute
+        ? [
+            attributeFixture("condition", "Condition", AttributeDataType.ENUM, true, undefined, [
+              { value: "new", label: "New", sortOrder: 10 },
+              { value: "good", label: "Good", sortOrder: 20 },
+              { value: "fair", label: "Fair", sortOrder: 30 },
+            ]),
+          ]
+        : []),
       attributeFixture("make", "Make", AttributeDataType.ENUM, true, undefined, [
         { value: "toyota", label: "Toyota", sortOrder: 10 },
         { value: "honda", label: "Honda", sortOrder: 20 },

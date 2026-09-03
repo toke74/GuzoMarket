@@ -1,5 +1,7 @@
 import "dotenv/config";
 
+import { scryptSync } from "node:crypto";
+
 import { PrismaPg } from "@prisma/adapter-pg";
 
 import {
@@ -47,6 +49,9 @@ if (!databaseUrl) {
 const prisma = new PrismaClient({
   adapter: new PrismaPg({ connectionString: databaseUrl }),
 });
+
+const stage11QaOwnerPassword = "stage eleven local passphrase";
+const stage11QaOwnerPasswordHash = hashSeedPassword(stage11QaOwnerPassword, "stage11-qa-owner");
 
 const demoEmails = [
   "amina.demo@guzomarket.test",
@@ -142,7 +147,12 @@ async function clearDemoRecords() {
   await prisma.authSession.deleteMany({ where: { userId: { in: demoUserIds } } });
 
   const demoListings = await prisma.listing.findMany({
-    where: { slug: { in: [...listingSlugs] } },
+    where: {
+      OR: [
+        { slug: { in: [...listingSlugs] } },
+        { ownerUserId: { in: demoUserIds } },
+      ],
+    },
     select: { id: true },
   });
   const demoListingIds = demoListings.map((listing) => listing.id);
@@ -203,7 +213,14 @@ async function clearDemoRecords() {
       OR: [{ userId: { in: demoUserIds } }, { listingId: { in: demoListingIds } }],
     },
   });
-  await prisma.listing.deleteMany({ where: { slug: { in: [...listingSlugs] } } });
+  await prisma.listing.deleteMany({
+    where: {
+      OR: [
+        { slug: { in: [...listingSlugs] } },
+        { ownerUserId: { in: demoUserIds } },
+      ],
+    },
+  });
   await prisma.job.deleteMany({ where: { slug: { in: [...jobSlugs] } } });
   await prisma.event.deleteMany({ where: { slug: { in: [...eventSlugs] } } });
   await prisma.businessMember.deleteMany({ where: { businessId: { in: demoBusinessIds } } });
@@ -490,21 +507,26 @@ async function seedAttributes(categories: Record<string, { id: string }>) {
   });
 
   for (const categoryKey of ["furniture", "electronics"] as const) {
-    await upsertAttribute("condition", categoryKey, {
-      label: "Condition",
-      dataType: AttributeDataType.ENUM,
-      isRequired: true,
-      isFilterable: true,
-      sortOrder: 10,
-      options: [
-        { value: "new", label: "New", sortOrder: 10 },
-        { value: "like_new", label: "Like new", sortOrder: 20 },
-        { value: "good", label: "Good", sortOrder: 30 },
-        { value: "fair", label: "Fair", sortOrder: 40 },
-      ],
-    });
     await upsertAttribute("brand", categoryKey, { label: "Brand", dataType: AttributeDataType.TEXT, isSearchable: true, sortOrder: 20 });
     await upsertAttribute("delivery_available", categoryKey, { label: "Delivery available", dataType: AttributeDataType.BOOLEAN, isFilterable: true, sortOrder: 30 });
+  }
+
+  for (const categoryKey of ["furniture", "electronics"] as const) {
+    const staleConditionAttribute = await prisma.categoryAttributeDefinition.findUnique({
+      where: { categoryId_key: { categoryId: categories[categoryKey].id, key: "condition" } },
+      select: { id: true },
+    });
+    if (staleConditionAttribute) {
+      await prisma.listingAttributeValue.deleteMany({
+        where: { attributeDefinitionId: staleConditionAttribute.id },
+      });
+      await prisma.categoryAttributeOption.deleteMany({
+        where: { attributeDefinitionId: staleConditionAttribute.id },
+      });
+      await prisma.categoryAttributeDefinition.delete({
+        where: { id: staleConditionAttribute.id },
+      });
+    }
   }
 
   return attributes;
@@ -515,11 +537,11 @@ async function seedUsers(
   locations: Record<string, { id: string }>,
 ) {
   const userSeeds = [
-    { key: "sellerAmina", email: demoEmails[0], displayName: "Amina D.", username: "demo-amina", status: UserStatus.ACTIVE, role: RoleName.REGISTERED_USER, locationKey: "silver-spring", publicLocationText: "Silver Spring, MD", bio: "Demo neighbor account for local marketplace development fixtures." },
-    { key: "buyerSamir", email: demoEmails[1], displayName: "Samir K.", username: "demo-samir", status: UserStatus.ACTIVE, role: RoleName.REGISTERED_USER, locationKey: "arlington", publicLocationText: "Arlington, VA", bio: "Synthetic buyer profile used for saved listing and messaging fixtures." },
-    { key: "sellerMaya", email: demoEmails[2], displayName: "Maya R.", username: "demo-maya", status: UserStatus.PENDING_VERIFICATION, role: RoleName.BUSINESS_ACCOUNT, locationKey: "dc-city", publicLocationText: "Washington, DC", bio: "Synthetic business owner profile for local development only." },
-    { key: "moderatorDavid", email: demoEmails[3], displayName: "David M.", username: "demo-moderator", status: UserStatus.ACTIVE, role: RoleName.MODERATOR, locationKey: "dc-city", publicLocationText: "Washington, DC", bio: "Synthetic moderator account for future admin workflow development." },
-    { key: "adminNora", email: demoEmails[4], displayName: "Nora A.", username: "demo-admin", status: UserStatus.ACTIVE, role: RoleName.ADMIN, locationKey: "rockville", publicLocationText: "Rockville, MD", bio: "Synthetic admin account for future administrative fixtures." },
+    { key: "sellerAmina", email: demoEmails[0], displayName: "Amina D.", username: "demo-amina", status: UserStatus.ACTIVE, role: RoleName.REGISTERED_USER, locationKey: "silver-spring", publicLocationText: "Silver Spring, MD", bio: "Demo neighbor account for local marketplace development fixtures.", passwordHash: stage11QaOwnerPasswordHash },
+    { key: "buyerSamir", email: demoEmails[1], displayName: "Samir K.", username: "demo-samir", status: UserStatus.ACTIVE, role: RoleName.REGISTERED_USER, locationKey: "arlington", publicLocationText: "Arlington, VA", bio: "Synthetic buyer profile used for saved listing and messaging fixtures.", passwordHash: "demo-fixture-password-hash-not-valid-for-login" },
+    { key: "sellerMaya", email: demoEmails[2], displayName: "Maya R.", username: "demo-maya", status: UserStatus.PENDING_VERIFICATION, role: RoleName.BUSINESS_ACCOUNT, locationKey: "dc-city", publicLocationText: "Washington, DC", bio: "Synthetic business owner profile for local development only.", passwordHash: "demo-fixture-password-hash-not-valid-for-login" },
+    { key: "moderatorDavid", email: demoEmails[3], displayName: "David M.", username: "demo-moderator", status: UserStatus.ACTIVE, role: RoleName.MODERATOR, locationKey: "dc-city", publicLocationText: "Washington, DC", bio: "Synthetic moderator account for future admin workflow development.", passwordHash: "demo-fixture-password-hash-not-valid-for-login" },
+    { key: "adminNora", email: demoEmails[4], displayName: "Nora A.", username: "demo-admin", status: UserStatus.ACTIVE, role: RoleName.ADMIN, locationKey: "rockville", publicLocationText: "Rockville, MD", bio: "Synthetic admin account for future administrative fixtures.", passwordHash: "demo-fixture-password-hash-not-valid-for-login" },
   ] as const;
 
   const users: Record<string, { id: string }> = {};
@@ -529,6 +551,7 @@ async function seedUsers(
       where: { emailNormalized: seed.email },
       update: {
         email: seed.email,
+        passwordHash: seed.passwordHash,
         status: seed.status,
         defaultRole: seed.role,
         emailVerifiedAt: seed.status === UserStatus.ACTIVE ? new Date("2026-08-01T12:00:00.000Z") : null,
@@ -537,7 +560,7 @@ async function seedUsers(
       create: {
         email: seed.email,
         emailNormalized: seed.email,
-        passwordHash: "demo-fixture-password-hash-not-valid-for-login",
+        passwordHash: seed.passwordHash,
         status: seed.status,
         defaultRole: seed.role,
         emailVerifiedAt: seed.status === UserStatus.ACTIVE ? new Date("2026-08-01T12:00:00.000Z") : null,
@@ -624,7 +647,7 @@ async function seedListings(
     }),
     room: await prisma.listing.create({
       data: {
-        ownerUserId: users.sellerMaya.id,
+        ownerUserId: users.sellerAmina.id,
         categoryId: categories.rooms.id,
         title: "Demo Silver Spring room near Metro",
         slug: "demo-silver-spring-room-near-metro",
@@ -667,7 +690,6 @@ async function seedListings(
         images: { create: [image("demo-table", "/fixtures/listings/demo-table.svg", "Synthetic fixture image for a dining table listing", 0)] },
         attributeValues: {
           create: [
-            { attributeDefinitionId: attributes["furniture.condition"].id, optionValue: "good" },
             { attributeDefinitionId: attributes["furniture.brand"].id, textValue: "Demo Local Workshop" },
             { attributeDefinitionId: attributes["furniture.delivery_available"].id, booleanValue: false },
           ],
@@ -693,7 +715,6 @@ async function seedListings(
         images: { create: [image("demo-camera", "/fixtures/listings/demo-camera.svg", "Synthetic fixture image for a camera listing", 0)] },
         attributeValues: {
           create: [
-            { attributeDefinitionId: attributes["electronics.condition"].id, optionValue: "like_new" },
             { attributeDefinitionId: attributes["electronics.brand"].id, textValue: "DemoCam" },
             { attributeDefinitionId: attributes["electronics.delivery_available"].id, booleanValue: true },
           ],
@@ -720,7 +741,6 @@ async function seedListings(
         images: { create: [image("demo-chair", "/fixtures/listings/demo-chair.svg", "Synthetic fixture image for an office chair listing", 0)] },
         attributeValues: {
           create: [
-            { attributeDefinitionId: attributes["furniture.condition"].id, optionValue: "good" },
             { attributeDefinitionId: attributes["furniture.brand"].id, textValue: "Demo Office" },
             { attributeDefinitionId: attributes["furniture.delivery_available"].id, booleanValue: true },
           ],
@@ -747,7 +767,6 @@ async function seedListings(
         images: { create: [image("demo-phone", "/fixtures/listings/demo-phone.svg", "Synthetic fixture image for a phone listing", 0)] },
         attributeValues: {
           create: [
-            { attributeDefinitionId: attributes["electronics.condition"].id, optionValue: "good" },
             { attributeDefinitionId: attributes["electronics.brand"].id, textValue: "DemoPhone" },
             { attributeDefinitionId: attributes["electronics.delivery_available"].id, booleanValue: false },
           ],
@@ -774,7 +793,6 @@ async function seedListings(
         images: { create: [image("demo-bookshelf", "/fixtures/listings/demo-bookshelf.svg", "Synthetic fixture image for a bookshelf listing", 0)] },
         attributeValues: {
           create: [
-            { attributeDefinitionId: attributes["furniture.condition"].id, optionValue: "like_new" },
             { attributeDefinitionId: attributes["furniture.brand"].id, textValue: "Demo Home" },
             { attributeDefinitionId: attributes["furniture.delivery_available"].id, booleanValue: false },
           ],
@@ -831,7 +849,6 @@ async function seedListings(
         images: { create: [image("demo-laptop", "/fixtures/listings/demo-laptop.svg", "Synthetic fixture image for a laptop listing", 0)] },
         attributeValues: {
           create: [
-            { attributeDefinitionId: attributes["electronics.condition"].id, optionValue: "good" },
             { attributeDefinitionId: attributes["electronics.brand"].id, textValue: "DemoBook" },
             { attributeDefinitionId: attributes["electronics.delivery_available"].id, booleanValue: true },
           ],
@@ -1204,6 +1221,11 @@ async function collectSummary() {
     { table: "Event", records: events },
     { table: "CommunityPost", records: communityPosts },
   ];
+}
+
+function hashSeedPassword(password: string, salt: string) {
+  const derivedKey = scryptSync(password, salt, 64);
+  return `scrypt-v1:${salt}:${derivedKey.toString("base64url")}`;
 }
 
 main()

@@ -1,11 +1,12 @@
 import type { Metadata, Viewport } from "next";
 import { Inter, Manrope } from "next/font/google";
-import type { ReactNode } from "react";
+import { Suspense, type ReactNode } from "react";
 
 import { getBaseUrl } from "@/lib/config/base-url";
 import { Footer } from "@/components/navigation/footer";
 import { GlobalHeader } from "@/components/navigation/global-header";
 import { MobileBottomNav } from "@/components/navigation/mobile-bottom-nav";
+import { RouteAwareFooter } from "@/components/navigation/route-aware-footer";
 
 import "./globals.css";
 
@@ -46,7 +47,9 @@ export default function RootLayout({ children }: Readonly<{ children: ReactNode 
         <main id="main-content" className="flex-1 scroll-mt-20">
           {children}
         </main>
-        <Footer />
+        <Suspense fallback={<Footer />}>
+          <RouteAwareFooter />
+        </Suspense>
         <MobileBottomNav />
       </body>
     </html>

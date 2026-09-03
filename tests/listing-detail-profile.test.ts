@@ -108,6 +108,40 @@ describe("listing detail and public seller profile data", () => {
     );
   });
 
+  it("renders condition from the core listing field only once", async () => {
+    prismaMock.listing.findUnique.mockResolvedValueOnce(
+      listingFixture({
+        condition: "good",
+        attributeValues: [
+          ...listingFixture().attributeValues,
+          {
+            textValue: null,
+            integerValue: null,
+            decimalValue: null,
+            booleanValue: null,
+            dateValue: null,
+            optionValue: "fair",
+            multiOptionJson: null,
+            attributeDefinition: {
+              key: "condition",
+              label: "Condition",
+              dataType: AttributeDataType.ENUM,
+              unit: null,
+              sortOrder: 0,
+              options: [{ value: "fair", label: "Fair" }],
+            },
+          },
+        ],
+      }),
+    );
+
+    const detail = await queryPublicListingDetail("demo-camera-11111111-1111-4111-8111-111111111111");
+
+    expect(detail?.attributes.filter((attribute) => attribute.key === "condition")).toEqual([
+      { key: "condition", label: "Condition", value: "Good" },
+    ]);
+  });
+
   it("collapses removed or suspended listing states to unavailable", async () => {
     prismaMock.listing.findUnique.mockResolvedValueOnce(
       listingFixture({ status: ListingStatus.REMOVED, moderationState: ModerationState.REMOVED }),

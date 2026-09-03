@@ -31,6 +31,7 @@ async function main() {
     carAttributes,
     housingAttributes,
     buySellAttributes,
+    duplicateConditionAttributes,
     demoUsers,
     activeListings,
     draftListings,
@@ -47,6 +48,9 @@ async function main() {
     prisma.categoryAttributeDefinition.count({ where: { category: { slug: "cars" } } }),
     prisma.categoryAttributeDefinition.count({ where: { category: { slug: "rooms-shared-housing" } } }),
     prisma.categoryAttributeDefinition.count({ where: { category: { slug: { in: ["furniture", "electronics"] } } } }),
+    prisma.categoryAttributeDefinition.count({
+      where: { key: "condition", category: { slug: { in: ["furniture", "electronics"] } } },
+    }),
     prisma.user.count({ where: { emailNormalized: { endsWith: "@guzomarket.test" } } }),
     prisma.listing.count({ where: { status: ListingStatus.ACTIVE, slug: { startsWith: "demo-" } } }),
     prisma.listing.count({ where: { status: ListingStatus.DRAFT, slug: { startsWith: "demo-" } } }),
@@ -64,7 +68,8 @@ async function main() {
   assert.ok(listingCategories >= 10, "Expected primary listing categories and subcategories");
   assert.ok(carAttributes >= 5, "Expected Cars category attributes");
   assert.ok(housingAttributes >= 5, "Expected Housing category attributes");
-  assert.ok(buySellAttributes >= 6, "Expected Buy & Sell category attributes");
+  assert.ok(buySellAttributes >= 4, "Expected Buy & Sell category attributes");
+  assert.equal(duplicateConditionAttributes, 0, "Furniture and Electronics condition must use the core listing field");
   assert.equal(demoUsers, 5, "Expected five synthetic demo users");
   assert.ok(activeListings >= 5, "Expected homepage-ready active demo listings");
   assert.ok(draftListings >= 1, "Expected a draft demo listing");

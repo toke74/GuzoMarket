@@ -1,7 +1,5 @@
 import { randomBytes, scrypt, timingSafeEqual } from "node:crypto";
-import { promisify } from "node:util";
 
-const scryptAsync = promisify(scrypt);
 const passwordVersion = "scrypt-v1";
 const saltBytes = 16;
 const keyLength = 64;
@@ -56,4 +54,17 @@ export async function verifyPassword(password: string, storedHash: string | null
 
 function cryptoRandomToken(bytes: number) {
   return randomBytes(bytes).toString("base64url");
+}
+
+function scryptAsync(password: string, salt: string, keyLength: number) {
+  return new Promise<Buffer>((resolve, reject) => {
+    scrypt(password, salt, keyLength, (error, derivedKey) => {
+      if (error) {
+        reject(error);
+        return;
+      }
+
+      resolve(derivedKey);
+    });
+  });
 }

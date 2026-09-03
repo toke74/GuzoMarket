@@ -23,6 +23,7 @@ const completedStatuses: ListingStatus[] = [
   ListingStatus.ARCHIVED,
 ];
 const restrictedStatuses: ListingStatus[] = [ListingStatus.REJECTED, ListingStatus.REMOVED, ListingStatus.SUSPENDED];
+const coreListingAttributeKeys = new Set(["condition"]);
 
 export type ListingPublicState = "active" | "completed" | "unavailable";
 
@@ -476,6 +477,9 @@ function buildListingAttributes(listing: {
   );
 
   for (const value of sortedValues) {
+    if (coreListingAttributeKeys.has(value.attributeDefinition.key)) {
+      continue;
+    }
     const formatted = formatAttributeValue(value);
     if (formatted) {
       attributes.push({

@@ -1,7 +1,8 @@
 "use client";
 
 import Link from "next/link";
-import { useActionState } from "react";
+import { useActionState, useEffect } from "react";
+import { useRouter } from "next/navigation";
 
 import { logInAction } from "@/features/auth/actions";
 import { AuthField, FormMessage, SubmitButton } from "@/features/auth/form-fields";
@@ -9,6 +10,13 @@ import { initialAuthActionState } from "@/features/auth/validation";
 
 export function LogInForm({ returnTo }: { returnTo: string }) {
   const [state, action] = useActionState(logInAction, initialAuthActionState);
+  const router = useRouter();
+
+  useEffect(() => {
+    if (state.status === "success" && state.redirectTo) {
+      router.replace(state.redirectTo);
+    }
+  }, [router, state]);
 
   return (
     <form action={action} className="grid gap-5">

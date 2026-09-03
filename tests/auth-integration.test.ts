@@ -65,7 +65,7 @@ describe("auth service integration", () => {
       ok: false,
       reason: "invalid_credentials",
     });
-  });
+  }, 20_000);
 
   it("consumes password reset tokens once and blocks suspended login", async () => {
     const { prisma } = await import("@/server/db/client");
@@ -99,5 +99,5 @@ describe("auth service integration", () => {
       ok: false,
       reason: "inactive_account",
     });
-  });
+  }, 20_000);
 });

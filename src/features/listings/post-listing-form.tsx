@@ -18,6 +18,7 @@ import Link from "next/link";
 import { publishListingAction, saveListingDraftAction } from "@/features/listings/actions";
 import {
   initialPostListingActionState,
+  type PostListingActionState,
   type PostListingCategoryDTO,
   type PostListingDraftDTO,
   type PostListingLocationDTO,
@@ -44,6 +45,14 @@ type PostListingFormProps = {
     maxSizeBytes: number;
     acceptedTypes: string[];
   };
+  mode?: "create" | "edit";
+  title?: string;
+  submitLabel?: string;
+  pendingSubmitLabel?: string;
+  actionOverride?: (
+    state: PostListingActionState,
+    formData: FormData,
+  ) => Promise<PostListingActionState>;
 };
 
 const steps = ["Category", "Details", "Photos", "Location", "Review", "Publish"] as const;
@@ -56,10 +65,15 @@ export function PostListingForm({
   draft,
   submissionToken,
   media,
+  mode = "create",
+  title: formTitle = "Post a listing",
+  submitLabel = "Publish listing",
+  pendingSubmitLabel = "Publishing...",
+  actionOverride,
 }: PostListingFormProps) {
   const leafCategories = useMemo(() => categories.filter((category) => category.children.length === 0), [categories]);
   const formRef = useRef<HTMLFormElement>(null);
-  const [state, action, pending] = useActionState(publishListingAction, initialPostListingActionState);
+  const [state, action, pending] = useActionState(actionOverride ?? publishListingAction, initialPostListingActionState);
   const [saveState, setSaveState] = useState(initialPostListingActionState);
   const [isSaving, startSaving] = useTransition();
   const [stepIndex, setStepIndex] = useState(0);
@@ -77,7 +91,7 @@ export function PostListingForm({
   const selectedLocation = locations.find((location) => location.id === publicLocationId);
   const currentStep = steps[stepIndex];
   const isLastStep = stepIndex === steps.length - 1;
-  const describedMediaLimit = `${media.maxCount} JPG, PNG, or WebP photos up to ${Math.round(media.maxSizeBytes / 1024 / 1024)} MB each. Upload storage is not enabled for this stage.`;
+  const describedMediaLimit = `${media.maxCount} JPG, PNG, or WebP photos up to ${Math.round(media.maxSizeBytes / 1024 / 1024)} MB each. Photo uploads are temporarily unavailable. You can continue without photos.`;
   const activeState = state.status === "error" ? state : saveState.status === "error" ? saveState : state;
 
   useEffect(() => {
@@ -117,7 +131,7 @@ export function PostListingForm({
         <div className="flex flex-wrap items-center justify-between gap-3">
           <div>
             <p className="text-sm font-semibold text-brand-primary">Step {stepIndex + 1} of {steps.length}</p>
-            <h1 className="font-display text-2xl font-extrabold text-navy sm:text-3xl">Post a listing</h1>
+            <h1 className="font-display text-2xl font-extrabold text-navy sm:text-3xl">{formTitle}</h1>
           </div>
           <p className="rounded-md bg-brand-light px-3 py-2 text-sm font-semibold text-brand-primary" aria-live="polite">
             {currentStep}
@@ -125,12 +139,14 @@ export function PostListingForm({
         </div>
         <div className="flex flex-wrap items-center justify-between gap-3 rounded-md bg-background p-3 text-sm text-text-secondary">
           <p>
-            Draft saved for this account. Last updated {new Date(draft.updatedAt).toLocaleString("en-US", { dateStyle: "medium", timeStyle: "short" })}.
+            {mode === "edit" ? "Editing listing for this account." : "Draft saved for this account."} Last updated {new Date(draft.updatedAt).toLocaleString("en-US", { dateStyle: "medium", timeStyle: "short" })}.
             {saveState.status === "success" ? " Latest changes saved." : null}
           </p>
-          <Link className="font-semibold text-brand-primary" href="/post?new=1">
-            Start New Listing
-          </Link>
+          {mode === "create" ? (
+            <Link className="font-semibold text-brand-primary" href="/post?new=1">
+              Start New Listing
+            </Link>
+          ) : null}
         </div>
 
         <ol className="grid gap-2 text-sm sm:grid-cols-3 lg:grid-cols-6" aria-label="Listing posting progress">
@@ -268,7 +284,7 @@ export function PostListingForm({
         </section>
 
         <section className={stepClass(stepIndex, 2)} aria-labelledby="post-media-heading">
-          <StepHeading id="post-media-heading" title="Photos and media" description="Photos are validated now; durable uploads are intentionally left for the media stage." />
+          <StepHeading id="post-media-heading" title="Photos and media" description="Photo uploads are temporarily unavailable. You can continue without photos." />
           <FormField id="media" label="Photos" errors={activeState.fieldErrors?.media} hint={describedMediaLimit}>
             <div className="grid gap-3 rounded-md border border-dashed border-border-strong bg-background p-4">
               <ImagePlus className="h-8 w-8 text-brand-primary" aria-hidden="true" />
@@ -287,7 +303,7 @@ export function PostListingForm({
                   ))}
                 </ul>
               ) : (
-                <p className="text-sm text-text-secondary">You can publish without photos in this stage.</p>
+                <p className="text-sm text-text-secondary">You can continue without photos.</p>
               )}
             </div>
           </FormField>
@@ -334,10 +350,14 @@ export function PostListingForm({
         </section>
 
         <section className={stepClass(stepIndex, 5)} aria-labelledby="post-publish-heading">
-          <StepHeading id="post-publish-heading" title="Publish" description="The server will validate every field again and create the listing under your account." />
+          <StepHeading
+            id="post-publish-heading"
+            title={mode === "edit" ? "Save" : "Publish"}
+            description={mode === "edit" ? "The server will validate every field again and preserve owner-only lifecycle rules." : "The server will validate every field again and create the listing under your account."}
+          />
           <div className="grid gap-3 rounded-md border border-border bg-background p-4 text-sm leading-6 text-text-primary">
-            <p>The listing will publish as active using the existing marketplace lifecycle.</p>
-            <p>Ownership, publication time, moderation state, featured status, and expiration are assigned by the server.</p>
+            <p>{mode === "edit" ? "The listing will keep its current editable lifecycle state." : "The listing will publish as active using the existing marketplace lifecycle."}</p>
+            <p>Ownership, moderation state, featured status, private address fields, and exact coordinates are controlled by the server.</p>
           </div>
         </section>
       </div>
@@ -354,17 +374,29 @@ export function PostListingForm({
             Back
           </Button>
           <div className="flex flex-col gap-3 sm:flex-row">
-            <Button type="button" variant="outline" onClick={() => saveDraft(false)} disabled={pending || isSaving}>
-              <Save className="h-4 w-4" aria-hidden="true" />
-              {isSaving ? "Saving..." : "Save draft"}
-            </Button>
+            {mode === "create" ? (
+              <Button type="button" variant="outline" onClick={() => saveDraft(false)} disabled={pending || isSaving}>
+                <Save className="h-4 w-4" aria-hidden="true" />
+                {isSaving ? "Saving..." : "Save draft"}
+              </Button>
+            ) : null}
             {isLastStep ? (
               <Button type="submit" disabled={pending || isSaving}>
                 <Send className="h-4 w-4" aria-hidden="true" />
-                {pending ? "Publishing..." : "Publish listing"}
+                {pending ? pendingSubmitLabel : submitLabel}
               </Button>
             ) : (
-              <Button type="button" onClick={() => saveDraft(true)} disabled={pending || isSaving}>
+              <Button
+                type="button"
+                onClick={() => {
+                  if (mode === "create") {
+                    saveDraft(true);
+                    return;
+                  }
+                  setStepIndex((value) => Math.min(value + 1, steps.length - 1));
+                }}
+                disabled={pending || isSaving}
+              >
                 {isSaving ? "Saving..." : "Next"}
                 <ArrowRight className="h-4 w-4" aria-hidden="true" />
               </Button>

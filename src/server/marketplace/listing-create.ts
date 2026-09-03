@@ -41,6 +41,7 @@ const listingPriceTypes = [
 ] as const;
 
 const conditionValues = new Set(["new", "like_new", "good", "fair"]);
+const coreListingAttributeKeys = new Set(["condition"]);
 const consumedSubmissionTokens = new Map<string, number>();
 const submissionTokenTtlMs = 60 * 60 * 1000;
 
@@ -141,7 +142,7 @@ export async function getPostListingOptions() {
       description: category.description,
       parentName: category.parent?.name ?? null,
       children: category.children,
-      attributes: category.attributeDefinitions.map(toAttributeDTO),
+      attributes: toCanonicalAttributeDTOs(category.attributeDefinitions),
     })),
     locations: locations.map((location) => ({
       id: location.id,
@@ -344,6 +345,107 @@ export async function createListingFromFormData(ownerUserId: string, formData: F
 
 export async function validateCreateListingInput(input: RawListingInput) {
   return validateListingInput(input, { mode: "publish" });
+}
+
+export async function getOwnedListingEditDraft(ownerUserId: string, listingId: string) {
+  if (!uuidPattern.test(listingId)) {
+    throw new ApplicationError("BAD_REQUEST", { message: "Invalid listing id." });
+  }
+
+  const listing = await prisma.listing.findFirst({
+    where: {
+      id: listingId,
+      ownerUserId,
+      status: { in: editableListingStatuses },
+      deletedAt: null,
+    },
+    select: draftSelect,
+  });
+
+  if (!listing) {
+    throw new ApplicationError("NOT_FOUND", { message: "Listing not found or not editable." });
+  }
+
+  return toDraftDTO(listing);
+}
+
+export async function updateOwnedListingFromFormData(
+  ownerUserId: string,
+  listingId: string,
+  formData: FormData,
+): Promise<CreateListingResult> {
+  if (!uuidPattern.test(listingId)) {
+    return failureState("Invalid listing id.");
+  }
+
+  const listing = await prisma.listing.findFirst({
+    where: { id: listingId, ownerUserId, status: { in: editableListingStatuses }, deletedAt: null },
+    select: { id: true, status: true, publishedAt: true },
+  });
+
+  if (!listing) {
+    return failureState("Listing not found or not editable.");
+  }
+
+  const input = parseListingFormData(formData);
+  const parsed = await validateListingInput({ ...input, draftId: listing.id }, { mode: "publish" });
+  if (!parsed.ok) {
+    return parsed;
+  }
+
+  if (listing.status === ListingStatus.DRAFT) {
+    const result = await publishListingDraftFromFormData(ownerUserId, formData);
+    return result;
+  }
+
+  const updated = await prisma.listing.updateMany({
+    where: {
+      id: listing.id,
+      ownerUserId,
+      status: { in: [ListingStatus.ACTIVE, ListingStatus.PENDING_REVIEW] },
+      deletedAt: null,
+    },
+    data: {
+      categoryId: parsed.data.categoryId,
+      title: parsed.data.title,
+      slug: parsed.data.slug,
+      description: parsed.data.description,
+      priceAmount: parsed.data.priceAmount,
+      priceCurrency: "USD",
+      priceType: parsed.data.priceType,
+      condition: parsed.data.condition,
+      publicLocationId: parsed.data.publicLocationId,
+      postalCode: null,
+      latitude: null,
+      longitude: null,
+      locationPrecision: parsed.data.locationPrecision,
+      contactPreference: ContactPreference.IN_APP_MESSAGE,
+      availabilityText: null,
+      isFeatured: false,
+      featuredSource: null,
+    },
+  });
+
+  if (updated.count !== 1) {
+    return failureState("Listing not found or not editable.");
+  }
+
+  const saved = await prisma.listing.update({
+    where: { id: listing.id },
+    data: {
+      attributeValues: {
+        deleteMany: {},
+        create: parsed.data.attributes.map(toNestedAttributeCreate),
+      },
+    },
+    select: { id: true, slug: true },
+  });
+
+  const href = `/listings/${saved.slug}-${saved.id}`;
+  revalidatePath("/account/listings");
+  revalidatePath(href);
+  revalidatePath("/search");
+  return { ok: true, href };
 }
 
 async function validateListingInput(
@@ -599,7 +701,7 @@ async function loadSelectedCategory(categoryId: string) {
       ? {
           id: category.id,
           children: category.children,
-          attributes: category.attributeDefinitions.map(toAttributeDTO),
+          attributes: toCanonicalAttributeDTOs(category.attributeDefinitions),
         }
       : null,
   );
@@ -769,7 +871,7 @@ function validateMedia(files: File[]) {
     }
   }
   if (files.length) {
-    return "Photo upload storage is not available in this stage. Remove photos to publish.";
+    return "Photo uploads are temporarily unavailable. You can continue without photos.";
   }
   return null;
 }
@@ -835,10 +937,19 @@ function toAttributeDTO(definition: {
   };
 }
 
+function toCanonicalAttributeDTOs(
+  definitions: Array<Parameters<typeof toAttributeDTO>[0]>,
+) {
+  return definitions.filter((definition) => !coreListingAttributeKeys.has(definition.key)).map(toAttributeDTO);
+}
+
 function toDraftDTO(draft: Prisma.ListingGetPayload<{ select: typeof draftSelect }>): PostListingDraftDTO {
   const attributes: Record<string, string> = {};
 
   for (const value of draft.attributeValues) {
+    if (coreListingAttributeKeys.has(value.attributeDefinition.key)) {
+      continue;
+    }
     const formatted = rawAttributeFormValue(value);
     if (formatted) {
       attributes[value.attributeDefinition.key] = formatted;
@@ -1012,3 +1123,5 @@ const draftSelect = {
     },
   },
 } satisfies Prisma.ListingSelect;
+
+const editableListingStatuses = [ListingStatus.DRAFT, ListingStatus.ACTIVE, ListingStatus.PENDING_REVIEW];

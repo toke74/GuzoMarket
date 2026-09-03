@@ -77,7 +77,7 @@ export async function logInAction(_state: AuthActionState, formData: FormData): 
   }
 
   await setSessionCookie(result.session.rawToken, result.session.expiresAt);
-  redirect(parsed.data.returnTo);
+  return { status: "success", redirectTo: parsed.data.returnTo };
 }
 
 export async function logOutAction() {

@@ -1,6 +1,7 @@
 import Link from "next/link";
 
 import { Container } from "@/components/layout/container";
+import { cn } from "@/lib/utils";
 
 const footerGroups = [
   {
@@ -41,12 +42,17 @@ const footerGroups = [
   },
 ];
 
-export function Footer() {
+export function Footer({ compactOnMobile = false }: { compactOnMobile?: boolean }) {
   const year = new Date().getFullYear();
 
   return (
     <footer className="border-t border-border bg-surface pb-20 shadow-[0_-1px_0_rgba(15,23,42,0.02)] md:pb-0">
-      <Container className="grid gap-8 py-10 md:grid-cols-[1.35fr_repeat(4,1fr)]">
+      <Container
+        className={cn(
+          "grid gap-8 py-10 md:grid-cols-[1.35fr_repeat(4,1fr)]",
+          compactOnMobile ? "hidden md:grid" : "",
+        )}
+      >
         <div>
           <p className="font-display text-2xl font-extrabold text-navy">GuzoMarket</p>
           <p className="mt-3 max-w-sm text-sm leading-6 text-text-secondary">
@@ -68,7 +74,7 @@ export function Footer() {
           </div>
         ))}
       </Container>
-      <Container className="border-t border-border py-5 text-sm text-text-secondary">
+      <Container className={cn("border-t border-border py-5 text-sm text-text-secondary", compactOnMobile ? "py-3 md:py-5" : "")}>
         <p>&copy; {year} GuzoMarket. All rights reserved.</p>
       </Container>
     </footer>
